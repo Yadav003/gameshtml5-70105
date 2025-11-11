@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>BubbleBurst</title>
+    <link rel="shortcut icon" href="./assets/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css?family=Bangers|Monoton" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="./assets/stylesheets/game.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+     <script src="https://use.fontawesome.com/0fcbe27086.js"></script>
+     <script type="application/javascript" src="./lib/function.js"></script>
+          <script type="application/javascript" src="./lib/board.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+  </head>
+  <body>
+    <audio id="myAudio" autoplay loop src="./assets/song.mp3"  loop="true" preload="auto">
+</audio>
+
+    <!-- <h1>BUBBLE BURST</h1> -->
+     <button type="button"   style="position: absolute; top:0px;" onclick="closeCurrentTab()" class="btn btn-success" >Pause</button>
+      <div class="main">
+      <div class="rules" style="display: none;" >
+       <div class="sound">Music?&nbsp<i id="toggleSound" class="fa fa-volume-up fa-2x"></i>&nbspSoundFX?&nbsp<i id="toggleFX" class="fa fa-volume-up fa-2x"></i></div>
+       </div>
+         <div  id="myDIV">
+          <p id="timer" style="color: white;position: relative;top: 300px;left: 50%;z-index: 22;"></p>'
+          <img id="map_img" src="pausescreen.png" style=" display: none; position: absolute;width: 250px;margin:10% 50%;position:relative;left:-130px; z-index: 19;"  height="400"/>
+          <button onclick="quit()"  class="btn btn-success"  type="submit" id="quit_button" value="quit_button" style="display: none; position: absolute;z-index: 20;background-color: red;top: 340px;right: 53%; width: 105px">Quit</button>
+          <button  onclick="myFunction()"   class="btn btn-success" type="submit" id="play_button" value="play_button" style="display: none; position: absolute; z-index: 20; background-color: red; top: 340px; margin-left: 50%; width: 105px">Play</button>
+                             </div>
+      
+      <canvas id="BubbleBurstCanvas" width="495" height="640" style="width: 100%; height:auto:; position: absolute;top:-315px;">
+        <p id="score_display">scoree</p>
+      </canvas>
+      <div class="personal-links" style="display:none;">
+        <div>
+        </div>
+        <ul>
+          <li><a href="https://www.github.com/bpowell15/"><i class="fa fa-github-square fa-4x" aria-hidden="true"></i><br>GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/bpowell15"><i class="fa fa-linkedin-square fa-4x" aria-hidden="true"></i><br>LinkedIn</a></li>
+          <li><a href="http://www.bricepowell.com"><i class="fa fa-briefcase fa-4x" aria-hidden="true"></i><br>Portfolio</a></li>
+        </ul>
+      </div>
+  </div>
+  <div class="author" style="display: none;"><p>Built by:</p><a href="http://bricepowell.com"><h2>Brice Powell</h2></a></div>
+    <script type="application/javascript" src="./lib/bundle.js"></script>
+    <script type="application/javascript" src="./lib/function.js"></script>
+    <script>
+      var audio = document.getElementById("myAudio");
+      audio.volume = 0.5;
+    </script>
+     .'<script type="text/javascript">
+                     var myTimer;
+               function closeCurrentTab(){
+                gamePauseEvent();
+                        myTimer = setInterval(myClock, 1000);
+                         var c = 6;
+
+                         function myClock() {
+                           document.getElementById("timer").innerHTML = --c;
+                           if (c == 0) {
+                             clearInterval(myTimer);
+                             gameQuitEvent2(score);
+                           }
+                         }
+
+
+                document.getElementById("map_img").style.display = "";
+                document.getElementById("quit_button").style.display = "";
+                document.getElementById("play_button").style.display = "";
+
+              }
+            </script>'
+
+
+            <script>
+                function myFunction() {
+                  var x = document.getElementById("map_img");
+                  var y = document.getElementById("quit_button");
+                  var z = document.getElementById("play_button");
+                  var a = document.getElementById("timer");
+                     document.getElementById("map_img").style.display = "none";
+                document.getElementById("quit_button").style.display = "none";
+                document.getElementById("play_button").style.display = "none";
+                clearInterval(myTimer);
+                document.getElementById("timer").style.display = "none";
+                
+                    x.style.display = "none";
+                    y.style.display = "none";
+                    z.style.display = "none";
+                   gameUnPauseEvent();
+
+                }
+                </script>
+
+
+
+                  <script>
+                                function quit() {
+                                  var x = document.getElementById("map_img");
+                                  var y = document.getElementById("quit_button");
+                                  var z = document.getElementById("play_button");
+
+                                    x.style.display = "none";
+                                    y.style.display = "none";
+                                    z.style.display = "none";
+                                   clearInterval(myTimer);
+                                   document.getElementById("timer").style.display = "none";
+                                                  gameQuitEvent2(score);
+
+                                }
+                                </script>
+  </body>
+</html>

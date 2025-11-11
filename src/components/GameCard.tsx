@@ -1,13 +1,26 @@
 import { Card } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 interface GameCardProps {
   title: string;
   image: string;
+  gameUrl?: string;
 }
 
-export const GameCard = ({ title, image }: GameCardProps) => {
+export const GameCard = ({ title, image, gameUrl }: GameCardProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (gameUrl) {
+      navigate(gameUrl);
+    }
+  };
+
   return (
-    <Card className="group overflow-hidden border-0 bg-card hover:scale-105 transition-all duration-300 cursor-pointer">
+    <Card 
+      className="group overflow-hidden border-0 bg-card hover:scale-105 transition-all duration-300 cursor-pointer"
+      onClick={handleClick}
+    >
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={image}
