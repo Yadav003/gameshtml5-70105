@@ -6,7 +6,7 @@ export interface GameInfo {
   title: string;
   path: string;
   image: string;
-  category?: string;
+  category?: string | string[]; // Support single or multiple categories
   description?: string;
 }
 
@@ -151,7 +151,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Space War",
     path: `${BASE_PATH}games/AlienInvasion-master/index.html`,
     image: gameSpaceWar,
-    category: "Arcade",
+    category: ["Arcade", "Shooter"],
     description: "Defend Earth from alien invaders",
   },
   "space-invaders": {
@@ -159,7 +159,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Space Invaders",
     path: `${BASE_PATH}games/SpaceInvaders-master/index.html`,
     image: gameSpace,
-    category: "Arcade",
+    category: ["Arcade", "Shooter"],
     description: "Classic Space Invaders arcade game",
   },
   "pacman": {
@@ -191,7 +191,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Radius Raid",
     path: `${BASE_PATH}games/radius-raid-js13k-master/index.html`,
     image: gameAirBattle,
-    category: "Arcade",
+    category: ["Arcade", "Shooter"],
     description: "Space shooter in a circular arena",
   },
   "tower-game": {
@@ -227,7 +227,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Go Bowling",
     path: `${BASE_PATH}games/GoBowling2/index.html`,
     image: gameBowling,
-    category: "Sports",
+    category: ["Sports", "Strategy"],
     description: "Realistic bowling game",
   },
 
@@ -280,9 +280,15 @@ export const getAllGames = (): GameInfo[] => {
 
 // Helper function to get games by category
 export const getGamesByCategory = (category: string): GameInfo[] => {
-  return Object.values(GAMES).filter(
-    (game) => game.category?.toLowerCase() === category.toLowerCase()
-  );
+  return Object.values(GAMES).filter((game) => {
+    if (!game.category) return false;
+    
+    // Handle both single category (string) and multiple categories (array)
+    if (Array.isArray(game.category)) {
+      return game.category.some(cat => cat.toLowerCase() === category.toLowerCase());
+    }
+    return game.category.toLowerCase() === category.toLowerCase();
+  });
 };
 
 // Get all unique categories
@@ -290,7 +296,12 @@ export const getCategories = (): string[] => {
   const categories = new Set<string>();
   Object.values(GAMES).forEach((game) => {
     if (game.category) {
-      categories.add(game.category);
+      // Handle both single category (string) and multiple categories (array)
+      if (Array.isArray(game.category)) {
+        game.category.forEach(cat => categories.add(cat));
+      } else {
+        categories.add(game.category);
+      }
     }
   });
   return Array.from(categories).sort();
