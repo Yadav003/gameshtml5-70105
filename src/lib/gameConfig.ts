@@ -29,14 +29,24 @@ import gameClumcy from "@/assets/flappy.png"
 import gameDuckHunt from "@/assets/duck_hunt.png"
 import gameSpaceWar from "@/assets/Space_war.png"
 import gameSpace from "@/assets/space_invaders.png"
+import gameBowling from "@/assets/bowling.png";
+import gamePacman from "@/assets/pacman.png"
+import gameSnake from "@/assets/snake_game.png"
+import gameKnifeAttack from "@/assets/knife.png"
+import gameCar from "@/assets/car_race.png"
+import gameTic from "@/assets/tic_tacgame.png"
+import gameBubbleShooter from "@/assets/bubble.png"
+import gameJumpingPanda from "@/assets/panda.png"
+import gameHextris from "@/assets/hextris.png"
+import gameBlockFusion from "@/assets/block.png"
 
 export const GAMES: Record<string, GameInfo> = {
   // Puzzle Games
   "2048": {
     id: "2048",
-    title: "2048",
+    title: "Block Fusion",
     path: `${BASE_PATH}games/2048-master/index.html`,
-    image: gameCubeNinja,
+    image: gameBlockFusion,
     category: "Puzzle",
     description: "Slide numbered tiles to combine them and create a tile with 2048",
   },
@@ -44,7 +54,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "hextris",
     title: "Hextris",
     path: `${BASE_PATH}games/hextris-gh-pages/index.html`,
-    image: gameCubeNinja,
+    image: gameHextris,
     category: "Puzzle",
     description: "Fast paced HTML5 puzzle game inspired by Tetris",
   },
@@ -76,18 +86,18 @@ export const GAMES: Record<string, GameInfo> = {
     id: "tic-tac-toe",
     title: "Tic Tac Toe",
     path: `${BASE_PATH}games/tic-tac-toe/dist/index.html`,
-    image: gameCubeNinja,
+    image: gameTic,
     category: "Puzzle",
     description: "Classic Tic Tac Toe game",
   },
-  "candyjam": {
-    id: "candyjam",
-    title: "Candy Jam",
-    path: `${BASE_PATH}games/candyjam-master/index.html`,
-    image: gameCubeNinja,
-    category: "Puzzle",
-    description: "Match colorful candies in this sweet puzzle game",
-  },
+  // "candyjam": {
+  //   id: "candyjam",
+  //   title: "Candy Jam",
+  //   path: `${BASE_PATH}games/candyjam-master/index.html`,
+  //   image: gameCubeNinja,
+  //   category: "Puzzle",
+  //   description: "Match colorful candies in this sweet puzzle game",
+  // },
 
   // Racing Games
   "hexgl": {
@@ -100,9 +110,9 @@ export const GAMES: Record<string, GameInfo> = {
   },
   "javascript-racer": {
     id: "javascript-racer",
-    title: "JavaScript Racer",
+    title: "Car Racing",
     path: `${BASE_PATH}games/javascript-racer-master/index.html`,
-    image: heroRacing,
+    image: gameCar,
     category: "Racing",
     description: "Retro-style pseudo 3D racing game",
   },
@@ -152,7 +162,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "pacman",
     title: "Pac-Man",
     path: `${BASE_PATH}games/pacman-canvas-master/index.htm`,
-    image: gameCubeNinja,
+    image: gamePacman,
     category: "Arcade",
     description: "Classic Pac-Man maze chase game",
   },
@@ -160,7 +170,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "snake",
     title: "Snake",
     path: `${BASE_PATH}games/snake/index.html`,
-    image: gameCubeNinja,
+    image: gameSnake,
     category: "Arcade",
     description: "Classic snake game - eat and grow",
   },
@@ -168,7 +178,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "knife-attacks",
     title: "Knife Attacks",
     path: `${BASE_PATH}games/Knife Attacks/index.html`,
-    image: gameCubeNinja,
+    image: gameKnifeAttack,
     category: "Arcade",
     description: "Knife throwing action game",
   },
@@ -198,21 +208,21 @@ export const GAMES: Record<string, GameInfo> = {
     category: "Strategy",
     description: "Real-time strategy game in space",
   },
-  "ophog": {
-    id: "ophog",
-    title: "OpHog",
-    path: `${BASE_PATH}games/OpHog-master/src/index.html`,
-    image: gameCubeNinja,
-    category: "Strategy",
-    description: "Strategic puzzle game",
-  },
+  // "ophog": {
+  //   id: "ophog",
+  //   title: "OpHog",
+  //   path: `${BASE_PATH}games/OpHog-master/src/index.html`,
+  //   image: gameCubeNinja,
+  //   category: "Strategy",
+  //   description: "Strategic puzzle game",
+  // },
 
   // Sports Games
   "bowling": {
     id: "bowling",
     title: "Go Bowling",
     path: `${BASE_PATH}games/GoBowling2/index.html`,
-    image: gameBaseball,
+    image: gameBowling,
     category: "Sports",
     description: "Realistic bowling game",
   },
@@ -238,17 +248,17 @@ export const GAMES: Record<string, GameInfo> = {
   },
   "3m": {
     id: "3m",
-    title: "3M Game",
+    title: "Bubble Shooter",
     path: `${BASE_PATH}games/3m/index.html`,
-    image: gameCubeNinja,
+    image: gameBubbleShooter,
     category: "Casual",
     description: "Quick casual game",
   },
   "game-4-2": {
     id: "game-4-2",
-    title: "Game 4.2",
+    title: "Jumping Panda",
     path: `${BASE_PATH}games/4_2/index.html`,
-    image: gameCubeNinja,
+    image: gameJumpingPanda,
     category: "Casual",
     description: "Fun casual game",
   },
