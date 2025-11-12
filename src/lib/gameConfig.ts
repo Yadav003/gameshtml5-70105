@@ -21,6 +21,14 @@ import gameAirBattle from "@/assets/game-air-battle.jpg";
 import gameCricket from "@/assets/game-cricket.jpg";
 import gameBaseball from "@/assets/game-baseball.jpg";
 import heroFps from "@/assets/hero-fps.jpg";
+import gamerocket from "@/assets/12.jpg"
+import gamebike from "@/assets/bike_game.png"
+import gameFruitNinja from "@/assets/fr2.png"
+import gameStackTower from "@/assets/stack_tower.png"
+import gameClumcy from "@/assets/flappy.png"
+import gameDuckHunt from "@/assets/duck_hunt.png"
+import gameSpaceWar from "@/assets/Space_war.png"
+import gameSpace from "@/assets/space_invaders.png"
 
 export const GAMES: Record<string, GameInfo> = {
   // Puzzle Games
@@ -84,9 +92,9 @@ export const GAMES: Record<string, GameInfo> = {
   // Racing Games
   "hexgl": {
     id: "hexgl",
-    title: "HexGL Racing",
+    title: "Rocket Racing",
     path: `${BASE_PATH}games/HexGL-master/index.html`,
-    image: heroRacing,
+    image: gamerocket,
     category: "Racing",
     description: "Futuristic racing game with high-speed tracks",
   },
@@ -102,7 +110,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "bike",
     title: "Bike Racing",
     path: `${BASE_PATH}games/bike/index.html`,
-    image: heroRacing,
+    image: gamebike,
     category: "Racing",
     description: "Fast-paced bike racing game",
   },
@@ -110,9 +118,9 @@ export const GAMES: Record<string, GameInfo> = {
   // Arcade/Action Games
   "clumsy-bird": {
     id: "clumsy-bird",
-    title: "Clumsy Bird",
+    title: "Flappy Bird",
     path: `${BASE_PATH}games/clumsy-bird-master/index.html`,
-    image: gameAirBattle,
+    image: gameClumcy,
     category: "Arcade",
     description: "Flappy Bird clone - navigate through pipes",
   },
@@ -120,15 +128,15 @@ export const GAMES: Record<string, GameInfo> = {
     id: "duck-hunt",
     title: "Duck Hunt",
     path: `${BASE_PATH}games/DuckHunt-JS-master/dist/index.html`,
-    image: gameAirBattle,
+    image: gameDuckHunt,
     category: "Arcade",
     description: "Classic duck hunting game with a light gun",
   },
   "alien-invasion": {
     id: "alien-invasion",
-    title: "Alien Invasion",
+    title: "Space War",
     path: `${BASE_PATH}games/AlienInvasion-master/index.html`,
-    image: gameAirBattle,
+    image: gameSpaceWar,
     category: "Arcade",
     description: "Defend Earth from alien invaders",
   },
@@ -136,7 +144,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "space-invaders",
     title: "Space Invaders",
     path: `${BASE_PATH}games/SpaceInvaders-master/index.html`,
-    image: gameAirBattle,
+    image: gameSpace,
     category: "Arcade",
     description: "Classic Space Invaders arcade game",
   },
@@ -174,9 +182,9 @@ export const GAMES: Record<string, GameInfo> = {
   },
   "tower-game": {
     id: "tower-game",
-    title: "Tower Game",
+    title: "Build Tower",
     path: `${BASE_PATH}games/tower_game-master/index.html`,
-    image: gameCubeNinja,
+    image: gameStackTower,
     category: "Arcade",
     description: "Stack blocks to build the tallest tower",
   },
@@ -222,9 +230,9 @@ export const GAMES: Record<string, GameInfo> = {
   // Number-based mini games
   "game-1": {
     id: "game-1",
-    title: "Game 1",
+    title: "Fruit Ninja",
     path: `${BASE_PATH}games/1/index.html`,
-    image: gameCubeNinja,
+    image: gameFruitNinja,
     category: "Casual",
     description: "Simple casual game",
   },
@@ -278,8 +286,8 @@ export const getCategories = (): string[] => {
 export const getTrendingGames = (): GameInfo[] => {
   return [
     GAMES["hexgl"],
-    GAMES["duck-hunt"],
-    GAMES["2048"],
-    GAMES["pacman"],
+    GAMES["bike"],
+    GAMES["game-1"],
+    GAMES["tower-game"],
   ];
 };

@@ -11,8 +11,42 @@ const GamePlayer = () => {
   useEffect(() => {
     // Set full screen for better gaming experience
     document.body.style.overflow = "hidden";
+    
+    // Prevent zoom on mobile devices
+    const viewport = document.querySelector('meta[name="viewport"]');
+    const originalContent = viewport?.getAttribute('content');
+    
+    if (viewport) {
+      viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+    }
+    
+    // Prevent pinch zoom
+    const preventZoom = (e: TouchEvent) => {
+      if (e.touches.length > 1) {
+        e.preventDefault();
+      }
+    };
+    
+    // Prevent double tap zoom
+    let lastTouchEnd = 0;
+    const preventDoubleTapZoom = (e: TouchEvent) => {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+      }
+      lastTouchEnd = now;
+    };
+    
+    document.addEventListener('touchstart', preventZoom, { passive: false });
+    document.addEventListener('touchend', preventDoubleTapZoom, { passive: false });
+    
     return () => {
       document.body.style.overflow = "auto";
+      if (viewport && originalContent) {
+        viewport.setAttribute('content', originalContent);
+      }
+      document.removeEventListener('touchstart', preventZoom);
+      document.removeEventListener('touchend', preventDoubleTapZoom);
     };
   }, []);
 
@@ -38,7 +72,7 @@ const GamePlayer = () => {
   }
 
   return (
-    <div className="fixed inset-0 bg-black">
+    <div className="fixed inset-0 bg-black touch-none">
       <div className="absolute top-4 left-4 z-50">
         <Button
           variant="secondary"
@@ -55,6 +89,8 @@ const GamePlayer = () => {
         className="w-full h-full border-0"
         title={game.title}
         allowFullScreen
+        allow="accelerometer; gyroscope"
+        style={{ touchAction: 'none' }}
       />
     </div>
   );

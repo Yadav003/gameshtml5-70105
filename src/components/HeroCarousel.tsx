@@ -1,30 +1,35 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import heroRacing from "@/assets/hero-racing.jpg";
-import heroFps from "@/assets/hero-fps.jpg";
-import heroWatercraft from "@/assets/hero-watercraft.jpg";
+import rocketimage from "@/assets/2.jpg";
+import bikeimage from "@/assets/1.jpg";
+import gameFruitNinja from "@/assets/fruit_ninja.jpg"
 
 const slides = [
   {
     id: 1,
-    title: "Traffic Racer",
-    image: heroRacing,
+    title: "Rocket Racing",
+    image: rocketimage,
+    gameId: "hexgl",
   },
   {
     id: 2,
-    title: "FPS Action",
-    image: heroFps,
+    title: "Bike Climb",
+    image: bikeimage,
+    gameId: "bike",
   },
   {
     id: 3,
-    title: "Watercraft Rush",
-    image: heroWatercraft,
+    title: "Fruit Ninja",
+    image: gameFruitNinja,
+    gameId: "game-1",
   },
 ];
 
 export const HeroCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -39,6 +44,10 @@ export const HeroCarousel = () => {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const handlePlayGame = (gameId: string) => {
+    navigate(`/play/${gameId}`);
   };
 
   return (
@@ -60,7 +69,11 @@ export const HeroCarousel = () => {
             <h1 className="text-5xl md:text-7xl font-bold mb-6 text-shadow-lg">
               {slide.title}
             </h1>
-            <Button variant="hero" size="xl">
+            <Button 
+              variant="hero" 
+              size="xl"
+              onClick={() => handlePlayGame(slide.gameId)}
+            >
               Let's Play
             </Button>
           </div>
