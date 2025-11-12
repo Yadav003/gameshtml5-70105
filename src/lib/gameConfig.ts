@@ -39,7 +39,11 @@ import gameBubbleShooter from "@/assets/bubble.png"
 import gameJumpingPanda from "@/assets/panda.png"
 import gameHextris from "@/assets/hextris.png"
 import gameBlockFusion from "@/assets/block.png"
-
+import gamebreak from "@/assets/break_lock.png"
+import gameTetris from "@/assets/tetris_game.png"
+import gameLastColony from "@/assets/last_colony.png"
+import gameship from "@/assets/ship_game.png"
+import gameTetris2 from "@/assets/tetris.png"
 export const GAMES: Record<string, GameInfo> = {
   // Puzzle Games
   "2048": {
@@ -60,17 +64,17 @@ export const GAMES: Record<string, GameInfo> = {
   },
   "tetris": {
     id: "tetris",
-    title: "Tetris",
+    title: "Tetris Lite",
     path: `${BASE_PATH}games/tetris-master/index.html`,
-    image: gameCubeNinja,
+    image: gameTetris,
     category: "Puzzle",
     description: "Classic Tetris block-stacking puzzle game",
   },
   "canvas-tetris": {
     id: "canvas-tetris",
-    title: "Canvas Tetris",
+    title: "Tetris",
     path: `${BASE_PATH}games/canvas-tetris-master/index.html`,
-    image: gameCubeNinja,
+    image: gameTetris2,
     category: "Puzzle",
     description: "Another version of the classic Tetris game",
   },
@@ -78,7 +82,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "breaklock",
     title: "Breaklock",
     path: `${BASE_PATH}games/breaklock-master/index.html`,
-    image: gameCubeNinja,
+    image: gamebreak,
     category: "Puzzle",
     description: "Puzzle game where you break locks",
   },
@@ -204,7 +208,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "last-colony",
     title: "Last Colony",
     path: `${BASE_PATH}games/last-colony-master/index.html`,
-    image: gameCubeNinja,
+    image: gameLastColony,
     category: "Strategy",
     description: "Real-time strategy game in space",
   },
@@ -230,9 +234,9 @@ export const GAMES: Record<string, GameInfo> = {
   // Space/Shooter Games
   "hugeship": {
     id: "hugeship",
-    title: "Huge Ship",
+    title: "Destroyer Ship",
     path: `${BASE_PATH}games/hugeship/index.html`,
-    image: gameAirBattle,
+    image: gameship,
     category: "Shooter",
     description: "Space shooter with huge spaceships",
   },
