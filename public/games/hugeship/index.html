@@ -31,18 +31,185 @@
 			overflow: hidden;
 			touch-action: none;
 			-ms-touch-action: none;
+			position: fixed;
+			width: 100%;
+			height: 100%;
 		}
 		canvas {
-			touch-action-delay: none;
+ 		 pointer-events: none;
+		}
+		
+		/* Rotation message for mobile portrait mode */
+		#rotate-message {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #000;
+			z-index: 9999;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			color: #fff;
+			font-family: Arial, sans-serif;
+			text-align: center;
+			padding: 20px;
+		}
+
+		#rotate-message .icon {
+			font-size: 80px;
+			margin-bottom: 20px;
+			animation: rotate 2s ease-in-out infinite;
+		}
+
+		#rotate-message .text {
+			font-size: 24px;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+
+		#rotate-message .subtext {
+			font-size: 16px;
+			color: #999;
+		}
+
+		@keyframes rotate {
+			0%, 100% { transform: rotate(0deg); }
+			50% { transform: rotate(90deg); }
+		}
+
+		/* Show rotation message on mobile portrait */
+		@media screen and (max-width: 768px) and (orientation: portrait) {
+			#rotate-message {
+				display: flex !important;
+			}
+			#c2canvasdiv {
+				display: none;
+			}
+		}
+
+		/* Mobile controls */
+		#mobile-controls {
+			display: block;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			/* pointer-events: none; */
+			z-index: 1000;
+		}
+
+		.control-button {
+			position: absolute;
+			background: rgba(255, 255, 255, 0.2);
+			border: 2px solid rgba(255, 255, 255, 0.5);
+			border-radius: 8px;
+			color: white;
+			font-size: 24px;
+			font-weight: bold;
+			pointer-events: auto;
+			user-select: none;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			touch-action: none;
-			-ms-touch-action: none;
+		}
+
+		.control-button:active {
+			background: rgba(255, 255, 255, 0.4);
+			transform: scale(0.95);
+		}
+
+		/* D-pad controls */
+		.dpad-container {
+			position: absolute;
+			bottom: 20px;
+			left: 20px;
+			width: 140px;
+			height: 140px;
+		}
+
+		#btn-up {
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 45px;
+			height: 45px;
+		}
+
+		#btn-down {
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 45px;
+			height: 45px;
+		}
+
+		#btn-left {
+			top: 50%;
+			left: 0;
+			transform: translateY(-50%);
+			width: 45px;
+			height: 45px;
+		}
+
+		#btn-right {
+			top: 50%;
+			right: 0;
+			transform: translateY(-50%);
+			width: 45px;
+			height: 45px;
+		}
+
+		#btn-center {
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 40px;
+			height: 40px;
+			background: rgba(100, 100, 100, 0.3);
+			border-radius: 50%;
+		}
+
+		/* Attack button */
+		#btn-attack {
+			position: absolute;
+			bottom: 40px;
+			right: 40px;
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+			background: rgba(255, 50, 50, 0.4);
+			border: 3px solid rgba(255, 100, 100, 0.7);
+			font-size: 16px;
+		}
+
+		#btn-attack:active {
+			background: rgba(255, 50, 50, 0.7);
+		}
+
+		/* Show controls on mobile landscape */
+		@media screen and (max-width: 768px) and (orientation: landscape) {
+			#mobile-controls {
+				display: block !important;
+			}
 		}
     </style>
 	
 
 </head> 
  
-<body> 
+<body>
+	<!-- Rotation message for mobile devices -->
+	<div id="rotate-message">
+		<div class="icon">📱</div>
+		<div class="text">Please Rotate Your Phone</div>
+		<div class="subtext">This game is best played in landscape mode</div>
+	</div>
+	
 	<div id="fb-root"></div>
 	
 	<script>
@@ -74,6 +241,18 @@
 		
 	</div>
 	
+	<!-- Mobile Controls -->
+	<div id="mobile-controls">
+		<div class="dpad-container">
+			<div id="btn-center"></div>
+			<div class="control-button" id="btn-up">▲</div>
+			<div class="control-button" id="btn-down">▼</div>
+			<div class="control-button" id="btn-left">◀</div>
+			<div class="control-button" id="btn-right">▶</div>
+		</div>
+		<div class="control-button" id="btn-attack">FIRE</div>
+	</div>
+	
 	<!-- Pages load faster with scripts at the bottom -->
 	
 	<!-- Construct 2 exported games require jQuery. -->
@@ -91,12 +270,260 @@
 
     <script>
 		// Start the Construct 2 project running on window load.
-		jQuery(document).ready(function ()
-		{			
-			// Create new runtime using the c2canvas
-			cr_createRuntime("c2canvas");
-		});
+		jQuery(document).ready(function() {
+    cr_createRuntime("c2canvas");
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        console.log('Touch device detected - enabling touch controls');
+        setTimeout(setupMobileControls, 1500);
+    }
+});
+
 		
+		// Setup mobile controls
+		// function setupMobileControls() {
+		// 	var canvas = document.getElementById('c2canvas');
+		// 	if (!canvas) return;
+			
+		// 	// Simulate keyboard events
+		// 	function simulateKey(keyCode, type) {
+		// 		var event = new KeyboardEvent(type, {
+		// 			keyCode: keyCode,
+		// 			which: keyCode,
+		// 			bubbles: true,
+		// 			cancelable: true
+		// 		});
+		// 		document.dispatchEvent(event);
+		// 	}
+			
+		// 	// Simulate mouse click on canvas for attack
+		// 	function simulateAttack() {
+		// 		var rect = canvas.getBoundingClientRect();
+		// 		var x = rect.left + rect.width / 2;
+		// 		var y = rect.top + rect.height / 2;
+				
+		// 		var mouseDown = new MouseEvent('mousedown', {
+		// 			bubbles: true,
+		// 			cancelable: true,
+		// 			clientX: x,
+		// 			clientY: y,
+		// 			button: 0
+		// 		});
+				
+		// 		var mouseUp = new MouseEvent('mouseup', {
+		// 			bubbles: true,
+		// 			cancelable: true,
+		// 			clientX: x,
+		// 			clientY: y,
+		// 			button: 0
+		// 		});
+				
+		// 		canvas.dispatchEvent(mouseDown);
+		// 		setTimeout(function() {
+		// 			canvas.dispatchEvent(mouseUp);
+		// 		}, 100);
+		// 	}
+			
+		// 	// Arrow key codes: Up=38, Down=40, Left=37, Right=39, Space=32, W=87, A=65, S=83, D=68
+		// 	var controls = {
+		// 		'btn-up': [38, 87],      // Up Arrow & W
+		// 		'btn-down': [40, 83],    // Down Arrow & S
+		// 		'btn-left': [37, 65],    // Left Arrow & A
+		// 		'btn-right': [39, 68],   // Right Arrow & D
+		// 		'btn-attack': [32]       // Space
+		// 	};
+			
+		// 	// Handle button press
+		// 	Object.keys(controls).forEach(function(btnId) {
+		// 		var btn = document.getElementById(btnId);
+		// 		if (!btn) return;
+				
+		// 		var keyCodes = controls[btnId];
+		// 		var isPressed = false;
+				
+		// 		function pressButton(e) {
+		// 			if (e) {
+		// 				e.preventDefault();
+		// 				e.stopPropagation();
+		// 			}
+		// 			if (isPressed) return;
+		// 			isPressed = true;
+					
+		// 			if (btnId === 'btn-attack') {
+		// 				simulateAttack();
+		// 			} else {
+		// 				keyCodes.forEach(function(keyCode) {
+		// 					simulateKey(keyCode, 'keydown');
+		// 				});
+		// 			}
+		// 		}
+				
+		// 		function releaseButton(e) {
+		// 			if (e) {
+		// 				e.preventDefault();
+		// 				e.stopPropagation();
+		// 			}
+		// 			if (!isPressed) return;
+		// 			isPressed = false;
+					
+		// 			if (btnId !== 'btn-attack') {
+		// 				keyCodes.forEach(function(keyCode) {
+		// 					simulateKey(keyCode, 'keyup');
+		// 				});
+		// 			}
+		// 		}
+				
+		// 		// Touch events
+		// 		btn.addEventListener('touchstart', pressButton, { passive: false });
+		// 		btn.addEventListener('touchend', releaseButton, { passive: false });
+		// 		btn.addEventListener('touchcancel', releaseButton, { passive: false });
+				
+		// 		// Mouse events (for desktop testing)
+		// 		btn.addEventListener('mousedown', pressButton);
+		// 		btn.addEventListener('mouseup', releaseButton);
+		// 		btn.addEventListener('mouseleave', releaseButton);
+		// 	});
+		// }
+		
+
+
+// 		function setupMobileControls() {
+//     var canvas = document.getElementById('c2canvas');
+//     if (!canvas || typeof cr_getC2Runtime !== "function") return;
+//     var runtime = cr_getC2Runtime();
+
+//     // These helpers trigger Construct 2 input directly
+//     function pressKey(keyCode) {
+//         if (runtime && runtime.triggerKeyDown)
+//             runtime.triggerKeyDown(keyCode);
+//     }
+//     function releaseKey(keyCode) {
+//         if (runtime && runtime.triggerKeyUp)
+//             runtime.triggerKeyUp(keyCode);
+//     }
+
+//     function simulateAttack() {
+//         const rect = canvas.getBoundingClientRect();
+//         const x = rect.left + rect.width / 2;
+//         const y = rect.top + rect.height / 2;
+//         const eDown = new MouseEvent('mousedown', {clientX: x, clientY: y});
+//         const eUp = new MouseEvent('mouseup', {clientX: x, clientY: y});
+//         canvas.dispatchEvent(eDown);
+//         setTimeout(() => canvas.dispatchEvent(eUp), 100);
+//     }
+
+//     const controls = {
+//         'btn-up': [38, 87],   // Up / W
+//         'btn-down': [40, 83], // Down / S
+//         'btn-left': [37, 65], // Left / A
+//         'btn-right': [39, 68],// Right / D
+//         'btn-attack': [32]    // Space
+//     };
+
+//     Object.keys(controls).forEach(id => {
+//         const btn = document.getElementById(id);
+//         if (!btn) return;
+//         const keys = controls[id];
+//         let pressed = false;
+
+//         function down(e) {
+//             e.preventDefault();
+//             if (pressed) return;
+//             pressed = true;
+//             if (id === 'btn-attack') simulateAttack();
+//             else keys.forEach(k => pressKey(k));
+//         }
+//         function up(e) {
+//             e.preventDefault();
+//             if (!pressed) return;
+//             pressed = false;
+//             if (id !== 'btn-attack') keys.forEach(k => releaseKey(k));
+//         }
+
+//         btn.addEventListener('touchstart', down, {passive:false});
+//         btn.addEventListener('touchend', up, {passive:false});
+//         btn.addEventListener('touchcancel', up, {passive:false});
+//         btn.addEventListener('mousedown', down);
+//         btn.addEventListener('mouseup', up);
+//         btn.addEventListener('mouseleave', up);
+//     });
+// }
+
+
+function setupMobileControls() {
+    const canvas = document.getElementById('c2canvas');
+    const runtime = (typeof cr_getC2Runtime === "function") ? cr_getC2Runtime() : null;
+    const mobileControls = document.getElementById('mobile-controls');
+    if (!mobileControls) return;
+
+    // Ensure controls can receive touch
+    mobileControls.style.pointerEvents = "auto";
+
+    function simulateKeyPress(keyCode, type) {
+        // Method 1: If Construct runtime exposes trigger functions
+        if (runtime && runtime.triggerKeyDown && runtime.triggerKeyUp) {
+            if (type === 'keydown') runtime.triggerKeyDown(keyCode);
+            else runtime.triggerKeyUp(keyCode);
+        } else {
+            // Method 2: Dispatch synthetic event as fallback
+            const event = new KeyboardEvent(type, {
+                keyCode: keyCode,
+                which: keyCode,
+                bubbles: true,
+                cancelable: true
+            });
+            document.dispatchEvent(event);
+        }
+    }
+
+    function simulateAttack() {
+        const rect = canvas.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        const eDown = new MouseEvent('mousedown', {clientX: x, clientY: y, bubbles: true});
+        const eUp = new MouseEvent('mouseup', {clientX: x, clientY: y, bubbles: true});
+        canvas.dispatchEvent(eDown);
+        setTimeout(() => canvas.dispatchEvent(eUp), 120);
+    }
+
+    const controls = {
+        'btn-up': [38, 87],   // Up/W
+        'btn-down': [40, 83], // Down/S
+        'btn-left': [37, 65], // Left/A
+        'btn-right': [39, 68],// Right/D
+        'btn-attack': [32]    // Space
+    };
+
+    Object.keys(controls).forEach(id => {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        const keyCodes = controls[id];
+        let isPressed = false;
+
+        const press = e => {
+            e.preventDefault();
+            if (isPressed) return;
+            isPressed = true;
+            if (id === 'btn-attack') simulateAttack();
+            else keyCodes.forEach(k => simulateKeyPress(k, 'keydown'));
+        };
+
+        const release = e => {
+            e.preventDefault();
+            if (!isPressed) return;
+            isPressed = false;
+            if (id !== 'btn-attack') keyCodes.forEach(k => simulateKeyPress(k, 'keyup'));
+        };
+
+        btn.addEventListener('touchstart', press, {passive:false});
+        btn.addEventListener('touchend', release, {passive:false});
+        btn.addEventListener('touchcancel', release, {passive:false});
+        btn.addEventListener('mousedown', press);
+        btn.addEventListener('mouseup', release);
+        btn.addEventListener('mouseleave', release);
+    });
+
+    console.log("✅ Mobile controls initialized");
+}
 		// Pause and resume on page becoming visible/invisible
 		function onVisibilityChanged() {
 			if (document.hidden || document.mozHidden || document.webkitHidden || document.msHidden)

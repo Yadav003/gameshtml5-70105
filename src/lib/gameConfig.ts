@@ -21,29 +21,31 @@ import gameAirBattle from "@/assets/game-air-battle.jpg";
 import gameCricket from "@/assets/game-cricket.jpg";
 import gameBaseball from "@/assets/game-baseball.jpg";
 import heroFps from "@/assets/hero-fps.jpg";
-import gamerocket from "@/assets/12.jpg"
-import gamebike from "@/assets/bike_game.png"
-import gameFruitNinja from "@/assets/fr2.png"
-import gameStackTower from "@/assets/stack_tower.png"
-import gameClumcy from "@/assets/flappy.png"
-import gameDuckHunt from "@/assets/duck_hunt.png"
-import gameSpaceWar from "@/assets/Space_war.png"
-import gameSpace from "@/assets/space_invaders.png"
-import gameBowling from "@/assets/bowling.png";
-import gamePacman from "@/assets/pacman.png"
-import gameSnake from "@/assets/snake_game.png"
-import gameKnifeAttack from "@/assets/knife.png"
-import gameCar from "@/assets/car_race.png"
-import gameTic from "@/assets/tic_tacgame.png"
-import gameBubbleShooter from "@/assets/bubble.png"
-import gameJumpingPanda from "@/assets/panda.png"
-import gameHextris from "@/assets/hextris.png"
-import gameBlockFusion from "@/assets/block.png"
-import gamebreak from "@/assets/break_lock.png"
-import gameTetris from "@/assets/tetris_game.png"
-import gameLastColony from "@/assets/last_colony.png"
-import gameship from "@/assets/ship_game.png"
-import gameTetris2 from "@/assets/tetris.png"
+import gamerocket from "@/assets/rocketr.jpg"
+import gamebike from "@/assets/biker.jpg"
+import gameFruitNinja from "@/assets/fruitn.jpg"
+import gameStackTower from "@/assets/tower.jpg"
+import gameClumcy from "@/assets/flappy.jpg"
+import gameDuckHunt from "@/assets/duck.jpg"
+import gameSpaceWar from "@/assets/spacewar.jpg"
+import gameSpace from "@/assets/spaceinvaders.jpg"
+import gameBowling from "@/assets/bowl.jpg";
+import gamePacman from "@/assets/pacman.jpg"
+import gameSnake from "@/assets/snake.jpg"
+import gameKnifeAttack from "@/assets/knife.jpg"
+import gameCar from "@/assets/carracing.jpg"
+import gameTic from "@/assets/tictac.jpg"
+import gameBubbleShooter from "@/assets/bubble.jpg"
+import gameJumpingPanda from "@/assets/jumpp.jpg"
+import gameHextris from "@/assets/hextris.jpg"
+import gameBlockFusion from "@/assets/block.jpg"
+import gamebreak from "@/assets/lock.jpg"
+import gameTetris from "@/assets/titrisl.jpg"
+import gameLastColony from "@/assets/lastcolony.jpg"
+import gameship from "@/assets/ship.jpg"
+import gameTetris2 from "@/assets/tetris.jpg"
+import gameRadiusRaid from "@/assets/radius_raid.jpg"
+
 export const GAMES: Record<string, GameInfo> = {
   // Puzzle Games
   "2048": {
@@ -94,15 +96,6 @@ export const GAMES: Record<string, GameInfo> = {
     category: "Puzzle",
     description: "Classic Tic Tac Toe game",
   },
-  // "candyjam": {
-  //   id: "candyjam",
-  //   title: "Candy Jam",
-  //   path: `${BASE_PATH}games/candyjam-master/index.html`,
-  //   image: gameCubeNinja,
-  //   category: "Puzzle",
-  //   description: "Match colorful candies in this sweet puzzle game",
-  // },
-
   // Racing Games
   "hexgl": {
     id: "hexgl",
@@ -186,11 +179,11 @@ export const GAMES: Record<string, GameInfo> = {
     category: "Arcade",
     description: "Knife throwing action game",
   },
-  "radius-raid": {
+  "radius-raid": { 
     id: "radius-raid",
     title: "Radius Raid",
     path: `${BASE_PATH}games/radius-raid-js13k-master/index.html`,
-    image: gameAirBattle,
+    image: gameRadiusRaid,
     category: ["Arcade", "Shooter"],
     description: "Space shooter in a circular arena",
   },

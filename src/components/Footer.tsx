@@ -1,4 +1,5 @@
 import { Gamepad2, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -34,10 +35,10 @@ export const Footer = () => {
           <div>
             <h3 className="font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#games" className="text-muted-foreground hover:text-foreground transition-colors">All Games</a></li>
-              <li><a href="#trending" className="text-muted-foreground hover:text-foreground transition-colors">Trending</a></li>
-              <li><a href="#categories" className="text-muted-foreground hover:text-foreground transition-colors">Categories</a></li>
-              <li><a href="#subscription" className="text-muted-foreground hover:text-foreground transition-colors">Subscribe</a></li>
+              <li><Link to="/games" className="text-muted-foreground hover:text-foreground transition-colors">All Games</Link></li>
+              <li><Link to="/#trending" className="text-muted-foreground hover:text-foreground transition-colors">Trending</Link></li>
+              <li><Link to="/#categories" className="text-muted-foreground hover:text-foreground transition-colors">Categories</Link></li>
+              <li><Link to="/favourites" className="text-muted-foreground hover:text-foreground transition-colors">Favourites</Link></li>
             </ul>
           </div>
 
@@ -45,10 +46,10 @@ export const Footer = () => {
           <div>
             <h3 className="font-bold mb-4">Support</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="/help-center" className="text-muted-foreground hover:text-foreground transition-colors">Help Center</a></li>
-              <li><a href="/contact-us" className="text-muted-foreground hover:text-foreground transition-colors">Contact Us</a></li>
-              <li><a href="/faq" className="text-muted-foreground hover:text-foreground transition-colors">FAQ</a></li>
-              <li><a href="/terms-conditions" className="text-muted-foreground hover:text-foreground transition-colors">Terms of Service</a></li>
+              <li><Link to="/help-center" className="text-muted-foreground hover:text-foreground transition-colors">Help Center</Link></li>
+              <li><Link to="/contact-us" className="text-muted-foreground hover:text-foreground transition-colors">Contact Us</Link></li>
+              <li><Link to="/faq" className="text-muted-foreground hover:text-foreground transition-colors">FAQ</Link></li>
+              <li><Link to="/terms-conditions" className="text-muted-foreground hover:text-foreground transition-colors">Terms of Service</Link></li>
             </ul>
           </div>
 
@@ -56,10 +57,10 @@ export const Footer = () => {
           <div>
             <h3 className="font-bold mb-4">Legal</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="/privacy-policy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a></li>
-              <li><a href="/cookie-policy" className="text-muted-foreground hover:text-foreground transition-colors">Cookie Policy</a></li>
-              <li><a href="/terms-conditions" className="text-muted-foreground hover:text-foreground transition-colors">Terms & Conditions</a></li>
-              <li><a href="/about-us" className="text-muted-foreground hover:text-foreground transition-colors">About Us</a></li>
+              <li><Link to="/privacy-policy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/cookie-policy" className="text-muted-foreground hover:text-foreground transition-colors">Cookie Policy</Link></li>
+              <li><Link to="/terms-conditions" className="text-muted-foreground hover:text-foreground transition-colors">Terms & Conditions</Link></li>
+              <li><Link to="/about-us" className="text-muted-foreground hover:text-foreground transition-colors">About Us</Link></li>
             </ul>
           </div>
         </div>
