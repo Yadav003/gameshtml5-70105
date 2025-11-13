@@ -85,10 +85,24 @@ define(['module/HUD'],function(HUD){
         update: function(){
             _ship.body.velocity.setTo(0,0);
 
+            // Keyboard controls
             if(_cursors.left.isDown){
                 _ship.body.velocity.x = -200;
             }else if(_cursors.right.isDown){
                 _ship.body.velocity.x = 200;
+            }
+            
+            // Touch/Mouse controls for mobile
+            if(_game.input.activePointer.isDown){
+                var pointerX = _game.input.activePointer.x;
+                var shipX = _ship.x;
+                
+                // Move ship towards pointer position
+                if(pointerX < shipX - 10){
+                    _ship.body.velocity.x = -200;
+                }else if(pointerX > shipX + 10){
+                    _ship.body.velocity.x = 200;
+                }
             }
         },
         setBulletGroup: function(bullets){

@@ -738,10 +738,37 @@ $.blurcb = function() {
 	}
 }
 
+$.touchmovecb = function( e ) {
+	e.preventDefault();
+	if( e.touches.length > 0 ) {
+		$.mouse.ax = e.touches[0].pageX;
+		$.mouse.ay = e.touches[0].pageY;
+		$.mousescreen();
+	}
+};
+
+$.touchstartcb = function( e ) {
+	e.preventDefault();
+	if( e.touches.length > 0 ) {
+		$.mouse.ax = e.touches[0].pageX;
+		$.mouse.ay = e.touches[0].pageY;
+		$.mousescreen();
+		$.mouse.down = 1;
+	}
+};
+
+$.touchendcb = function( e ) {
+	e.preventDefault();
+	$.mouse.down = 0;
+};
+
 $.bindEvents = function() {
 	window.addEventListener( 'mousemove', $.mousemovecb );
 	window.addEventListener( 'mousedown', $.mousedowncb );
 	window.addEventListener( 'mouseup', $.mouseupcb );
+	window.addEventListener( 'touchmove', $.touchmovecb );
+	window.addEventListener( 'touchstart', $.touchstartcb );
+	window.addEventListener( 'touchend', $.touchendcb );
 	window.addEventListener( 'keydown', $.keydowncb );
 	window.addEventListener( 'keyup', $.keyupcb );
 	window.addEventListener( 'resize', $.resizecb );
@@ -1169,7 +1196,7 @@ $.setupStates = function() {
 			ctx: $.ctxmg,
 			x: $.cw / 2,
 			y: $.ch - 172,
-			text: 'CREATED BY JACK RUGILE FOR JS13KGAMES 2013',
+			text: 'CREATED BY GOD',
 			hspacing: 1,
 			vspacing: 1,
 			halign: 'center',

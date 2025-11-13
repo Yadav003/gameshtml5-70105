@@ -2,11 +2,25 @@
 <html>
 	<head>
 		<title>Radius Raid</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 		<link rel="shortcut icon" id="favicon" />
 
 		<style>
-			body {
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			html, body {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				position: fixed;
 				background: #080808;
+				touch-action: none;
+				-webkit-user-select: none;
+				user-select: none;
 			}
 
 			#wrap {
@@ -37,9 +51,73 @@
 				position: absolute;
 				top: 0;
 			}
+
+			/* Rotation message for mobile portrait mode */
+			#rotate-message {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: #080808;
+				z-index: 9999;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				color: #fff;
+				font-family: Arial, sans-serif;
+				text-align: center;
+				padding: 20px;
+			}
+
+			#rotate-message .icon {
+				font-size: 80px;
+				margin-bottom: 20px;
+				animation: rotate 2s ease-in-out infinite;
+			}
+
+			#rotate-message .text {
+				font-size: 20px;
+				font-weight: bold;
+				margin-bottom: 10px;
+			}
+
+			#rotate-message .subtext {
+				font-size: 14px;
+				color: #999;
+			}
+
+			@keyframes rotate {
+				0%, 100% { transform: rotate(0deg); }
+				50% { transform: rotate(90deg); }
+			}
+
+			/* Show rotation message on mobile portrait */
+			@media screen and (max-width: 768px) and (orientation: portrait) {
+				#rotate-message {
+					display: flex !important;
+				}
+				#wrap {
+					display: none;
+				}
+			}
+
+			/* Optimize for mobile landscape */
+			@media screen and (max-width: 768px) and (orientation: landscape) {
+				#wrap {
+					padding: 5px;
+				}
+			}
 		</style>
 	</head>
 	<body>
+		<!-- Rotation message for mobile devices -->
+		<div id="rotate-message">
+			<div class="icon">📱</div>
+			<div class="text">Please Rotate Your Device</div>
+			<div class="subtext">This game is best played in landscape mode</div>
+		</div>
 		<div id="wrap">
 			<div id="wrap-inner">
 				<canvas id="cbg1"></canvas>

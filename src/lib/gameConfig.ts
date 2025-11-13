@@ -60,7 +60,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/hextris-gh-pages/index.html`,
     image: gameHextris,
     category: "Puzzle",
-    description: "Fast paced HTML5 puzzle game inspired by Tetris",
+    description: "Fast paced puzzle game inspired by Tetris",
   },
   "tetris": {
     id: "tetris",
