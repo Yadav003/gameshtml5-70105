@@ -9,17 +9,22 @@ export interface GameInfo {
   category?: string | string[]; // Support single or multiple categories
   description?: string;
 }
-const BASE_PATH ="https://www.ovalplay.com/";
+// production url below
+
+// const BASE_PATH ="https://www.ovalplay.com/";
+
+
+
 // Get the base path from Vite config
-// const BASE_PATH = import.meta.env.BASE_URL || '/';
+const BASE_PATH = import.meta.env.BASE_URL || '/';
 
 // Import game images
 import gameCubeNinja from "@/assets/game-cube-ninja.jpg";
 import heroRacing from "@/assets/hero-racing.jpg";
-import heroWatercraft from "@/assets/hero-watercraft.jpg";
 import gameAirBattle from "@/assets/game-air-battle.jpg";
 import gameCricket from "@/assets/game-cricket.jpg";
-import gameBaseball from "@/assets/game-baseball.jpg";
+import gameBaseball from "@/assets/game-cube-ninja.jpg";
+import heroWatercraft from "@/assets/hero-racing.jpg";
 import heroFps from "@/assets/hero-fps.jpg";
 import gamerocket from "@/assets/rocketr.jpg"
 import gamebike from "@/assets/biker.jpg"
@@ -45,6 +50,8 @@ import gameLastColony from "@/assets/lastcolony.jpg"
 import gameship from "@/assets/ship.jpg"
 import gameTetris2 from "@/assets/tetris.jpg"
 import gameRadiusRaid from "@/assets/radius_raid.jpg"
+import placeholder1 from "@/assets/1.jpg"
+import placeholder2 from "@/assets/2.jpg"
 
 export const GAMES: Record<string, GameInfo> = {
   // Puzzle Games
@@ -205,14 +212,6 @@ export const GAMES: Record<string, GameInfo> = {
     category: "Strategy",
     description: "Real-time strategy game in space",
   },
-  // "ophog": {
-  //   id: "ophog",
-  //   title: "OpHog",
-  //   path: `${BASE_PATH}games/OpHog-master/src/index.html`,
-  //   image: gameCubeNinja,
-  //   category: "Strategy",
-  //   description: "Strategic puzzle game",
-  // },
 
   // Sports Games
   "bowling": {
@@ -259,6 +258,182 @@ export const GAMES: Record<string, GameInfo> = {
     category: "Casual",
     description: "Fun casual game",
   },
+  // "foosBall": {
+  //   id: "foosBall",
+  //   title: "Foos Ball",
+  //   path: `${BASE_PATH}games/FoosBall/index.php`,
+  //   image: placeholder1,
+  //   category: "Sports",
+  //   description: "Table football game",
+  // },
+  "frog-bubbles": {
+    id: "frog-bubbles",
+    title: "Frog Super Bubbles",
+    path: `${BASE_PATH}games/Frog Super Bubbles/gamefiles/index.html`,
+    image: placeholder2,
+    category: "Casual",
+    description: "Frog bubble shooting game",
+  },
+  // "double-stickman": {
+  //   id: "double-stickman",
+  //   title: "Double Stickman",
+  //   path: `${BASE_PATH}games/double-stickman/gamefiles/index.php`,
+  //   image: placeholder1,
+  //   category: "Casual",
+  //   description: "Double stickman fighting game",
+  // },
+  "super-match": {
+    id: "super-match",
+    title: "Super Match",
+    path: `${BASE_PATH}games/block super match/gamefiles/index.html`,
+    image: placeholder2,
+    category: "Puzzle",
+    description: "Block matching puzzle game",
+  },
+  "100m-race": {
+    id: "100m-race",
+    title: "100 Metres Race",
+    path: `${BASE_PATH}games/100metresrace/gamefiles/game/index.html`,
+    image: placeholder1,
+    category: "Sports",
+    description: "Sprint racing game",
+  },
+  "1010-puzzle": {
+    id: "1010-puzzle",
+    title: "1010 Puzzle",
+    path: `${BASE_PATH}games/1010-puzzle/gamefiles/index.html`,
+    image: placeholder2,
+    category: "Puzzle",
+    description: "Block placement puzzle game",
+  },
+  "aleor-gold": {
+    id: "aleor-gold",
+    title: "Aleor Gold",
+    path: `${BASE_PATH}games/aleorgold/gamefiles/files/files/index.html`,
+    image: placeholder1,
+    category: "Casual",
+    description: "Gold collection adventure",
+  },
+  "aliens-memory": {
+    id: "aliens-memory",
+    title: "Aliens Memory",
+    path: `${BASE_PATH}games/AliensMemory/index.html`,
+    image: placeholder2,
+    category: "Puzzle",
+    description: "Memory card matching game with aliens",
+  },
+  "animal-crush": {
+    id: "animal-crush",
+    title: "Animal Crush",
+    path: `${BASE_PATH}games/animalcrush/gamefiles/index.html`,
+    image: placeholder1,
+    category: "Casual",
+    description: "Match 3 animal puzzle game",
+  },
+  "animal-puzzle": {
+    id: "animal-puzzle",
+    title: "Animal Puzzle",
+    path: `${BASE_PATH}games/animalpuzzle/gamefiles/files/files/index.html`,
+    image: placeholder2,
+    category: "Puzzle",
+    description: "Jigsaw puzzle with animal images",
+  },
+  // "asteroids": {
+  //   id: "asteroids",
+  //   title: "Asteroids",
+  //   path: `${BASE_PATH}games/asteroids/gamefiles/index.php`,
+  //   image: gameAirBattle,
+  //   category: ["Arcade", "Shooter"],
+  //   description: "Classic asteroids space shooter",
+  // },
+  // "auto-offroad": {
+  //   id: "auto-offroad",
+  //   title: "Auto Offroad",
+  //   path: `${BASE_PATH}games/Autoofroad/index.php`,
+  //   image: gameCar,
+  //   category: "Racing",
+  //   description: "Offroad driving adventure",
+  // },
+  "barrier": {
+    id: "barrier",
+    title: "Barrier",
+    path: `${BASE_PATH}games/Barrier/index.html`,
+    image: placeholder1,
+    category: "Arcade",
+    description: "Navigate through barriers",
+  },
+  // "baseball-classic": {
+  //   id: "baseball-classic",
+  //   title: "Baseball Classic",
+  //   path: `${BASE_PATH}games/BaseballClassic/index.php`,
+  //   image: gameBaseball,
+  //   category: "Sports",
+  //   description: "Classic baseball game",
+  // },
+  // "basketball-practice": {
+  //   id: "basketball-practice",
+  //   title: "Basketball Practice",
+  //   path: `${BASE_PATH}games/BasketballPractice/index.php`,
+  //   image: placeholder2,
+  //   category: "Sports",
+  //   description: "Basketball shooting practice",
+  // },
+  // "billards": {
+  //   id: "billards",
+  //   title: "Billards",
+  //   path: `${BASE_PATH}games/billards/gamefiles/index.php`,
+  //   image: placeholder1,
+  //   category: "Sports",
+  //   description: "Classic pool billiards game",
+  // },
+  "birdify": {
+    id: "birdify",
+    title: "Birdify",
+    path: `${BASE_PATH}games/Birdify/gamefiles/index.html`,
+    image: placeholder2,
+    category: "Arcade",
+    description: "Bird flying adventure",
+  },
+  // "birds-memory": {
+  //   id: "birds-memory",
+  //   title: "Birds Memory",
+  //   path: `${BASE_PATH}games/BirdsMemory/index.php`,
+  //   image: placeholder1,
+  //   category: "Puzzle",
+  //   description: "Memory card matching game with birds",
+  // },
+  // "blocker": {
+  //   id: "blocker",
+  //   title: "Blocker",
+  //   path: `${BASE_PATH}games/blocker/index.html`,
+  //   image: placeholder2,
+  //   category: "Puzzle",
+  //   description: "Block puzzle strategy game",
+  // },
+  // "boat-rush": {
+  //   id: "boat-rush",
+  //   title: "Boat Rush",
+  //   path: `${BASE_PATH}games/BoatRush/index.php`,
+  //   image: heroWatercraft,
+  //   category: "Racing",
+  //   description: "Fast-paced boat racing",
+  // },
+  // "bubble-shooter-classic": {
+  //   id: "bubble-shooter-classic",
+  //   title: "Bubble Shooter Classic",
+  //   path: `${BASE_PATH}games/bubble-shooter/index.html`,
+  //   image: gameBubbleShooter,
+  //   category: "Casual",
+  //   description: "Classic bubble shooter game",
+  // },
+  // "crazy-match3": {
+  //   id: "crazy-match3",
+  //   title: "Crazy Match 3",
+  //   path: `${BASE_PATH}games/crazy-match3/gamefiles/index.php`,
+  //   image: placeholder1,
+  //   category: "Puzzle",
+  //   description: "Exciting match-3 puzzle game",
+  // },
 };
 
 // Helper function to get game by ID

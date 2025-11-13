@@ -1,0 +1,74 @@
+<?php include("../../../checksub.php"); ?>
+<html>
+  <head>
+    <title>1010 puzzle game</title>
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css" charset="utf-8">
+  </head>
+
+  <body>
+    <div class="logo">
+      <h1>
+         [1010 puzzle game]
+      </h1>
+
+    </div>
+    <div class="modal-box" id="start-modal">
+      <div class="modal">
+        <p>
+          <strong class="heading">Welcome to 1010 puzzle game.</strong></br>
+          <strong class="heading">How to play</strong>
+		  <br />
+          You get three random pieces per turn.
+          <br />
+          You get a point for every square you fill.
+          <br />
+          Completing a row or column clears it.
+          <br />
+          You lose when you can't fit any of your tiles on the board.
+          <br />
+          Best of Luck.
+        </p>
+        <br />
+        <div class="button" id="start">Play</div>
+      </div>
+    </div>
+
+    <div class="modal-box hidden" id="restart-modal">
+      <div class="modal">
+        <section class="score-show group">
+
+        <section class="score-detail">
+          <strong>Your Score</strong>
+          <br />
+          <strong id="score"></strong>
+        </br>
+          <input id="inits" type="text" placeholder="Your Initials" maxlength="3"/>
+        </br>
+          <div class="button small">Submit and Play Again</div>
+        </section>
+
+        <div class="score-detail">
+        <table class="score-list">
+            <strong>High Scores</strong>
+            <tr class="score-header">
+              <td>Name</td>
+              <td>Score</td>
+            </tr>
+
+        </table>
+      </div>
+      </section>
+        <br />
+        <div class="button" id="restart">Restart</div>
+      </div>
+    </div>
+        <div class="score hidden" id="score-zone">
+          Score:
+          <strong id="running-score">0</strong>
+        </div>
+  </br/>
+    <canvas ></canvas>
+    <script type="application/javascript" src="lib/bundle.js"></script>
+  </body>
+</html>

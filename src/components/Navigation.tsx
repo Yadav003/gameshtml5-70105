@@ -1,4 +1,4 @@
-import { Gamepad2, Menu, Search, User } from "lucide-react";
+import { Gamepad2, User, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
@@ -46,14 +46,21 @@ export const Navigation = () => {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="hidden md:flex">
-            <Search className="w-5 h-5" />
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="hidden md:flex"
+            onClick={() => navigate('/favourites')}
+          >
+            <Heart className="w-5 h-5" />
           </Button>
-          <Button variant="ghost" size="icon">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="hidden md:flex"
+            onClick={() => navigate('/profile')}
+          >
             <User className="w-5 h-5" />
-          </Button>
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <Menu className="w-5 h-5" />
           </Button>
         </div>
       </div>
