@@ -11,12 +11,12 @@ export interface GameInfo {
 }
 // production url below
 
-// const BASE_PATH ="https://www.ovalplay.com/";
+const BASE_PATH ="https://www.ovalplay.com/";
 
 
 
 // Get the base path from Vite config
-const BASE_PATH = import.meta.env.BASE_URL || '/';
+// const BASE_PATH = import.meta.env.BASE_URL || '/';
 
 // Import game images
 import gameCubeNinja from "@/assets/game-cube-ninja.jpg";
@@ -245,7 +245,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Bubble Shooter",
     path: `${BASE_PATH}games/3m/index.html`,
     image: gameBubbleShooter,
-    category: "Casual",
+    category: ["Casual", "Shooter"],
     description: "Quick casual game",
   },
   "game-4-2": {
@@ -261,7 +261,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Foos Ball",
     path: `${BASE_PATH}games/FoosBall/index.html`,
     image: gamefoosball,
-    category: "Sports",
+    category: ["Sports", "Strategy"],
     description: "Table football game",
   },
   "frog-bubbles": {
@@ -342,7 +342,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Barrier",
     path: `${BASE_PATH}games/Barrier/index.html`,
     image: gameBarrier,
-    category: "Arcade",
+    category: ["Racing"],
     description: "Navigate through barriers",
   },
   "baseball-classic": {
@@ -366,7 +366,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Billards",
     path: `${BASE_PATH}games/billards/gamefiles/index.html`,
     image: gamebiliards, 
-    category: "Sports",
+    category: ["Sports", "Strategy"],
     description: "Classic pool billiards game",
   },
   "birdify": {
