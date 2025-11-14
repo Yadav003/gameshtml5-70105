@@ -365,7 +365,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "billards",
     title: "Billards",
     path: `${BASE_PATH}games/billards/gamefiles/index.html`,
-    image: gamebiliards,
+    image: gamebiliards, 
     category: "Sports",
     description: "Classic pool billiards game",
   },
@@ -378,38 +378,38 @@ export const GAMES: Record<string, GameInfo> = {
     description: "Bird flying adventure",
   },
 
-  "blocker": {
-    id: "blocker",
-    title: "Blocker",
-    path: `${BASE_PATH}games/blocker/index.html`,
-    image: placeholder2,
-    category: "Puzzle",
-    description: "Block puzzle strategy game",
-  },
-  "boat-rush": {
-    id: "boat-rush",
-    title: "Boat Rush",
-    path: `${BASE_PATH}games/BoatRush/index.html`,
-    image: placeholder1,
-    category: "Racing",
-    description: "Fast-paced boat racing game",
-  },
-  "crazy-match3": {
-    id: "crazy-match3",
-    title: "Crazy Match 3",
-    path: `${BASE_PATH}games/crazy-match3/gamefiles/index.html`,
-    image: placeholder2,
-    category: "Casual",
-    description: "Match 3 puzzle game with crazy effects",
-  },
-  "birds-memory": {
-    id: "birds-memory",
-    title: "Birds Memory",
-    path: `${BASE_PATH}games/BirdsMemory/index.html`,
-    image: placeholder1,
-    category: "Puzzle",
-    description: "Memory card matching game with birds",
-  },
+  // "blocker": {
+  //   id: "blocker",
+  //   title: "Blocker",
+  //   path: `${BASE_PATH}games/blocker/index.html`,
+  //   image: placeholder2,
+  //   category: "Puzzle",
+  //   description: "Block puzzle strategy game",
+  // },
+  // "boat-rush": {
+  //   id: "boat-rush",
+  //   title: "Boat Rush",
+  //   path: `${BASE_PATH}games/BoatRush/index.html`,
+  //   image: placeholder1,
+  //   category: "Racing",
+  //   description: "Fast-paced boat racing game",
+  // },
+  // "crazy-match3": {
+  //   id: "crazy-match3",
+  //   title: "Crazy Match 3",
+  //   path: `${BASE_PATH}games/crazy-match3/gamefiles/index.html`,
+  //   image: placeholder2,
+  //   category: "Casual",
+  //   description: "Match 3 puzzle game with crazy effects",
+  // },
+  // "birds-memory": {
+  //   id: "birds-memory",
+  //   title: "Birds Memory",
+  //   path: `${BASE_PATH}games/BirdsMemory/index.html`,
+  //   image: placeholder1,
+  //   category: "Puzzle",
+  //   description: "Memory card matching game with birds",
+  // },
 };
 
 // Helper function to get game by ID
@@ -457,6 +457,6 @@ export const getTrendingGames = (): GameInfo[] => {
     GAMES["hexgl"],
     GAMES["bike"],
     GAMES["game-1"],
-    GAMES["tower-game"],
+    GAMES["auto-offroad"],
   ];
 };
