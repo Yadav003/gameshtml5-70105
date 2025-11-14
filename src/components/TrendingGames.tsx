@@ -17,6 +17,7 @@ export const TrendingGames = () => {
               title={game.title} 
               image={game.image}
               gameUrl={game.path ? `/play/${game.id}` : undefined}
+              navigationState={{ from: 'home' }}
             />
           ))}
         </div>

@@ -7,8 +7,8 @@ export const CategoriesSection = () => {
   const navigate = useNavigate();
   const categories = getCategories();
 
-  const handleGameClick = (gameId: string) => {
-    navigate(`/play/${gameId}`);
+  const handleGameClick = (gameId: string, category: string) => {
+    navigate(`/play/${gameId}`, { state: { category, from: 'home' } });
   };
 
   return (
@@ -39,7 +39,7 @@ export const CategoriesSection = () => {
                     <Card
                       key={game.id}
                       className="group relative overflow-hidden border-0 cursor-pointer"
-                      onClick={() => handleGameClick(game.id)}
+                      onClick={() => handleGameClick(game.id, category)}
                     >
                       <div className="aspect-[3/4] relative">
                         <img

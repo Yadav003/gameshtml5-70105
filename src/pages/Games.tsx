@@ -54,7 +54,12 @@ const Games = () => {
   };
 
   const handlePlayGame = (gameId: string) => {
-    navigate(`/play/${gameId}`);
+    navigate(`/play/${gameId}`, { 
+      state: { 
+        category: selectedCategory === "All" ? undefined : selectedCategory,
+        from: 'games'
+      } 
+    });
   };
 
   // Group games by category

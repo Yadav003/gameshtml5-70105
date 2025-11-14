@@ -5,14 +5,15 @@ interface GameCardProps {
   title: string;
   image: string;
   gameUrl?: string;
+  navigationState?: any;
 }
 
-export const GameCard = ({ title, image, gameUrl }: GameCardProps) => {
+export const GameCard = ({ title, image, gameUrl, navigationState }: GameCardProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
     if (gameUrl) {
-      navigate(gameUrl);
+      navigate(gameUrl, { state: navigationState });
     }
   };
 

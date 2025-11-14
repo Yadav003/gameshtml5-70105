@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { getGameById } from "@/lib/gameConfig";
 
 const GamePlayer = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { gameId } = useParams<{ gameId: string }>();
 
   useEffect(() => {
@@ -53,6 +54,38 @@ const GamePlayer = () => {
   // Get game configuration
   const game = gameId ? getGameById(gameId) : null;
 
+  // Determine where to navigate back to
+  const getBackUrl = () => {
+    // Check if there's a referrer state passed from navigation
+    const state = location.state as { from?: string; category?: string } | null;
+    
+    if (state?.category) {
+      // If category was passed, go back to that category in /games
+      return `/games?category=${state.category}`;
+    } else if (state?.from === 'games') {
+      // If coming from games page, go back to games
+      return '/games';
+    } else if (state?.from === 'favourites') {
+      // If coming from favourites, go back to favourites
+      return '/favourites';
+    } else if (state?.from === 'home') {
+      // If coming from home, go back to home with scroll to categories
+      return '/#categories';
+    }
+    
+    // Check if the game has a category and navigate to that category
+    if (game?.category) {
+      return `/games?category=${game.category}`;
+    }
+    
+    // Default fallback to home
+    return '/';
+  };
+
+  const handleBack = () => {
+    navigate(getBackUrl());
+  };
+
   // If game not found, show error
   if (!game || !game.path) {
     return (
@@ -62,9 +95,9 @@ const GamePlayer = () => {
           <p className="text-muted-foreground mb-6">
             The game you're looking for doesn't exist or is not yet available.
           </p>
-          <Button onClick={() => navigate("/")}>
+          <Button onClick={handleBack}>
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
+            Back
           </Button>
         </div>
       </div>
@@ -77,11 +110,11 @@ const GamePlayer = () => {
         <Button
           variant="secondary"
           size="sm"
-          onClick={() => navigate("/")}
+          onClick={handleBack}
           className="flex items-center gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Home
+          Back
         </Button>
       </div>
       <iframe

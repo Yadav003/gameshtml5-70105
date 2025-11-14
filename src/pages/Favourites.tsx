@@ -32,7 +32,7 @@ const Favourites = () => {
   };
 
   const handlePlayGame = (gameId: string) => {
-    navigate(`/play/${gameId}`);
+    navigate(`/play/${gameId}`, { state: { from: 'favourites' } });
   };
 
   const favoriteGames = favorites

@@ -47,7 +47,7 @@ export const HeroCarousel = () => {
   };
 
   const handlePlayGame = (gameId: string) => {
-    navigate(`/play/${gameId}`);
+    navigate(`/play/${gameId}`, { state: { from: 'home' } });
   };
 
   return (
