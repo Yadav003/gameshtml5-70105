@@ -298,7 +298,7 @@ export const GAMES: Record<string, GameInfo> = {
   },
   "aleor-gold": {
     id: "aleor-gold",
-    title: "Aleor Gold",
+    title: "Ale or Gold",
     path: `${BASE_PATH}games/aleorgold/gamefiles/files/files/index.html`,
     image: gameAleorgold,
     category: "Casual",

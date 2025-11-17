@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { getCategories, getGamesByCategory } from "@/lib/gameConfig";
+import { getCategoryDisplay } from "@/lib/utils";
 
 export const CategoriesSection = () => {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ export const CategoriesSection = () => {
                           <div className="flex items-center gap-1">
                             <span className="text-primary">★</span>
                             <span className="text-sm text-muted-foreground">
-                              {game.category}
+                              {getCategoryDisplay(game.category)}
                             </span>
                           </div>
                         </div>

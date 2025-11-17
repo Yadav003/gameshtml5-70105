@@ -3,13 +3,28 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { getGameById } from "@/lib/gameConfig";
+import { trackGamePlay } from "@/lib/analytics";
 
 const GamePlayer = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { gameId } = useParams<{ gameId: string }>();
 
+  // Get game configuration
+  const game = gameId ? getGameById(gameId) : null;
+
+  // Helper function to get category as string
+  const getCategoryString = (category?: string | string[]): string => {
+    if (!category) return 'Uncategorized';
+    return Array.isArray(category) ? category[0] : category;
+  };
+
   useEffect(() => {
+    // Track game play in Google Analytics
+    if (game) {
+      trackGamePlay(game.id, game.title, getCategoryString(game.category));
+    }
+
     // Set full screen for better gaming experience
     document.body.style.overflow = "hidden";
     
@@ -49,10 +64,7 @@ const GamePlayer = () => {
       document.removeEventListener('touchstart', preventZoom);
       document.removeEventListener('touchend', preventDoubleTapZoom);
     };
-  }, []);
-
-  // Get game configuration
-  const game = gameId ? getGameById(gameId) : null;
+  }, [game]);
 
   // Determine where to navigate back to
   const getBackUrl = () => {
@@ -75,7 +87,7 @@ const GamePlayer = () => {
     
     // Check if the game has a category and navigate to that category
     if (game?.category) {
-      return `/games?category=${game.category}`;
+      return `/games?category=${getCategoryString(game.category)}`;
     }
     
     // Default fallback to home

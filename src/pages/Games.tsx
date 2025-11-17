@@ -9,6 +9,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getAllGames, getCategories, getGamesByCategory } from "@/lib/gameConfig";
+import { trackFavoriteAction, trackCategoryView } from "@/lib/analytics";
+import { getCategoryDisplay } from "@/lib/utils";
 
 const Games = () => {
   const { toast } = useToast();
@@ -36,19 +38,24 @@ const Games = () => {
       setSearchParams({});
     } else {
       setSearchParams({ category });
+      trackCategoryView(category);
     }
   };
 
   const toggleFavorite = (gameId: string, gameName: string) => {
-    const newFavorites = favorites.includes(gameId)
+    const isRemoving = favorites.includes(gameId);
+    const newFavorites = isRemoving
       ? favorites.filter((id) => id !== gameId)
       : [...favorites, gameId];
     
     setFavorites(newFavorites);
     localStorage.setItem("ovalplay-favorites", JSON.stringify(newFavorites));
     
+    // Track the favorite action in analytics
+    trackFavoriteAction(gameId, gameName, isRemoving ? 'remove' : 'add');
+    
     toast({
-      title: favorites.includes(gameId) ? "Removed from favourites" : "Added to favourites",
+      title: isRemoving ? "Removed from favourites" : "Added to favourites",
       description: gameName,
     });
   };
@@ -134,7 +141,7 @@ const Games = () => {
                       </p>
                       <div className="flex items-center justify-between">
                         <span className="text-sm text-muted-foreground">
-                          {game.category}
+                          {getCategoryDisplay(game.category)}
                         </span>
                         <Button size="sm" onClick={() => handlePlayGame(game.id)}>
                           Play Now

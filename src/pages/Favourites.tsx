@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { getAllGames, getGameById } from "@/lib/gameConfig";
+import { trackFavoriteAction } from "@/lib/analytics";
+import { getCategoryDisplay } from "@/lib/utils";
 
 const Favourites = () => {
   const { toast } = useToast();
@@ -24,6 +26,9 @@ const Favourites = () => {
     const newFavorites = favorites.filter((id) => id !== gameId);
     setFavorites(newFavorites);
     localStorage.setItem("ovalplay-favorites", JSON.stringify(newFavorites));
+    
+    // Track the remove action in analytics
+    trackFavoriteAction(gameId, gameName, 'remove');
     
     toast({
       title: "Removed from favourites",
@@ -90,7 +95,7 @@ const Favourites = () => {
                     </p>
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-muted-foreground">
-                        {game!.category}
+                        {getCategoryDisplay(game!.category)}
                       </span>
                       <Button size="sm" onClick={() => handlePlayGame(game!.id)}>
                         Play Now
