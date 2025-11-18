@@ -277,7 +277,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Double Stickman",
     path: `${BASE_PATH}games/double-stickman/gamefiles/index.html`,
     image: gamestickman,
-    category: "Casual",
+    category: ["Casual","Arcade"],
     description: "Double stickman fighting game",
   },
   "super-match": {
@@ -339,7 +339,7 @@ export const GAMES: Record<string, GameInfo> = {
   },
   "barrier": {
     id: "barrier",
-    title: "Barrier",
+    title: "Dotch Barrier",
     path: `${BASE_PATH}games/Barrier/index.html`,
     image: gameBarrier,
     category: ["Racing"],
@@ -380,10 +380,10 @@ export const GAMES: Record<string, GameInfo> = {
 
   // "blocker": {
   //   id: "blocker",
-  //   title: "Blocker",
+  //   title: "Wall Breaker",
   //   path: `${BASE_PATH}games/blocker/index.html`,
   //   image: placeholder2,
-  //   category: "Puzzle",
+  //   category: "Casual",
   //   description: "Block puzzle strategy game",
   // },
   // "boat-rush": {
@@ -404,7 +404,7 @@ export const GAMES: Record<string, GameInfo> = {
   // },
   // "birds-memory": {
   //   id: "birds-memory",
-  //   title: "Birds Memory",
+  //   title: "Remember Birds ",
   //   path: `${BASE_PATH}games/BirdsMemory/index.html`,
   //   image: placeholder1,
   //   category: "Puzzle",
