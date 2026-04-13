@@ -11,7 +11,7 @@ const Profile = () => {
   // Mock profile data - in a real app, this would come from authentication
   const userProfile = {
     name: "Gaming Pro",
-    email: "gamer@ovalplay.com",
+    email: "gamer@playverse.com",
     memberSince: "January 2024",
     subscription: {
       plan: "Premium",

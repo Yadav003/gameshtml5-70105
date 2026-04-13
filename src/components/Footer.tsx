@@ -14,7 +14,7 @@ export const Footer = () => {
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <Gamepad2 className="w-8 h-8 text-primary" />
-              <span className="text-xl font-bold">OvalPlay</span>
+              <span className="text-xl font-bold">PlayVerse</span>
             </div>
             <p className="text-muted-foreground text-sm mb-4">
               Your ultimate destination for online gaming entertainment.
@@ -70,7 +70,7 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; 2025 OvalPlay. All rights reserved.</p>
+          <p>&copy; 2025 PlayVerse. All rights reserved.</p>
         </div>
       </div>
     </footer>

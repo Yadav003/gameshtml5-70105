@@ -87,8 +87,8 @@ const ContactUs = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    support@ovalplay.com<br />
-                    business@ovalplay.com
+                    support@playverse.com<br />
+                    business@playverse.com
                   </p>
                 </CardContent>
               </Card>

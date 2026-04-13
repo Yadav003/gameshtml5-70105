@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">1. Introduction</h2>
                 <p className="text-muted-foreground mb-4">
-                  Welcome to OvalPlay. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights.
+                  Welcome to PlayVerse. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights.
                 </p>
               </section>
 
@@ -98,7 +98,7 @@ const PrivacyPolicy = () => {
                   If you have any questions about this privacy policy, please contact us at:
                 </p>
                 <p className="text-muted-foreground">
-                  Email: privacy@ovalplay.com<br />
+                  Email: privacy@playverse.com<br />
                   Address: 123 Gaming Street, San Francisco, CA 94102
                 </p>
               </section>

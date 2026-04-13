@@ -2,28 +2,31 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import rocketimage from "@/assets/2.jpg";
-import bikeimage from "@/assets/1.jpg";
-import gameFruitNinja from "@/assets/fruit_ninja.jpg"
+// import rocketimage from "@/assets/2.jpg";
+// import bikeimage from "@/assets/1.jpg";
+// import gameFruitNinja from "@/assets/fruit_ninja.jpg"
+import gameCar from "@/assets/carracing.jpg"
+import gameStackTower from "@/assets/tower.jpg"
+import game100meter from "@/assets/100meter.jpg"
 
 const slides = [
   {
     id: 1,
-    title: "Rocket Racing",
-    image: rocketimage,
-    gameId: "hexgl",
+    title: "Auto Offroad",
+    image: gameCar,
+    gameId: "auto-offroad",
   },
   {
     id: 2,
-    title: "Bike Climb",
-    image: bikeimage,
-    gameId: "bike",
+    title: "Build Tower",
+    image: gameStackTower,
+    gameId: "tower-game",
   },
   {
     id: 3,
-    title: "Fruit Ninja",
-    image: gameFruitNinja,
-    gameId: "game-1",
+    title: "100 Metres Race",
+    image: game100meter,
+    gameId: "100m-race",
   },
 ];
 

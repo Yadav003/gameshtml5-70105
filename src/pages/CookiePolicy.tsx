@@ -125,7 +125,7 @@ const CookiePolicy = () => {
                   If you have questions about our use of cookies, please contact us at:
                 </p>
                 <p className="text-muted-foreground">
-                  Email: privacy@ovalplay.com<br />
+                  Email: privacy@playverse.com<br />
                   Address: 123 Gaming Street, San Francisco, CA 94102
                 </p>
               </section>

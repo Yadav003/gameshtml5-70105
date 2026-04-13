@@ -10,7 +10,7 @@ const AboutUs = () => {
       <Navigation />
       <main className="pt-16 pb-20 md:pb-8">
         <div className="container mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold mb-4">About OvalPlay</h1>
+          <h1 className="text-4xl font-bold mb-4">About PlayVerse</h1>
           <p className="text-xl text-muted-foreground mb-12">
             Your ultimate destination for online gaming entertainment
           </p>
@@ -20,7 +20,7 @@ const AboutUs = () => {
               <CardContent className="pt-6">
                 <h2 className="text-2xl font-bold mb-4">Our Story</h2>
                 <p className="text-muted-foreground mb-4">
-                  Founded in 2024, OvalPlay was born from a simple idea: make premium gaming accessible to everyone, everywhere. We believe that great games shouldn't be locked behind expensive hardware or complicated downloads.
+                  Founded in 2024, PlayVerse was born from a simple idea: make premium gaming accessible to everyone, everywhere. We believe that great games shouldn't be locked behind expensive hardware or complicated downloads.
                 </p>
                 <p className="text-muted-foreground">
                   Today, we serve thousands of gamers worldwide, offering instant access to hundreds of games across all genres. Our platform continues to grow, adding new games and features every month.
@@ -97,7 +97,7 @@ const AboutUs = () => {
             <CardContent className="pt-6">
               <h2 className="text-2xl font-bold mb-4">Join Us</h2>
               <p className="text-muted-foreground mb-4">
-                Whether you're a casual player or a hardcore gamer, OvalPlay has something for you. Join thousands of players who have already discovered the future of browser-based gaming.
+                Whether you're a casual player or a hardcore gamer, PlayVerse has something for you. Join thousands of players who have already discovered the future of browser-based gaming.
               </p>
               <div className="grid grid-cols-3 gap-8 text-center mt-8">
                 <div>

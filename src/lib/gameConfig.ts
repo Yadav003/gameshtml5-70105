@@ -11,12 +11,11 @@ export interface GameInfo {
 }
 // production url below
 
-const BASE_PATH ="https://www.ovalplay.com/";
-
+// const BASE_PATH ="https://www.PlayVerse.com/";
 
 
 // Get the base path from Vite config
-// const BASE_PATH = import.meta.env.BASE_URL || '/';
+const BASE_PATH = import.meta.env.BASE_URL || '/';
 
 // Import game images
 import gameCubeNinja from "@/assets/game-cube-ninja.jpg";

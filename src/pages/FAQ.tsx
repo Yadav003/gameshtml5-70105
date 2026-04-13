@@ -12,7 +12,7 @@ const FAQ = () => {
       <main className="pt-16 pb-20 md:pb-8">
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
-          <p className="text-muted-foreground mb-8">Find answers to common questions about OvalPlay</p>
+          <p className="text-muted-foreground mb-8">Find answers to common questions about PlayVerse</p>
           
           <Tabs defaultValue="general" className="w-full">
             <TabsList className="grid w-full grid-cols-4 mb-8">
@@ -27,15 +27,15 @@ const FAQ = () => {
                 <CardContent className="pt-6">
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
-                      <AccordionTrigger>What is OvalPlay?</AccordionTrigger>
+                      <AccordionTrigger>What is PlayVerse?</AccordionTrigger>
                       <AccordionContent>
-                        OvalPlay is a premium online gaming platform offering unlimited access to hundreds of games across various categories including action, sports, racing, and more.
+                        PlayVerse is a premium online gaming platform offering unlimited access to hundreds of games across various categories including action, sports, racing, and more.
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-2">
                       <AccordionTrigger>What devices are supported?</AccordionTrigger>
                       <AccordionContent>
-                        OvalPlay works on all modern web browsers including Chrome, Firefox, Safari, and Edge. Our platform is fully responsive and works on desktops, tablets, and mobile devices.
+                        PlayVerse works on all modern web browsers including Chrome, Firefox, Safari, and Edge. Our platform is fully responsive and works on desktops, tablets, and mobile devices.
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-3">

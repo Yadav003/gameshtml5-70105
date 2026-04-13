@@ -17,7 +17,7 @@ const TermsConditions = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">1. Agreement to Terms</h2>
                 <p className="text-muted-foreground mb-4">
-                  By accessing and using OvalPlay, you agree to be bound by these Terms and Conditions. If you disagree with any part of these terms, you may not access the service.
+                  By accessing and using PlayVerse, you agree to be bound by these Terms and Conditions. If you disagree with any part of these terms, you may not access the service.
                 </p>
               </section>
 
@@ -35,7 +35,7 @@ const TermsConditions = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">3. Subscription Services</h2>
                 <p className="text-muted-foreground mb-4">
-                  OvalPlay offers various subscription plans with different features and pricing:
+                  PlayVerse offers various subscription plans with different features and pricing:
                 </p>
                 <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                   <li>Subscriptions automatically renew unless cancelled</li>
@@ -63,14 +63,14 @@ const TermsConditions = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">5. Intellectual Property</h2>
                 <p className="text-muted-foreground mb-4">
-                  All content on OvalPlay, including games, graphics, logos, and text, is owned by OvalPlay or its licensors. You may not reproduce, distribute, or create derivative works without express written permission.
+                  All content on PlayVerse, including games, graphics, logos, and text, is owned by PlayVerse or its licensors. You may not reproduce, distribute, or create derivative works without express written permission.
                 </p>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">6. User Content</h2>
                 <p className="text-muted-foreground mb-4">
-                  If you submit content to OvalPlay (reviews, comments, etc.), you grant us a worldwide, non-exclusive license to use, reproduce, and display that content.
+                  If you submit content to PlayVerse (reviews, comments, etc.), you grant us a worldwide, non-exclusive license to use, reproduce, and display that content.
                 </p>
               </section>
 
@@ -91,7 +91,7 @@ const TermsConditions = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">9. Limitation of Liability</h2>
                 <p className="text-muted-foreground mb-4">
-                  OvalPlay shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the service.
+                  PlayVerse shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the service.
                 </p>
               </section>
 
@@ -108,7 +108,7 @@ const TermsConditions = () => {
                   For questions about these Terms and Conditions, contact us at:
                 </p>
                 <p className="text-muted-foreground">
-                  Email: legal@ovalplay.com<br />
+                  Email: legal@playverse.com<br />
                   Address: 123 Gaming Street, San Francisco, CA 94102
                 </p>
               </section>
