@@ -109,14 +109,14 @@ export const GAMES: Record<string, GameInfo> = {
     category: "Puzzle",
     description: "Puzzle game where you break locks",
   },
-  "tic-tac-toe": {
-    id: "tic-tac-toe",
-    title: "Tic Tac Toe",
-    path: `${BASE_PATH}games/tic-tac-toe/dist/index.html`,
-    image: gameTic,
-    category: ["Puzzle", "Strategy","Casual"],
-    description: "Classic Tic Tac Toe game",
-  },
+  // "tic-tac-toe": {
+  //   id: "tic-tac-toe",
+  //   title: "Tic Tac Toe",
+  //   path: `${BASE_PATH}games/tic-tac-toe/dist/index.html`,
+  //   image: gameTic,
+  //   category: ["Puzzle", "Strategy","Casual"],
+  //   description: "Classic Tic Tac Toe game",
+  // },
   // Racing Games
   "hexgl": {
     id: "hexgl",
@@ -144,14 +144,14 @@ export const GAMES: Record<string, GameInfo> = {
     category: "Casual",
     description: "Flappy Bird clone - navigate through pipes",
   },
-  "duck-hunt": {
-    id: "duck-hunt",
-    title: "Duck Hunt",
-    path: `${BASE_PATH}games/DuckHunt-JS-master/dist/index.html`,
-    image: gameDuckHunt,
-    category: "Arcade",
-    description: "Classic duck hunting game with a light gun",
-  },
+  // "duck-hunt": {
+  //   id: "duck-hunt",
+  //   title: "Duck Hunt",
+  //   path: `${BASE_PATH}games/DuckHunt-JS-master/dist/index.html`,
+  //   image: gameDuckHunt,
+  //   category: "Arcade",
+  //   description: "Classic duck hunting game with a light gun",
+  // },
   "alien-invasion": {
     id: "alien-invasion",
     title: "Space War",
@@ -220,15 +220,15 @@ export const GAMES: Record<string, GameInfo> = {
     description: "Realistic bowling game",
   },
 
-  // Space/Shooter Games
-  "hugeship": {
-    id: "hugeship",
-    title: "Destroyer Ship",
-    path: `${BASE_PATH}games/hugeship/index.html`,
-    image: gameship,
-    category: "Shooter",
-    description: "Space shooter with huge spaceships",
-  },
+  // // Space/Shooter Games
+  // "hugeship": {
+  //   id: "hugeship",
+  //   title: "Destroyer Ship",
+  //   path: `${BASE_PATH}games/hugeship/index.html`,
+  //   image: gameship,
+  //   category: "Shooter",
+  //   description: "Space shooter with huge spaceships",
+  // },
 
   // Number-based mini games
   "game-1": {

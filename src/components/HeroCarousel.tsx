@@ -62,14 +62,14 @@ export const HeroCarousel = () => {
             index === currentSlide ? "opacity-100" : "opacity-0"
           }`}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent dark:from-background dark:via-background/50 z-10" />
           <img
             src={slide.image}
             alt={slide.title}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-shadow-lg">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-shadow-lg text-white">
               {slide.title}
             </h1>
             <Button 

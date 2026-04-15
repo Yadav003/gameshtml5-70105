@@ -2,6 +2,7 @@ import { Navigation } from "@/components/Navigation";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { TrendingGames } from "@/components/TrendingGames";
 import { CategoriesSection } from "@/components/CategoriesSection";
+import { LeaderboardSection } from "@/components/LeaderboardSection";
 import { SubscriptionPlans } from "@/components/SubscriptionPlans";
 import { Footer } from "@/components/Footer";
 import { MobileFooterNav } from "@/components/MobileFooterNav";
@@ -31,12 +32,13 @@ const Index = () => {
         <div id="trending">
           <TrendingGames />
         </div>
+        <LeaderboardSection />
         <div id="categories">
           <CategoriesSection />
         </div>
-        <div id="subscription">
+        {/* <div id="subscription">
           <SubscriptionPlans />
-        </div>
+        </div> */}
       </main>
       <Footer />
       <MobileFooterNav />

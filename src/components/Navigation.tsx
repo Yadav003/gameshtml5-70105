@@ -1,10 +1,13 @@
-import { Gamepad2, User, Heart } from "lucide-react";
+import { Gamepad2, User, Heart, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 export const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { setTheme, resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
 
   const scrollToSection = (sectionId: string) => {
     if (location.pathname !== '/') {
@@ -46,6 +49,15 @@ export const Navigation = () => {
           </div>
         </div>
         <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hidden md:flex"
+            onClick={() => setTheme(isDark ? "light" : "dark")}
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {isDark ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+          </Button>
           <Button 
             variant="ghost" 
             size="icon" 
