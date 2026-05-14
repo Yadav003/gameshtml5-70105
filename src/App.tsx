@@ -10,6 +10,7 @@ import Favourites from "./pages/Favourites";
 import Profile from "./pages/Profile";
 import Login from "./Login-Components/Login.tsx";
 import UpdatePassword from "./Login-Components/UpdatePassword.tsx";
+import ResetPassword from "./Login-Components/ResetPassword.tsx";
 import HelpCenter from "./pages/HelpCenter";
 import ContactUs from "./pages/ContactUs";
 import FAQ from "./pages/FAQ";
@@ -56,6 +57,7 @@ const App = () => (
             <Route path="/play/:gameId" element={<GamePlayer />} />
             <Route path="/login" element={<Login />} />
             <Route path="/update-password" element={<UpdatePassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

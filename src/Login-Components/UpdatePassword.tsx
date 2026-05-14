@@ -49,18 +49,18 @@ const UpdatePassword = () => {
                 <form onSubmit={submit} className="space-y-4">
                   <div>
                     <label className="block text-sm text-foreground/80 mb-1">Current password</label>
-                    <input value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} type="password" required className="w-full px-3 py-2 border border-border rounded bg-transparent" />
+                    <input value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} type="password" required minLength={8} maxLength={30} className="w-full px-3 py-2 border border-border rounded bg-transparent" />
                   </div>
 
                   <div>
                     <label className="block text-sm text-foreground/80 mb-1">New password</label>
-                    <input value={newPassword} onChange={(e) => setNewPassword(e.target.value)} type="password" minLength={8} required className="w-full px-3 py-2 border border-border rounded bg-transparent" />
+                    <input value={newPassword} onChange={(e) => setNewPassword(e.target.value)} type="password" minLength={8} maxLength={30} required className="w-full px-3 py-2 border border-border rounded bg-transparent" />
                     <p className="text-xs text-foreground/60 mt-1">Minimum 8 characters. Use letters, numbers, and symbols for a stronger password.</p>
                   </div>
 
                   <div>
                     <label className="block text-sm text-foreground/80 mb-1">Confirm new password</label>
-                    <input value={confirm} onChange={(e) => setConfirm(e.target.value)} type="password" minLength={8} required className="w-full px-3 py-2 border border-border rounded bg-transparent" />
+                    <input value={confirm} onChange={(e) => setConfirm(e.target.value)} type="password" minLength={8} maxLength={30} required className="w-full px-3 py-2 border border-border rounded bg-transparent" />
                   </div>
 
                   <div className="flex justify-end">

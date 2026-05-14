@@ -3,7 +3,7 @@ import { useAuth } from "@/lib/auth";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { login, register } = useAuth();
+  const { login, register, forgotPassword } = useAuth();
   const navigate = useNavigate();
   const [mode, setMode] = useState<"login" | "register" | "forgot">("login");
   const [name, setName] = useState("");
@@ -19,8 +19,8 @@ const Login = () => {
         await register(name, email, password);
       } else {
         // forgot
-        // in real app send reset email
-        alert(`If connected, a reset link would be sent to ${email}`);
+        const result = await forgotPassword(email);
+        alert(result?.message || `If your email exists, a reset link was sent to ${email}`);
         setMode("login");
       }
     } catch (err) {
@@ -59,19 +59,19 @@ const Login = () => {
                   {mode === 'register' && (
                     <div>
                       <label className="block text-sm text-foreground/80 mb-1">Full name</label>
-                      <input value={name} onChange={(e) => setName(e.target.value)} required className="w-full px-3 py-2 border border-border rounded bg-transparent" />
+                      <input value={name} onChange={(e) => setName(e.target.value)} required maxLength={40} className="w-full px-3 py-2 border border-border rounded bg-transparent" />
                     </div>
                   )}
 
                   <div>
                     <label className="block text-sm text-foreground/80 mb-1">Email</label>
-                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required className="w-full px-3 py-2 border border-border rounded bg-transparent" />
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required maxLength={40} className="w-full px-3 py-2 border border-border rounded bg-transparent" />
                   </div>
 
                   {mode !== 'forgot' && (
                     <div>
                       <label className="block text-sm text-foreground/80 mb-1">Password</label>
-                      <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" required className="w-full px-3 py-2 border border-border rounded bg-transparent" />
+                      <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" required minLength={8} maxLength={30} className="w-full px-3 py-2 border border-border rounded bg-transparent" />
                     </div>
                   )}
 
@@ -100,6 +100,15 @@ const Login = () => {
                       <span>Login with Google</span>
                     </button>
                   </div>
+
+                  {mode === 'forgot' && (
+                    <div className="text-center text-sm text-foreground/80">
+                      Already have a reset token?{" "}
+                      <button type="button" onClick={() => navigate('/reset-password')} className="text-primary underline ml-1">
+                        Reset here
+                      </button>
+                    </div>
+                  )}
 
                   <div className="text-center text-sm text-foreground/80">
                     {mode === 'login' ? (

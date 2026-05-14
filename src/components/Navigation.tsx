@@ -107,7 +107,7 @@ const AuthArea = () => {
       {open && (
         <div className="absolute right-0 mt-2 w-52 overflow-hidden rounded-xl border border-border bg-card p-1 shadow-lg">
           <button onClick={() => { setOpen(false); navigate('/profile'); }} className="w-full rounded-lg px-4 py-3 text-left transition-colors hover:bg-primary hover:text-primary-foreground">Profile</button>
-          <button onClick={() => { setOpen(false); navigate('/update-password'); }} className="w-full rounded-lg px-4 py-3 text-left transition-colors hover:bg-primary hover:text-primary-foreground">Update password</button>
+          {/* <button onClick={() => { setOpen(false); navigate('/update-password'); }} className="w-full rounded-lg px-4 py-3 text-left transition-colors hover:bg-primary hover:text-primary-foreground">Update password</button> */}
           <button onClick={() => { setOpen(false); logout(); }} className="w-full rounded-lg px-4 py-3 text-left transition-colors hover:bg-primary hover:text-primary-foreground">Logout</button>
         </div>
       )}
