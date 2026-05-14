@@ -40,6 +40,10 @@ export type UpdatePasswordPayload = {
   newPassword: string;
 };
 
+export type GoogleLoginPayload = {
+  credential: string;
+};
+
 const unwrapAuthResponse = (response: AuthResponse) => {
   const payload = response.data ?? response;
   const user = payload.user;
@@ -57,6 +61,11 @@ const unwrapAuthResponse = (response: AuthResponse) => {
 export const authApi = {
   login: async (payload: LoginPayload) => {
     const response = await apiClient.post<AuthResponse>(AUTH_SERVICE_ENDPOINTS.login, payload);
+    return unwrapAuthResponse(response);
+  },
+
+  googleLogin: async (payload: GoogleLoginPayload) => {
+    const response = await apiClient.post<AuthResponse>(AUTH_SERVICE_ENDPOINTS.googleLogin, payload);
     return unwrapAuthResponse(response);
   },
 

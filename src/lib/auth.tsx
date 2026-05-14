@@ -13,6 +13,7 @@ type User = {
 type AuthContextType = {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
+  googleLogin: (credential: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   updatePassword: (currentPassword: string, newPassword: string) => Promise<void>;
@@ -66,6 +67,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     navigate("/");
   };
 
+  const googleLogin = async (credential: string) => {
+    const response = await authApi.googleLogin({ credential });
+    const fallbackEmail = response.user?.email ?? "google-user@playverse.com";
+    persistAuthUser(response.user, fallbackEmail, response.token, response.refreshToken);
+    navigate("/");
+  };
+
   const register = async (name: string, email: string, password: string) => {
     await authApi.register({ name, email, password });
     persist(null);
@@ -94,7 +102,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, updatePassword, forgotPassword, resetPassword }}>
+    <AuthContext.Provider value={{ user, login, googleLogin, register, logout, updatePassword, forgotPassword, resetPassword }}>
       {children}
     </AuthContext.Provider>
   );

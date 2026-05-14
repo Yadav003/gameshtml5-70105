@@ -1,6 +1,7 @@
 export const AUTH_SERVICE_ENDPOINTS = {
   register: "/api/v1/auth/register",
   login: "/api/v1/auth/login",
+  googleLogin: "/api/v1/auth/google",
   refreshToken: "/api/v1/auth/refresh-token",
   updatePassword: "/api/auth/update-password",
   forgotPassword: "/api/auth/forgot-password",

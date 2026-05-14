@@ -36,6 +36,7 @@ const safeParseJson = async (response: Response) => {
 
 const refreshSkippablePaths = new Set<string>([
   AUTH_SERVICE_ENDPOINTS.login,
+  AUTH_SERVICE_ENDPOINTS.googleLogin,
   AUTH_SERVICE_ENDPOINTS.register,
   AUTH_SERVICE_ENDPOINTS.refreshToken,
   AUTH_SERVICE_ENDPOINTS.forgotPassword,
