@@ -54,7 +54,6 @@ export const Navigation = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="hidden md:flex"
             onClick={() => setTheme(isDark ? "light" : "dark")}
             aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
           >

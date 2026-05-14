@@ -1,7 +1,12 @@
-import { Home, Gamepad2, Heart, User } from "lucide-react";
+import { Home, Gamepad2, Heart, User, LogIn } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
+import { useAuth } from "@/lib/auth";
+import { useNavigate } from "react-router-dom";
 
 export const MobileFooterNav = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border">
       <div className="grid grid-cols-4 h-16">
@@ -29,14 +34,24 @@ export const MobileFooterNav = () => {
           <Heart className="w-5 h-5" />
           <span className="text-xs">Favourites</span>
         </NavLink>
-        <NavLink 
-          to="/profile" 
-          className="flex flex-col items-center justify-center gap-1 text-muted-foreground hover:text-primary transition-colors"
-          activeClassName="text-primary"
-        >
-          <User className="w-5 h-5" />
-          <span className="text-xs">Profile</span>
-        </NavLink>
+        {user ? (
+          <NavLink 
+            to="/profile" 
+            className="flex flex-col items-center justify-center gap-1 text-muted-foreground hover:text-primary transition-colors"
+            activeClassName="text-primary"
+          >
+            <User className="w-5 h-5" />
+            <span className="text-xs">Profile</span>
+          </NavLink>
+        ) : (
+          <button
+            onClick={() => navigate('/login')}
+            className="flex flex-col items-center justify-center gap-1 text-muted-foreground hover:text-primary transition-colors"
+          >
+            <LogIn className="w-5 h-5" />
+            <span className="text-xs">Login</span>
+          </button>
+        )}
       </div>
     </nav>
   );
