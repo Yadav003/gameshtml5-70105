@@ -2,6 +2,8 @@ import { Gamepad2, User, Heart, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "@/lib/auth";
+import { useState, useRef, useEffect } from "react";
 
 export const Navigation = () => {
   const navigate = useNavigate();
@@ -66,16 +68,50 @@ export const Navigation = () => {
           >
             <Heart className="w-5 h-5" />
           </Button>
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="hidden md:flex"
-            onClick={() => navigate('/profile')}
-          >
-            <User className="w-5 h-5" />
-          </Button>
+          {/* Auth-aware area */}
+          <AuthArea />
         </div>
       </div>
     </nav>
+  );
+};
+
+const AuthArea = () => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const onDoc = (e: MouseEvent) => {
+      if (!ref.current) return;
+      if (!ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("click", onDoc);
+    return () => document.removeEventListener("click", onDoc);
+  }, []);
+
+  if (!user) {
+    return (
+      <div className="flex items-center gap-2">
+        <button onClick={() => navigate('/login')} className="px-3 py-2 rounded-md bg-primary text-primary-foreground transition-colors hover:bg-primary/90">Login</button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative" ref={ref}>
+      <button onClick={() => setOpen((s) => !s)} className="flex items-center gap-2 rounded-md px-3 py-2 transition-colors hover:bg-primary hover:text-primary-foreground">
+        <User className="w-5 h-5" />
+        <span className="hidden md:inline">{user.name}</span>
+      </button>
+      {open && (
+        <div className="absolute right-0 mt-2 w-52 overflow-hidden rounded-xl border border-border bg-card p-1 shadow-lg">
+          <button onClick={() => { setOpen(false); navigate('/profile'); }} className="w-full rounded-lg px-4 py-3 text-left transition-colors hover:bg-primary hover:text-primary-foreground">Profile</button>
+          <button onClick={() => { setOpen(false); navigate('/update-password'); }} className="w-full rounded-lg px-4 py-3 text-left transition-colors hover:bg-primary hover:text-primary-foreground">Update password</button>
+          <button onClick={() => { setOpen(false); logout(); }} className="w-full rounded-lg px-4 py-3 text-left transition-colors hover:bg-primary hover:text-primary-foreground">Logout</button>
+        </div>
+      )}
+    </div>
   );
 };
