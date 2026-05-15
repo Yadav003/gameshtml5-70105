@@ -3,148 +3,264 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Download, Eye, Pencil, Search, Trash2 } from "lucide-react";
 import AdminLayout from "@/Admin-Components/layout/AdminLayout";
-
-type UserStatus = "Active" | "Pending" | "Suspended";
-
-type AdminUser = {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  role: string;
-  status: UserStatus;
-  joined: string;
-};
-
-const initialUsers: AdminUser[] = [
-  {
-    id: "u-101",
-    name: "Ariana Miles",
-    email: "ariana.miles@playverse.com",
-    phone: "+1 202 555 0114",
-    role: "Moderator",
-    status: "Active",
-    joined: "2026-01-18",
-  },
-  {
-    id: "u-102",
-    name: "Jordan Lee",
-    email: "jordan.lee@playverse.com",
-    phone: "+1 202 555 0135",
-    role: "Member",
-    status: "Pending",
-    joined: "2026-03-02",
-  },
-  {
-    id: "u-103",
-    name: "Priya Nair",
-    email: "priya.nair@playverse.com",
-    phone: "+1 202 555 0170",
-    role: "Creator",
-    status: "Active",
-    joined: "2025-11-21",
-  },
-  {
-    id: "u-104",
-    name: "Marcus Chen",
-    email: "marcus.chen@playverse.com",
-    phone: "+1 202 555 0109",
-    role: "Member",
-    status: "Suspended",
-    joined: "2025-08-16",
-  },
-  {
-    id: "u-105",
-    name: "Elena Rossi",
-    email: "elena.rossi@playverse.com",
-    phone: "+1 202 555 0197",
-    role: "VIP",
-    status: "Active",
-    joined: "2024-12-05",
-  },
-];
+import { useToast } from "@/hooks/use-toast";
+import { adminApi, type AdminUser } from "@/lib/api";
 
 const AdminUserManagement = () => {
-  const [users, setUsers] = useState<AdminUser[]>(initialUsers);
+  const { toast } = useToast();
+  const [users, setUsers] = useState<AdminUser[]>([]);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
-  const [selectedUserId, setSelectedUserId] = useState<string>(initialUsers[0]?.id ?? "");
+  const [roleFilter, setRoleFilter] = useState("all");
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState<string>("");
+  const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
   const [editUserId, setEditUserId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState({
     name: "",
     email: "",
-    phone: "",
     role: "",
-    status: "Active" as UserStatus,
+    password: "",
+    lockUntil: "",
+  });
+  const [createForm, setCreateForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "",
   });
 
-  const filteredUsers = useMemo(
-    () =>
-      users.filter((user) =>
-        `${user.name} ${user.email} ${user.phone} ${user.role} ${user.status}`
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      ),
-    [users, search]
-  );
+  const roleOptions = useMemo(() => {
+    const roles = new Set<string>();
+    users.forEach((user) => {
+      if (user.role) roles.add(user.role);
+    });
+    return ["all", ...Array.from(roles).sort((a, b) => a.localeCompare(b))];
+  }, [users]);
+
+  const totalPages = Math.max(1, Math.ceil(totalUsers / Math.max(limit, 1)));
 
   useEffect(() => {
-    if (filteredUsers.length === 0) {
-      setSelectedUserId("");
+    const handle = window.setTimeout(() => {
+      setSearch(searchInput.trim());
+      setPage(1);
+    }, 300);
+
+    return () => window.clearTimeout(handle);
+  }, [searchInput]);
+
+  useEffect(() => {
+    let isActive = true;
+
+    const loadUsers = async () => {
+      setIsLoading(true);
+      try {
+        const response = await adminApi.getUsers({
+          page,
+          limit,
+          search: search || undefined,
+          role: roleFilter !== "all" ? roleFilter : undefined,
+        });
+
+        if (!isActive) return;
+
+        setUsers(response.users);
+        setTotalUsers(response.total);
+
+        if (response.page !== page) setPage(response.page);
+        if (response.limit !== limit) setLimit(response.limit);
+
+        const stillVisible = response.users.some((user) => user.id === selectedUserId);
+        if (!stillVisible) {
+          setSelectedUserId(response.users[0]?.id ?? "");
+          setSelectedUser(response.users[0] ?? null);
+        }
+      } catch (error) {
+        if (isActive) {
+          toast({
+            title: "Failed to load users",
+            description: error instanceof Error ? error.message : "Please retry in a moment.",
+            variant: "destructive",
+          });
+        }
+      } finally {
+        if (isActive) setIsLoading(false);
+      }
+    };
+
+    void loadUsers();
+
+    return () => {
+      isActive = false;
+    };
+  }, [page, limit, search, roleFilter, selectedUserId, toast]);
+
+  useEffect(() => {
+    if (!selectedUserId) {
+      setSelectedUser(null);
       return;
     }
 
-    const userStillVisible = filteredUsers.some((user) => user.id === selectedUserId);
-    if (!userStillVisible) {
-      setSelectedUserId(filteredUsers[0].id);
-    }
-  }, [filteredUsers, selectedUserId]);
+    let isActive = true;
 
-  const selectedUser = filteredUsers.find((user) => user.id === selectedUserId) ?? null;
+    const loadUser = async () => {
+      try {
+        const user = await adminApi.getUser(selectedUserId);
+        if (isActive && user) {
+          setSelectedUser(user);
+        }
+      } catch (error) {
+        if (isActive) {
+          toast({
+            title: "Failed to load user",
+            description: error instanceof Error ? error.message : "Please retry in a moment.",
+            variant: "destructive",
+          });
+        }
+      }
+    };
+
+    void loadUser();
+
+    return () => {
+      isActive = false;
+    };
+  }, [selectedUserId, toast]);
+
+  const toLocalDateTime = (value?: string | null) => {
+    if (!value) return "";
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? "" : date.toISOString().slice(0, 16);
+  };
+
+  const resolveStatus = (user: AdminUser) => {
+    if (user.status) return user.status;
+    if (user.lockUntil) return "Suspended";
+    return "Active";
+  };
 
   const openEdit = (user: AdminUser) => {
     setEditUserId(user.id);
     setEditForm({
       name: user.name,
       email: user.email,
-      phone: user.phone,
-      role: user.role,
-      status: user.status,
+      role: user.role ?? "",
+      password: "",
+      lockUntil: toLocalDateTime(user.lockUntil),
     });
   };
 
-  const saveEdit = () => {
-    if (!editUserId) return;
+  const saveEdit = async () => {
+    if (!editUserId || isSaving) return;
+    setIsSaving(true);
 
-    setUsers((current) =>
-      current.map((user) =>
-        user.id === editUserId
-          ? {
-              ...user,
-              name: editForm.name,
-              email: editForm.email,
-              phone: editForm.phone,
-              role: editForm.role,
-              status: editForm.status,
-            }
-          : user
-      )
-    );
-    setEditUserId(null);
+    try {
+      const updatedUser = await adminApi.updateUser(editUserId, {
+        name: editForm.name,
+        email: editForm.email,
+        role: editForm.role || undefined,
+        password: editForm.password || undefined,
+        lockUntil: editForm.lockUntil ? new Date(editForm.lockUntil).toISOString() : null,
+      });
+
+      if (updatedUser) {
+        setUsers((current) => current.map((user) => (user.id === editUserId ? { ...user, ...updatedUser } : user)));
+        if (selectedUserId === editUserId) {
+          setSelectedUser(updatedUser);
+        }
+      }
+
+      setEditUserId(null);
+      setEditForm({ name: "", email: "", role: "", password: "", lockUntil: "" });
+      toast({ title: "User updated" });
+    } catch (error) {
+      toast({
+        title: "Update failed",
+        description: error instanceof Error ? error.message : "Please retry in a moment.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSaving(false);
+    }
   };
 
-  const deleteUser = (id: string) => {
-    const nextUsers = users.filter((user) => user.id !== id);
-    setUsers(nextUsers);
+  const deleteUser = async (id: string) => {
+    if (isSaving) return;
+    setIsSaving(true);
 
-    if (selectedUserId === id) {
-      setSelectedUserId(nextUsers[0]?.id ?? "");
+    try {
+      await adminApi.deleteUser(id);
+      setUsers((current) => current.filter((user) => user.id !== id));
+      setTotalUsers((current) => Math.max(current - 1, 0));
+
+      if (selectedUserId === id) {
+        const nextUser = users.find((user) => user.id !== id) ?? null;
+        setSelectedUserId(nextUser?.id ?? "");
+        setSelectedUser(nextUser);
+      }
+
+      if (editUserId === id) {
+        setEditUserId(null);
+      }
+
+      toast({ title: "User deleted" });
+    } catch (error) {
+      toast({
+        title: "Delete failed",
+        description: error instanceof Error ? error.message : "Please retry in a moment.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const createUser = async () => {
+    if (isCreating) return;
+    if (!createForm.name || !createForm.email || !createForm.password) {
+      toast({
+        title: "Missing details",
+        description: "Name, email, and password are required.",
+        variant: "destructive",
+      });
+      return;
     }
 
-    if (editUserId === id) {
-      setEditUserId(null);
+    setIsCreating(true);
+    try {
+      const newUser = await adminApi.createUser({
+        name: createForm.name,
+        email: createForm.email,
+        password: createForm.password,
+        role: createForm.role || undefined,
+      });
+
+      if (newUser) {
+        setUsers((current) => [newUser, ...current]);
+        setTotalUsers((current) => current + 1);
+        setSelectedUserId(newUser.id);
+        setSelectedUser(newUser);
+      }
+
+      setCreateForm({ name: "", email: "", password: "", role: "" });
+      toast({ title: "User created" });
+    } catch (error) {
+      toast({
+        title: "Create failed",
+        description: error instanceof Error ? error.message : "Please retry in a moment.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCreating(false);
     }
   };
 
@@ -154,10 +270,10 @@ const AdminUserManagement = () => {
       user.id,
       user.name,
       user.email,
-      user.phone,
-      user.role,
-      user.status,
-      user.joined,
+      user.phone ?? "",
+      user.role ?? "",
+      resolveStatus(user),
+      user.joined ?? "",
     ]);
 
     const content = [headers, ...rows]
@@ -173,7 +289,7 @@ const AdminUserManagement = () => {
     URL.revokeObjectURL(url);
   };
 
-  const activeUsers = users.filter((user) => user.status === "Active").length;
+  const activeUsers = users.filter((user) => resolveStatus(user) === "Active").length;
 
   return (
     <AdminLayout
@@ -184,16 +300,48 @@ const AdminUserManagement = () => {
         <div className="relative">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
+            value={searchInput}
+            onChange={(event) => setSearchInput(event.target.value)}
             placeholder="Search by name, email, phone or role"
             className="pl-10"
           />
         </div>
-        <Button onClick={downloadExcel} className="gap-2">
-          <Download className="h-4 w-4" />
-          Download Excel
-        </Button>
+        <div className="flex flex-wrap items-center gap-2">
+          <Select value={roleFilter} onValueChange={(value) => setRoleFilter(value)}>
+            <SelectTrigger className="w-[160px]">
+              <SelectValue placeholder="Role" />
+            </SelectTrigger>
+            <SelectContent>
+              {roleOptions.map((role) => (
+                <SelectItem key={role} value={role}>
+                  {role === "all" ? "All roles" : role}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select
+            value={String(limit)}
+            onValueChange={(value) => {
+              setLimit(Number(value));
+              setPage(1);
+            }}
+          >
+            <SelectTrigger className="w-[110px]">
+              <SelectValue placeholder="Rows" />
+            </SelectTrigger>
+            <SelectContent>
+              {[10, 20, 50].map((size) => (
+                <SelectItem key={size} value={String(size)}>
+                  {size} rows
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Button onClick={downloadExcel} className="gap-2" variant="outline">
+            <Download className="h-4 w-4" />
+            Export
+          </Button>
+        </div>
       </section>
 
       <section className="mt-4 grid gap-4 md:grid-cols-3">
@@ -212,7 +360,7 @@ const AdminUserManagement = () => {
         <Card>
           <CardContent className="p-4">
             <p className="text-sm text-muted-foreground">Filtered Results</p>
-            <p className="mt-1 text-2xl font-bold">{filteredUsers.length}</p>
+            <p className="mt-1 text-2xl font-bold">{users.length}</p>
           </CardContent>
         </Card>
       </section>
@@ -234,20 +382,26 @@ const AdminUserManagement = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredUsers.length === 0 ? (
+                {isLoading ? (
+                  <TableRow>
+                    <TableCell colSpan={5} className="py-10 text-center text-muted-foreground">
+                      Loading users...
+                    </TableCell>
+                  </TableRow>
+                ) : users.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={5} className="py-10 text-center text-muted-foreground">
                       No users found
                     </TableCell>
                   </TableRow>
                 ) : (
-                  filteredUsers.map((user) => (
+                  users.map((user) => (
                     <TableRow key={user.id}>
                       <TableCell className="font-medium">{user.name}</TableCell>
                       <TableCell>{user.email}</TableCell>
-                      <TableCell>{user.role}</TableCell>
+                      <TableCell>{user.role ?? "-"}</TableCell>
                       <TableCell>
-                        <Badge variant="outline">{user.status}</Badge>
+                        <Badge variant="outline">{resolveStatus(user)}</Badge>
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex justify-end gap-2">
@@ -273,6 +427,39 @@ const AdminUserManagement = () => {
         <div className="space-y-4">
           <Card>
             <CardHeader>
+              <CardTitle className="text-lg">Create User</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Input
+                placeholder="Name"
+                value={createForm.name}
+                onChange={(event) => setCreateForm((current) => ({ ...current, name: event.target.value }))}
+              />
+              <Input
+                placeholder="Email"
+                type="email"
+                value={createForm.email}
+                onChange={(event) => setCreateForm((current) => ({ ...current, email: event.target.value }))}
+              />
+              <Input
+                placeholder="Password"
+                type="password"
+                value={createForm.password}
+                onChange={(event) => setCreateForm((current) => ({ ...current, password: event.target.value }))}
+              />
+              <Input
+                placeholder="Role (optional)"
+                value={createForm.role}
+                onChange={(event) => setCreateForm((current) => ({ ...current, role: event.target.value }))}
+              />
+              <Button onClick={createUser} disabled={isCreating} className="w-full">
+                {isCreating ? "Creating..." : "Create User"}
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
               <CardTitle className="text-lg">User Profile</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
@@ -288,16 +475,16 @@ const AdminUserManagement = () => {
                   </div>
                   <div className="rounded-md border border-border bg-muted/30 p-3">
                     <p className="text-muted-foreground">Phone</p>
-                    <p className="font-semibold">{selectedUser.phone}</p>
+                    <p className="font-semibold">{selectedUser.phone ?? "-"}</p>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="rounded-md border border-border bg-muted/30 p-3">
                       <p className="text-muted-foreground">Role</p>
-                      <p className="font-semibold">{selectedUser.role}</p>
+                      <p className="font-semibold">{selectedUser.role ?? "-"}</p>
                     </div>
                     <div className="rounded-md border border-border bg-muted/30 p-3">
                       <p className="text-muted-foreground">Joined</p>
-                      <p className="font-semibold">{selectedUser.joined}</p>
+                      <p className="font-semibold">{selectedUser.joined ?? "-"}</p>
                     </div>
                   </div>
                 </>
@@ -325,25 +512,25 @@ const AdminUserManagement = () => {
                     onChange={(event) => setEditForm((current) => ({ ...current, email: event.target.value }))}
                   />
                   <Input
-                    placeholder="Phone"
-                    value={editForm.phone}
-                    onChange={(event) => setEditForm((current) => ({ ...current, phone: event.target.value }))}
-                  />
-                  <Input
                     placeholder="Role"
                     value={editForm.role}
                     onChange={(event) => setEditForm((current) => ({ ...current, role: event.target.value }))}
                   />
                   <Input
-                    placeholder="Status"
-                    value={editForm.status}
-                    onChange={(event) =>
-                      setEditForm((current) => ({ ...current, status: event.target.value as UserStatus }))
-                    }
+                    placeholder="Password (optional)"
+                    type="password"
+                    value={editForm.password}
+                    onChange={(event) => setEditForm((current) => ({ ...current, password: event.target.value }))}
+                  />
+                  <Input
+                    placeholder="Lock until (optional)"
+                    type="datetime-local"
+                    value={editForm.lockUntil}
+                    onChange={(event) => setEditForm((current) => ({ ...current, lockUntil: event.target.value }))}
                   />
                   <div className="flex gap-2">
-                    <Button className="flex-1" onClick={saveEdit}>
-                      Save
+                    <Button className="flex-1" onClick={saveEdit} disabled={isSaving}>
+                      {isSaving ? "Saving..." : "Save"}
                     </Button>
                     <Button variant="outline" className="flex-1" onClick={() => setEditUserId(null)}>
                       Cancel
@@ -355,6 +542,24 @@ const AdminUserManagement = () => {
               )}
             </CardContent>
           </Card>
+        </div>
+      </section>
+
+      <section className="mt-4 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-muted-foreground">
+          Page {page} of {totalPages} ({totalUsers} users)
+        </p>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page <= 1}>
+            Previous
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={page >= totalPages}
+          >
+            Next
+          </Button>
         </div>
       </section>
     </AdminLayout>

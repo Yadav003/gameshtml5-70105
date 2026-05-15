@@ -20,6 +20,9 @@ const Login = () => {
         await login(email, password);
       } else if (mode === "register") {
         await register(name, email, password);
+        setMode("login");
+        setName("");
+        setPassword("");
       } else {
         // forgot
         const result = await forgotPassword(email);
@@ -169,7 +172,7 @@ const Login = () => {
                 </form>
 
               </div>
-              <div>
+              {/* <div>
                 <button
                   type="button"
                   onClick={() => navigate('/admin/login')}
@@ -177,7 +180,7 @@ const Login = () => {
                 >
                   Admin Login
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

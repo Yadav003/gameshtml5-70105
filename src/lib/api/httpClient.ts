@@ -1,6 +1,6 @@
 import { applyRequestInterceptors, applyResponseInterceptors } from "./interceptors";
 import { apiConfig } from "./config";
-import { AUTH_SERVICE_ENDPOINTS } from "./endpoints";
+import { ADMIN_SERVICE_ENDPOINTS, AUTH_SERVICE_ENDPOINTS } from "./endpoints";
 import { clearAuthToken, getRefreshToken, setAuthTokens } from "./session";
 
 export class ApiError extends Error {
@@ -15,8 +15,7 @@ export class ApiError extends Error {
   }
 }
 
-const buildUrl = (path: string) => {
-  const baseUrl = apiConfig.authServiceBaseUrl;
+const buildUrl = (path: string, baseUrl: string) => {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   return `${baseUrl}${normalizedPath}`;
 };
@@ -43,6 +42,7 @@ const refreshSkippablePaths = new Set<string>([
   AUTH_SERVICE_ENDPOINTS.resetPassword,
   AUTH_SERVICE_ENDPOINTS.logout,
   AUTH_SERVICE_ENDPOINTS.status,
+  ADMIN_SERVICE_ENDPOINTS.logout,
 ]);
 
 let refreshInFlight: Promise<string | null> | null = null;
@@ -53,9 +53,13 @@ const extractTokens = (data: Record<string, unknown> | null): { accessToken: str
   const payload = data.data && typeof data.data === "object" ? (data.data as Record<string, unknown>) : data;
   const accessToken =
     (typeof payload.accessToken === "string" && payload.accessToken) ||
+    (typeof payload.access_token === "string" && payload.access_token) ||
     (typeof payload.token === "string" && payload.token) ||
     null;
-  const refreshToken = typeof payload.refreshToken === "string" ? payload.refreshToken : null;
+  const refreshToken =
+    (typeof payload.refreshToken === "string" && payload.refreshToken) ||
+    (typeof payload.refresh_token === "string" && payload.refresh_token) ||
+    null;
 
   return { accessToken, refreshToken };
 };
@@ -66,7 +70,7 @@ const refreshAccessToken = async (): Promise<string | null> => {
 
   if (!refreshInFlight) {
     refreshInFlight = (async () => {
-      const response = await fetch(buildUrl(AUTH_SERVICE_ENDPOINTS.refreshToken), {
+      const response = await fetch(buildUrl(AUTH_SERVICE_ENDPOINTS.refreshToken, apiConfig.authServiceBaseUrl), {
         method: "POST",
         credentials: "include",
         headers: {
@@ -98,10 +102,11 @@ const refreshAccessToken = async (): Promise<string | null> => {
 export const request = async <T>(
   path: string,
   init: RequestInit = {},
-  timeoutMs: number = apiConfig.requestTimeoutMs
+  timeoutMs: number = apiConfig.requestTimeoutMs,
+  baseUrl: string = apiConfig.authServiceBaseUrl
 ): Promise<T> => {
   const requestContext = await applyRequestInterceptors({
-    url: buildUrl(path),
+    url: buildUrl(path, baseUrl),
     init: {
       credentials: "include",
       ...init,

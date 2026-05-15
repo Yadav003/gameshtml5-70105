@@ -1,7 +1,8 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authApi } from "./api";
-import { clearAuthToken, setAuthTokens } from "./api/session";
+import { clearAuthToken, getAuthToken, getRefreshToken, setAuthTokens } from "./api/session";
 
 type User = {
   id?: string;
@@ -12,6 +13,7 @@ type User = {
 
 type AuthContextType = {
   user: User | null;
+  isInitialized: boolean;
   login: (email: string, password: string) => Promise<void>;
   googleLogin: (credential: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
@@ -27,21 +29,36 @@ const STORAGE_KEY = "playverse_user";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setUser(JSON.parse(raw));
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      const accessToken = getAuthToken();
+      const refreshToken = getRefreshToken();
+
+      if (raw && (accessToken || refreshToken)) {
+        setUser(JSON.parse(raw));
+      } else {
+        sessionStorage.removeItem(STORAGE_KEY);
+        clearAuthToken();
+        setUser(null);
+      }
     } catch (e) {
       console.error("Failed to load user from storage", e);
+      setUser(null);
+      clearAuthToken();
+      sessionStorage.removeItem(STORAGE_KEY);
+    } finally {
+      setIsInitialized(true);
     }
   }, []);
 
   const persist = (u: User | null) => {
     setUser(u);
-    if (u) localStorage.setItem(STORAGE_KEY, JSON.stringify(u));
-    else localStorage.removeItem(STORAGE_KEY);
+    if (u) sessionStorage.setItem(STORAGE_KEY, JSON.stringify(u));
+    else sessionStorage.removeItem(STORAGE_KEY);
   };
 
   const persistAuthUser = (
@@ -64,14 +81,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = async (email: string, password: string) => {
     const response = await authApi.login({ email, password });
     persistAuthUser(response.user, email, response.token, response.refreshToken);
-    navigate("/");
+    const role = response.user?.role?.toLowerCase();
+    navigate(role === "admin" ? "/admin/dashboard" : "/");
   };
 
   const googleLogin = async (credential: string) => {
     const response = await authApi.googleLogin({ credential });
     const fallbackEmail = response.user?.email ?? "google-user@playverse.com";
     persistAuthUser(response.user, fallbackEmail, response.token, response.refreshToken);
-    navigate("/");
+    const role = response.user?.role?.toLowerCase();
+    navigate(role === "admin" ? "/admin/dashboard" : "/");
   };
 
   const register = async (name: string, email: string, password: string) => {
@@ -102,7 +121,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, googleLogin, register, logout, updatePassword, forgotPassword, resetPassword }}>
+    <AuthContext.Provider
+      value={{ user, isInitialized, login, googleLogin, register, logout, updatePassword, forgotPassword, resetPassword }}
+    >
       {children}
     </AuthContext.Provider>
   );

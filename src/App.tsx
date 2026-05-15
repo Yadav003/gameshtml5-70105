@@ -22,9 +22,9 @@ import Leaderboard from "./pages/Leaderboard";
 import GamePlayer from "./pages/GamePlayer";
 import AdminDashboard from "./Admin-Components/dashboard/AdminDashboard.tsx";
 import AdminUserManagement from "./Admin-Components/user-management/AdminUserManagement.tsx";
-import AdminLogin from "./Admin-Components/admin-login/AdminLogin.tsx";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./lib/auth";
+import RequireAdmin from "./components/RequireAdmin";
 
 const queryClient = new QueryClient();
 
@@ -51,9 +51,22 @@ const App = () => (
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/admin/user-management" element={<AdminUserManagement />} />
+            <Route
+              path="/admin/dashboard"
+              element={
+                <RequireAdmin>
+                  <AdminDashboard />
+                </RequireAdmin>
+              }
+            />
+            <Route
+              path="/admin/user-management"
+              element={
+                <RequireAdmin>
+                  <AdminUserManagement />
+                </RequireAdmin>
+              }
+            />
             <Route path="/play/:gameId" element={<GamePlayer />} />
             <Route path="/login" element={<Login />} />
             <Route path="/update-password" element={<UpdatePassword />} />

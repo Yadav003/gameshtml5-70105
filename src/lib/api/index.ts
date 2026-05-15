@@ -1,4 +1,5 @@
 export * from "./authApi";
+export * from "./adminApi";
 export * from "./endpoints";
 export * from "./httpClient";
 export * from "./interceptors";

@@ -11,4 +11,11 @@ export const AUTH_SERVICE_ENDPOINTS = {
   status: "/status",
 } as const;
 
+export const ADMIN_SERVICE_ENDPOINTS = {
+  dashboard: "/dashboard",
+  users: "/users",
+  logout: "/logout",
+} as const;
+
 export type AuthServiceEndpointKey = keyof typeof AUTH_SERVICE_ENDPOINTS;
+export type AdminServiceEndpointKey = keyof typeof ADMIN_SERVICE_ENDPOINTS;

@@ -52,8 +52,8 @@ const extractTokens = (data: unknown): { accessToken: string | null; refreshToke
   }
 
   const payload = data as Record<string, unknown>;
-  const tokenCandidates = [payload.token, payload.accessToken, payload.jwt, payload.data];
-  const refreshCandidates = [payload.refreshToken, payload.data];
+  const tokenCandidates = [payload.token, payload.accessToken, payload.access_token, payload.jwt, payload.data];
+  const refreshCandidates = [payload.refreshToken, payload.refresh_token, payload.data];
   return {
     accessToken: extractTokenValue(tokenCandidates),
     refreshToken: extractRefreshToken(refreshCandidates),
@@ -71,6 +71,7 @@ const extractTokenValue = (tokenCandidates: unknown[]): string | null => {
       const nested = candidate as Record<string, unknown>;
       if (typeof nested.token === "string" && nested.token.trim()) return nested.token;
       if (typeof nested.accessToken === "string" && nested.accessToken.trim()) return nested.accessToken;
+      if (typeof nested.access_token === "string" && nested.access_token.trim()) return nested.access_token;
       if (typeof nested.jwt === "string" && nested.jwt.trim()) return nested.jwt;
     }
   }
@@ -87,6 +88,7 @@ const extractRefreshToken = (refreshCandidates: unknown[]): string | null => {
     if (candidate && typeof candidate === "object") {
       const nested = candidate as Record<string, unknown>;
       if (typeof nested.refreshToken === "string" && nested.refreshToken.trim()) return nested.refreshToken;
+      if (typeof nested.refresh_token === "string" && nested.refresh_token.trim()) return nested.refresh_token;
     }
   }
 

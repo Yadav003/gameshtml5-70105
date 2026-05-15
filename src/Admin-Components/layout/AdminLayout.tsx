@@ -1,7 +1,9 @@
-import { type ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard, LogOut, Shield, Users } from "lucide-react";
+import { LayoutDashboard, LogOut, Users } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { adminApi } from "@/lib/api";
 
 type AdminLayoutProps = {
   title: string;
@@ -18,6 +20,26 @@ const activeClass = "bg-primary/10 text-primary border-primary/20";
 
 const AdminLayout = ({ title, subtitle, children }: AdminLayoutProps) => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    if (isLoggingOut) return;
+    setIsLoggingOut(true);
+
+    try {
+      await adminApi.logout();
+      navigate("/admin/login");
+    } catch (error) {
+      toast({
+        title: "Logout failed",
+        description: error instanceof Error ? error.message : "Unable to sign out right now.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-muted/30">
@@ -57,9 +79,14 @@ const AdminLayout = ({ title, subtitle, children }: AdminLayoutProps) => {
           </nav>
 
           <div className="mt-8 border-t border-border pt-4">
-            <Button variant="ghost" className="w-full justify-start gap-2" onClick={() => navigate("/admin/login")}>
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-2"
+              onClick={handleLogout}
+              disabled={isLoggingOut}
+            >
               <LogOut className="h-4 w-4" />
-              Logout
+              {isLoggingOut ? "Logging out..." : "Logout"}
             </Button>
           </div>
         </aside>

@@ -11,12 +11,14 @@ export type AuthUser = {
 
 export type AuthResponse = {
   user?: AuthUser;
+  role?: string;
   token?: string;
   accessToken?: string;
   refreshToken?: string;
   message?: string;
   data?: {
     user?: AuthUser;
+    role?: string;
     token?: string;
     accessToken?: string;
     refreshToken?: string;
@@ -46,9 +48,29 @@ export type GoogleLoginPayload = {
 
 const unwrapAuthResponse = (response: AuthResponse) => {
   const payload = response.data ?? response;
-  const user = payload.user;
-  const token = payload.token ?? payload.accessToken ?? response.token ?? response.accessToken ?? null;
-  const refreshToken = payload.refreshToken ?? response.refreshToken ?? null;
+  const rawUser = payload.user ?? response.user;
+  const role =
+    rawUser?.role ??
+    payload.role ??
+    response.role ??
+    (payload as { data?: { role?: string } }).data?.role ??
+    (response as { data?: { role?: string } }).data?.role ??
+    undefined;
+  const user = rawUser ? { ...rawUser, role: rawUser.role ?? role } : rawUser;
+  const token =
+    payload.token ??
+    payload.accessToken ??
+    (payload as { access_token?: string }).access_token ??
+    response.token ??
+    response.accessToken ??
+    (response as { access_token?: string }).access_token ??
+    null;
+  const refreshToken =
+    payload.refreshToken ??
+    (payload as { refresh_token?: string }).refresh_token ??
+    response.refreshToken ??
+    (response as { refresh_token?: string }).refresh_token ??
+    null;
 
   return {
     user,
