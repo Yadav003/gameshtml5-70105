@@ -34,7 +34,7 @@ export const GameCard = ({ title, image, gameUrl, navigationState }: GameCardPro
         </div>
       </div>
       <div className="p-4">
-        <h3 className="font-semibold text-lg text-white">{title}</h3>
+        <h3 className="font-semibold text-lg text-foreground">{title}</h3>
       </div>
     </Card>
   );
