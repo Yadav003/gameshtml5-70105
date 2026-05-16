@@ -6,7 +6,7 @@ import { apiConfig } from "./api/config";
 import { AUTH_SERVICE_ENDPOINTS } from "./api/endpoints";
 import { clearAuthToken, getAuthToken, getRefreshToken, setAuthTokens } from "./api/session";
 
-type User = {
+export type User = {
   id?: string;
   name: string;
   email: string;
@@ -18,6 +18,7 @@ type AuthContextType = {
   isInitialized: boolean;
   login: (email: string, password: string) => Promise<void>;
   startGoogleOAuth: () => Promise<void>;
+  completeOAuthLogin: (payload: { user: User; accessToken?: string | null; refreshToken?: string | null }) => void;
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   updatePassword: (currentPassword: string, newPassword: string) => Promise<void>;
@@ -88,22 +89,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const startGoogleOAuth = async () => {
-    try {
-      const response = await authApi.googleOAuthStart();
-      const authorizationUrl = response.authorizationUrl ?? response.url;
-
-      if (authorizationUrl) {
-        window.location.assign(authorizationUrl);
-        return;
-      }
-    } catch (error) {
-      const status = typeof error === "object" && error && "status" in error ? Number((error as { status?: unknown }).status) : null;
-      if (status !== 404) {
-        throw error;
-      }
-    }
-
     window.location.assign(`${apiConfig.authServiceBaseUrl}${AUTH_SERVICE_ENDPOINTS.googleLogin}`);
+  };
+
+  const completeOAuthLogin = ({ user: incomingUser, accessToken, refreshToken }: { user: User; accessToken?: string | null; refreshToken?: string | null }) => {
+    setAuthTokens(accessToken, refreshToken);
+    persist(incomingUser);
   };
 
   const register = async (name: string, email: string, password: string) => {
@@ -135,7 +126,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, isInitialized, login, startGoogleOAuth, register, logout, updatePassword, forgotPassword, resetPassword }}
+      value={{ user, isInitialized, login, startGoogleOAuth, completeOAuthLogin, register, logout, updatePassword, forgotPassword, resetPassword }}
     >
       {children}
     </AuthContext.Provider>

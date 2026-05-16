@@ -20,6 +20,7 @@ import AboutUs from "./pages/AboutUs";
 import CookiePolicy from "./pages/CookiePolicy";
 import Leaderboard from "./pages/Leaderboard";
 import GamePlayer from "./pages/GamePlayer";
+import OAuthCallback from "./pages/OAuthCallback";
 import AdminDashboard from "./Admin-Components/dashboard/AdminDashboard.tsx";
 import AdminUserManagement from "./Admin-Components/user-management/AdminUserManagement.tsx";
 import NotFound from "./pages/NotFound";
@@ -53,6 +54,7 @@ const App = () => (
                 <Route path="/about-us" element={<AboutUs />} />
                 <Route path="/cookie-policy" element={<CookiePolicy />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/oauth/callback" element={<OAuthCallback />} />
                 <Route
                   path="/admin/dashboard"
                   element={
