@@ -25,6 +25,7 @@ import AdminUserManagement from "./Admin-Components/user-management/AdminUserMan
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./lib/auth";
 import RequireAdmin from "./components/RequireAdmin";
+import AuthGate from "./components/AuthGate";
 
 const queryClient = new QueryClient();
 
@@ -38,42 +39,44 @@ const App = () => (
         <BrowserRouter>
           {/* AuthProvider provides `useAuth()` for login state */}
           <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/games" element={<Games />} />
-            <Route path="/favourites" element={<Favourites />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/help-center" element={<HelpCenter />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-conditions" element={<TermsConditions />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/cookie-policy" element={<CookiePolicy />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route
-              path="/admin/dashboard"
-              element={
-                <RequireAdmin>
-                  <AdminDashboard />
-                </RequireAdmin>
-              }
-            />
-            <Route
-              path="/admin/user-management"
-              element={
-                <RequireAdmin>
-                  <AdminUserManagement />
-                </RequireAdmin>
-              }
-            />
-            <Route path="/play/:gameId" element={<GamePlayer />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/update-password" element={<UpdatePassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+            <AuthGate>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/games" element={<Games />} />
+                <Route path="/favourites" element={<Favourites />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/help-center" element={<HelpCenter />} />
+                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-conditions" element={<TermsConditions />} />
+                <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/cookie-policy" element={<CookiePolicy />} />
+                <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route
+                  path="/admin/dashboard"
+                  element={
+                    <RequireAdmin>
+                      <AdminDashboard />
+                    </RequireAdmin>
+                  }
+                />
+                <Route
+                  path="/admin/user-management"
+                  element={
+                    <RequireAdmin>
+                      <AdminUserManagement />
+                    </RequireAdmin>
+                  }
+                />
+                <Route path="/play/:gameId" element={<GamePlayer />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/update-password" element={<UpdatePassword />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </AuthGate>
           </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>
