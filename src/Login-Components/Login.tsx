@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { GoogleLogin } from "@react-oauth/google";
 import { useAuth } from "@/lib/auth";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { login, googleLogin, register, forgotPassword } = useAuth();
+  const { login, startGoogleOAuth, register, forgotPassword } = useAuth();
   const navigate = useNavigate();
   const [mode, setMode] = useState<"login" | "register" | "forgot">("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [googleLoading, setGoogleLoading] = useState(false);
-  const googleClientId = import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID as string | undefined;
+  const [googleRedirecting, setGoogleRedirecting] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,20 +33,14 @@ const Login = () => {
     }
   };
 
-  const handleGoogleSuccess = async (credential: string | undefined) => {
-    if (!credential) {
-      alert("Google login failed: missing credentials.");
-      return;
-    }
-
-    setGoogleLoading(true);
+  const handleGoogleRedirect = async () => {
+    setGoogleRedirecting(true);
     try {
-      await googleLogin(credential);
+      await startGoogleOAuth();
     } catch (err) {
       console.error(err);
       alert("Google login failed");
-    } finally {
-      setGoogleLoading(false);
+      setGoogleRedirecting(false);
     }
   };
 
@@ -118,30 +110,17 @@ const Login = () => {
                   <div className="flex flex-col gap-3">
                     <button type="submit" className="w-full px-4 py-2 bg-primary text-white rounded">{mode === 'login' ? 'Login' : mode === 'register' ? 'Create account' : 'Send reset link'}</button>
                     <div className="text-center text-sm text-foreground/70">or</div>
-                    {googleClientId ? (
-                      <div className="w-full flex justify-center">
-                        <GoogleLogin
-                          onSuccess={(credentialResponse) => handleGoogleSuccess(credentialResponse.credential)}
-                          onError={() => alert("Google login failed")}
-                          theme="outline"
-                          size="large"
-                          text="signin_with"
-                          shape="pill"
-                          width="100%"
-                        />
-                      </div>
-                    ) : (
-                      <button
-                        type="button"
-                        disabled
-                        className="w-full px-4 py-2 border border-border rounded flex items-center justify-center gap-2 opacity-60 cursor-not-allowed"
-                      >
-                        <img src="/assets/google.svg" alt="" className="w-5 h-5" />
-                        <span>Login with Google</span>
-                      </button>
-                    )}
-                    {googleLoading && (
-                      <div className="text-center text-xs text-foreground/70">Signing you in with Google...</div>
+                    <button
+                      type="button"
+                      onClick={handleGoogleRedirect}
+                      disabled={googleRedirecting}
+                      className="w-full px-4 py-2 border border-border rounded flex items-center justify-center gap-2"
+                    >
+                      <img src="/assets/google.svg" alt="" className="w-5 h-5" />
+                      <span>{googleRedirecting ? "Redirecting..." : "Continue with Google"}</span>
+                    </button>
+                    {googleRedirecting && (
+                      <div className="text-center text-xs text-foreground/70">Redirecting to Google...</div>
                     )}
                   </div>
 
