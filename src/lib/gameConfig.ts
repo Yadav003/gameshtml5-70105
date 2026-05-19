@@ -113,14 +113,14 @@ export const GAMES: Record<string, GameInfo> = {
     Toplay:"Login-Required",
     description: "Puzzle game where you break locks",
   },
-  "tic-tac-toe": {
-    id: "tic-tac-toe",
-    title: "Tic Tac Toe",
-    path: `${BASE_PATH}games/tic-tac-toe/dist/index.html`,
-    image: gameTic,
-    category: ["Casual"],
-    description: "Classic Tic Tac Toe game",
-  },
+  // "tic-tac-toe": {
+  //   id: "tic-tac-toe",
+  //   title: "Tic Tac Toe",
+  //   path: `${BASE_PATH}games/tic-tac-toe/dist/index.html`,
+  //   image: gameTic,
+  //   category: ["Casual"],
+  //   description: "Classic Tic Tac Toe game",
+  // },
   // Racing Games
   "hexgl": {
     id: "hexgl",
