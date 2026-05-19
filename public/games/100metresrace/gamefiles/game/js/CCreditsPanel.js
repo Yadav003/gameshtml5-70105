@@ -70,7 +70,7 @@ function CCreditsPanel(){
     };
     
     this._onLogoButRelease = function(){
-        window.open("http://www.codethislab.com/index.php?&l=en");
+        window.open("#");
     };
     
     this._init();

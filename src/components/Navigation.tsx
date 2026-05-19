@@ -48,6 +48,12 @@ export const Navigation = () => {
             >
               CATEGORIES
             </button>
+            {/* <Link
+              to="/premium-games"
+              className="text-foreground/80 hover:text-foreground transition-colors"
+            >
+              PREMIUM GAMES
+            </Link> */}
           </div>
         </div>
         <div className="flex items-center gap-4">

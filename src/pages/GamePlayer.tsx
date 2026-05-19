@@ -1,17 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { getGameById } from "@/lib/gameConfig";
 import { trackGamePlay } from "@/lib/analytics";
+import { useAuth } from "@/lib/auth";
+import { useToast } from "@/hooks/use-toast";
 
 const GamePlayer = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { gameId } = useParams<{ gameId: string }>();
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const notifiedRef = useRef(false);
 
   // Get game configuration
   const game = gameId ? getGameById(gameId) : null;
+  const requiresLogin = game?.Toplay === "Login-Required";
 
   // Helper function to get category as string
   const getCategoryString = (category?: string | string[]): string => {
@@ -20,6 +26,35 @@ const GamePlayer = () => {
   };
 
   useEffect(() => {
+    if (!game || !requiresLogin) {
+      notifiedRef.current = false;
+      return;
+    }
+
+    if (user) {
+      notifiedRef.current = false;
+      return;
+    }
+
+    if (notifiedRef.current) return;
+    notifiedRef.current = true;
+
+    toast({
+      title: "Login required",
+      description: "Please sign in to play this game.",
+      duration: 10000,
+    });
+    navigate("/login", {
+      replace: true,
+      state: { from: location, redirectTo: `/play/${gameId}` },
+    });
+  }, [game, requiresLogin, user, toast, navigate, location, gameId]);
+
+  useEffect(() => {
+    if (!game || (requiresLogin && !user)) {
+      return;
+    }
+
     // Track game play in Google Analytics
     if (game) {
       trackGamePlay(game.id, game.title, getCategoryString(game.category));
@@ -64,7 +99,7 @@ const GamePlayer = () => {
       document.removeEventListener('touchstart', preventZoom);
       document.removeEventListener('touchend', preventDoubleTapZoom);
     };
-  }, [game]);
+  }, [game, requiresLogin, user]);
 
   // Determine where to navigate back to
   const getBackUrl = () => {

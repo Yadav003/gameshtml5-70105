@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth, type User } from "@/lib/auth";
+import { useToast } from "@/hooks/use-toast";
 
 const decodeBase64Url = (value: string): string => {
   const base64 = value.replace(/-/g, "+").replace(/_/g, "/");
@@ -25,6 +26,7 @@ const decodeUser = (encoded: string): User | null => {
 const OAuthCallback = () => {
   const { completeOAuthLogin } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const hasHandled = useRef(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,6 +53,10 @@ const OAuthCallback = () => {
     }
 
     completeOAuthLogin({ user, accessToken, refreshToken });
+    toast({
+      title: "Login successful",
+      description: "Signed in with Google.",
+    });
     window.history.replaceState({}, document.title, "/oauth/callback");
 
     const role = user.role?.toLowerCase();

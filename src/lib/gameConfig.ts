@@ -8,6 +8,7 @@ export interface GameInfo {
   image: string;
   category?: string | string[]; // Support single or multiple categories
   description?: string;
+  Toplay?: string;
 }
 // production url below
 
@@ -75,6 +76,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/2048-master/index.html`,
     image: gameBlockFusion,
     category: "Puzzle",
+    Toplay:"Login-Required",
     description: "Slide numbered tiles to combine them and create a tile with 2048",
   },
   "hextris": {
@@ -99,6 +101,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/canvas-tetris-master/index.html`,
     image: gameTetris2,
     category: "Puzzle",
+    Toplay:"Login-Required",
     description: "Another version of the classic Tetris game",
   },
   "breaklock": {
@@ -107,6 +110,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/breaklock-master/index.html`,
     image: gamebreak,
     category: "Puzzle",
+    Toplay:"Login-Required",
     description: "Puzzle game where you break locks",
   },
   // "tic-tac-toe": {
@@ -142,6 +146,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/clumsy-bird-master/index.html`,
     image: gameClumcy,
     category: "Casual",
+    Toplay:"Login-Required",
     description: "Flappy Bird clone - navigate through pipes",
   },
   // "duck-hunt": {
@@ -158,6 +163,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/AlienInvasion-master/index.html`,
     image: gameSpaceWar,
     category: ["Arcade", "Shooter"],
+    Toplay:"Login-Required",
     description: "Defend Earth from alien invaders",
   },
   "space-invaders": {
@@ -174,6 +180,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/pacman-canvas-master/index.htm`,
     image: gamePacman,
     category: "Arcade",
+    Toplay:"Login-Required",
     description: "Classic Pac-Man maze chase game",
   },
   "snake": {
@@ -190,6 +197,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/Knife Attacks/index.html`,
     image: gameKnifeAttack,
     category: "Arcade",
+    Toplay:"Login-Required",
     description: "Knife throwing action game",
   },
   "radius-raid": { 
@@ -244,6 +252,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Bubble Shooter",
     path: `${BASE_PATH}games/3m/index.html`,
     image: gameBubbleShooter,
+    Toplay:"Login-Required",
     category: ["Casual", "Shooter"],
     description: "Quick casual game",
   },
@@ -253,6 +262,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/4_2/index.html`,
     image: gameJumpingPanda,
     category: "Casual",
+    Toplay:"Login-Required",
     description: "Fun casual game",
   },
   "foosBall": {
@@ -285,6 +295,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/block super match/gamefiles/index.html`,
     image: gameblocksupermatch,
     category: "Puzzle",
+    Toplay:"Login-Required",
     description: "Block matching puzzle game",
   },
   "100m-race": {
@@ -317,6 +328,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/animalcrush/gamefiles/index.html`,
     image: gameanimalcrush,
     category: "Casual",
+    Toplay:"Login-Required",
     description: "Match 3 animal puzzle game",
   },
   "animal-puzzle": {
@@ -342,6 +354,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/Barrier/index.html`,
     image: gameBarrier,
     category: ["Racing"],
+    Toplay:"Login-Required",
     description: "Navigate through barriers",
   },
   "baseball-classic": {
@@ -365,6 +378,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Billards",
     path: `${BASE_PATH}games/billards/gamefiles/index.html`,
     image: gamebiliards, 
+    Toplay:"Login-Required",
     category: ["Sports", "Strategy"],
     description: "Classic pool billiards game",
   },

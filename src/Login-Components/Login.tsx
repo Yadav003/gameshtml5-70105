@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useAuth } from "@/lib/auth";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
   const { login, startGoogleOAuth, register, forgotPassword } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [mode, setMode] = useState<"login" | "register" | "forgot">("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,8 +18,17 @@ const Login = () => {
     try {
       if (mode === "login") {
         await login(email, password);
+        toast({
+          title: "Login successful",
+          description: "Welcome back to PlayVerse.",
+        });
       } else if (mode === "register") {
         await register(name, email, password);
+        toast({
+          title: "Registration successful",
+          description: "Your account is ready. Please sign in to continue.",
+          duration: 10000,
+        });
         setMode("login");
         setName("");
         setPassword("");
