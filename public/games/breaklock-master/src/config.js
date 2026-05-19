@@ -18,16 +18,11 @@ const config = {
   },
   SOCIAL: {
     PLATFORMS: {
-      FB: {
-        NAME: 'Facebook',
-        ICON: 'facebook',
-        URL: (url) => `https://www.facebook.com/sharer/sharer.php?u=${encodeURI(url)}`
-      },
       TWITTER: {
         NAME: 'Twitter',
         ICON: 'twitter',
         URL: (url, msg, tags) => {
-          return `http://twitter.com/` +
+          return `#` +
             (url  ? `share?` : `intent/tweet?`) +
             (msg  ? `text=${encodeURI(msg)}&` : '') +
             (url  ? `url=${encodeURI(url)}&`  : '') +
@@ -38,7 +33,7 @@ const config = {
     MESSAGE: 'I wasted my time on BreakLock, it\'s pointless, don\'t try it.',
     TAGS: ['breaklock']
   },
-  URL: 'https://maxwellito.github.io/breaklock/',
+  URL: '#',
   COLORS: {
     BRIGHT:  '#ffffff',
     DARK:    '#14171b',
