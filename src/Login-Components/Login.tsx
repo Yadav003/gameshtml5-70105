@@ -15,15 +15,37 @@ const Login = () => {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const emailValue = email.trim();
+    const nameValue = name.trim();
+
+    if (mode === "register") {
+      if (nameValue.length < 3 || nameValue.length > 30) {
+        toast({
+          title: "Invalid name",
+          description: "Name must be between 3 and 30 characters.",
+          variant: "destructive",
+        });
+        return;
+      }
+      if (password.length < 8) {
+        toast({
+          title: "Invalid password",
+          description: "Password must be at least 8 characters.",
+          variant: "destructive",
+        });
+        return;
+      }
+    }
+
     try {
       if (mode === "login") {
-        await login(email, password);
+        await login(emailValue, password);
         toast({
           title: "Login successful",
           description: "Welcome back to PlayVerse.",
         });
       } else if (mode === "register") {
-        await register(name, email, password);
+        await register(nameValue, emailValue, password);
         toast({
           title: "Registration successful",
           description: "Your account is ready. Please sign in to continue.",
@@ -34,13 +56,20 @@ const Login = () => {
         setPassword("");
       } else {
         // forgot
-        const result = await forgotPassword(email);
-        alert(result?.message || `If your email exists, a reset link was sent to ${email}`);
+        const result = await forgotPassword(emailValue);
+        toast({
+          title: "Password reset sent",
+          description: result?.message || `If your email exists, a reset link was sent to ${emailValue}`,
+        });
         setMode("login");
       }
     } catch (err) {
       console.error(err);
-      alert("Authentication failed");
+      toast({
+        title: "Authentication failed",
+        description: err instanceof Error ? err.message : "Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -85,7 +114,7 @@ const Login = () => {
                   {mode === 'register' && (
                     <div>
                       <label className="block text-sm text-foreground/80 mb-1">Full name</label>
-                      <input value={name} onChange={(e) => setName(e.target.value)} required maxLength={40} className="w-full px-3 py-2 border border-border rounded bg-transparent" />
+                      <input value={name} onChange={(e) => setName(e.target.value)} required minLength={3} maxLength={30} className="w-full px-3 py-2 border border-border rounded bg-transparent" />
                     </div>
                   )}
 
@@ -97,7 +126,7 @@ const Login = () => {
                   {mode !== 'forgot' && (
                     <div>
                       <label className="block text-sm text-foreground/80 mb-1">Password</label>
-                      <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" required minLength={8} maxLength={30} className="w-full px-3 py-2 border border-border rounded bg-transparent" />
+                      <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" required minLength={8} className="w-full px-3 py-2 border border-border rounded bg-transparent" />
                     </div>
                   )}
 

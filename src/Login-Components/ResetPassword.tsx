@@ -21,6 +21,7 @@ const ResetPassword = () => {
     e.preventDefault();
     if (!token.trim()) return alert("Reset token is required");
     if (password !== confirm) return alert("Passwords do not match");
+    if (password.length < 8) return alert("Password must be at least 8 characters");
 
     try {
       setLoading(true);
@@ -64,7 +65,6 @@ const ResetPassword = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 minLength={8}
-                maxLength={30}
                 required
                 className="w-full px-3 py-2 border border-border rounded bg-transparent"
               />
@@ -77,7 +77,6 @@ const ResetPassword = () => {
                 onChange={(e) => setConfirm(e.target.value)}
                 type="password"
                 minLength={8}
-                maxLength={30}
                 required
                 className="w-full px-3 py-2 border border-border rounded bg-transparent"
               />

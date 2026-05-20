@@ -17,6 +17,8 @@ const AdminUserManagement = () => {
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [loginProviderFilter, setLoginProviderFilter] = useState("all");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,6 +31,7 @@ const AdminUserManagement = () => {
     name: "",
     email: "",
     role: "",
+    status: "active",
     password: "",
     lockUntil: "",
   });
@@ -36,7 +39,8 @@ const AdminUserManagement = () => {
     name: "",
     email: "",
     password: "",
-    role: "",
+    role: "user",
+    status: "active",
   });
 
   const roleOptions = useMemo(() => {
@@ -69,6 +73,8 @@ const AdminUserManagement = () => {
           limit,
           search: search || undefined,
           role: roleFilter !== "all" ? roleFilter : undefined,
+          status: statusFilter !== "all" ? statusFilter : undefined,
+          loginProvider: loginProviderFilter !== "all" ? loginProviderFilter : undefined,
         });
 
         if (!isActive) return;
@@ -102,7 +108,7 @@ const AdminUserManagement = () => {
     return () => {
       isActive = false;
     };
-  }, [page, limit, search, roleFilter, selectedUserId, toast]);
+  }, [page, limit, search, roleFilter, statusFilter, loginProviderFilter, selectedUserId, toast]);
 
   useEffect(() => {
     if (!selectedUserId) {
@@ -143,7 +149,8 @@ const AdminUserManagement = () => {
   };
 
   const resolveStatus = (user: AdminUser) => {
-    if (user.status) return user.status;
+    const status = user.status?.toLowerCase();
+    if (status) return status.charAt(0).toUpperCase() + status.slice(1);
     if (user.lockUntil) return "Suspended";
     return "Active";
   };
@@ -153,7 +160,8 @@ const AdminUserManagement = () => {
     setEditForm({
       name: user.name,
       email: user.email,
-      role: user.role ?? "",
+      role: user.role ?? "user",
+      status: user.status ?? "active",
       password: "",
       lockUntil: toLocalDateTime(user.lockUntil),
     });
@@ -161,13 +169,31 @@ const AdminUserManagement = () => {
 
   const saveEdit = async () => {
     if (!editUserId || isSaving) return;
+    const trimmedName = editForm.name.trim();
+    if (trimmedName.length < 3 || trimmedName.length > 30) {
+      toast({
+        title: "Invalid name",
+        description: "Name must be between 3 and 30 characters.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (editForm.password && editForm.password.length < 8) {
+      toast({
+        title: "Invalid password",
+        description: "Password must be at least 8 characters.",
+        variant: "destructive",
+      });
+      return;
+    }
     setIsSaving(true);
 
     try {
       const updatedUser = await adminApi.updateUser(editUserId, {
-        name: editForm.name,
+        name: trimmedName,
         email: editForm.email,
         role: editForm.role || undefined,
+        status: editForm.status || undefined,
         password: editForm.password || undefined,
         lockUntil: editForm.lockUntil ? new Date(editForm.lockUntil).toISOString() : null,
       });
@@ -180,7 +206,7 @@ const AdminUserManagement = () => {
       }
 
       setEditUserId(null);
-      setEditForm({ name: "", email: "", role: "", password: "", lockUntil: "" });
+      setEditForm({ name: "", email: "", role: "", status: "active", password: "", lockUntil: "" });
       toast({ title: "User updated" });
     } catch (error) {
       toast({
@@ -226,10 +252,35 @@ const AdminUserManagement = () => {
 
   const createUser = async () => {
     if (isCreating) return;
-    if (!createForm.name || !createForm.email || !createForm.password) {
+    const trimmedName = createForm.name.trim();
+    if (!trimmedName || !createForm.email || !createForm.password) {
       toast({
         title: "Missing details",
         description: "Name, email, and password are required.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (trimmedName.length < 3 || trimmedName.length > 30) {
+      toast({
+        title: "Invalid name",
+        description: "Name must be between 3 and 30 characters.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (createForm.password.length < 8) {
+      toast({
+        title: "Invalid password",
+        description: "Password must be at least 8 characters.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (!createForm.role) {
+      toast({
+        title: "Role required",
+        description: "Please select a role for the new user.",
         variant: "destructive",
       });
       return;
@@ -238,10 +289,11 @@ const AdminUserManagement = () => {
     setIsCreating(true);
     try {
       const newUser = await adminApi.createUser({
-        name: createForm.name,
+        name: trimmedName,
         email: createForm.email,
         password: createForm.password,
-        role: createForm.role || undefined,
+        role: createForm.role,
+        status: createForm.status || undefined,
       });
 
       if (newUser) {
@@ -251,7 +303,7 @@ const AdminUserManagement = () => {
         setSelectedUser(newUser);
       }
 
-      setCreateForm({ name: "", email: "", password: "", role: "" });
+      setCreateForm({ name: "", email: "", password: "", role: "user", status: "active" });
       toast({ title: "User created" });
     } catch (error) {
       toast({
@@ -307,7 +359,13 @@ const AdminUserManagement = () => {
           />
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <Select value={roleFilter} onValueChange={(value) => setRoleFilter(value)}>
+          <Select
+            value={roleFilter}
+            onValueChange={(value) => {
+              setRoleFilter(value);
+              setPage(1);
+            }}
+          >
             <SelectTrigger className="w-[160px]">
               <SelectValue placeholder="Role" />
             </SelectTrigger>
@@ -342,6 +400,42 @@ const AdminUserManagement = () => {
             Export
           </Button>
         </div>
+      </section>
+
+      <section className="mt-3 flex flex-wrap items-center gap-2">
+        <Select
+          value={statusFilter}
+          onValueChange={(value) => {
+            setStatusFilter(value);
+            setPage(1);
+          }}
+        >
+          <SelectTrigger className="w-[170px]">
+            <SelectValue placeholder="Status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All statuses</SelectItem>
+            <SelectItem value="active">Active</SelectItem>
+            <SelectItem value="disabled">Disabled</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select
+          value={loginProviderFilter}
+          onValueChange={(value) => {
+            setLoginProviderFilter(value);
+            setPage(1);
+          }}
+        >
+          <SelectTrigger className="w-[190px]">
+            <SelectValue placeholder="Login provider" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All providers</SelectItem>
+            <SelectItem value="local">Local</SelectItem>
+            <SelectItem value="google">Google</SelectItem>
+            <SelectItem value="normal">Normal</SelectItem>
+          </SelectContent>
+        </Select>
       </section>
 
       <section className="mt-4 grid gap-4 md:grid-cols-3">
@@ -447,11 +541,30 @@ const AdminUserManagement = () => {
                 value={createForm.password}
                 onChange={(event) => setCreateForm((current) => ({ ...current, password: event.target.value }))}
               />
-              <Input
-                placeholder="Role (optional)"
+              <Select
                 value={createForm.role}
-                onChange={(event) => setCreateForm((current) => ({ ...current, role: event.target.value }))}
-              />
+                onValueChange={(value) => setCreateForm((current) => ({ ...current, role: value }))}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="user">User</SelectItem>
+                  <SelectItem value="admin">Admin</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select
+                value={createForm.status}
+                onValueChange={(value) => setCreateForm((current) => ({ ...current, status: value }))}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="active">Active</SelectItem>
+                  <SelectItem value="disabled">Disabled</SelectItem>
+                </SelectContent>
+              </Select>
               <Button onClick={createUser} disabled={isCreating} className="w-full">
                 {isCreating ? "Creating..." : "Create User"}
               </Button>
@@ -511,11 +624,30 @@ const AdminUserManagement = () => {
                     value={editForm.email}
                     onChange={(event) => setEditForm((current) => ({ ...current, email: event.target.value }))}
                   />
-                  <Input
-                    placeholder="Role"
+                  <Select
                     value={editForm.role}
-                    onChange={(event) => setEditForm((current) => ({ ...current, role: event.target.value }))}
-                  />
+                    onValueChange={(value) => setEditForm((current) => ({ ...current, role: value }))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="user">User</SelectItem>
+                      <SelectItem value="admin">Admin</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Select
+                    value={editForm.status}
+                    onValueChange={(value) => setEditForm((current) => ({ ...current, status: value }))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="active">Active</SelectItem>
+                      <SelectItem value="disabled">Disabled</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <Input
                     placeholder="Password (optional)"
                     type="password"

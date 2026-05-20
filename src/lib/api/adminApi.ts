@@ -17,6 +17,7 @@ export type AdminUser = {
   phone?: string | null;
   role?: string | null;
   status?: string | null;
+  loginProvider?: string | null;
   joined?: string | null;
   lockUntil?: string | null;
 };
@@ -33,13 +34,16 @@ type AdminUserListParams = {
   limit?: number;
   search?: string;
   role?: string;
+  loginProvider?: string;
+  status?: string;
 };
 
 type AdminUserCreatePayload = {
   name: string;
   email: string;
   password: string;
-  role?: string;
+  role: string;
+  status?: string;
 };
 
 type AdminUserUpdatePayload = {
@@ -47,6 +51,7 @@ type AdminUserUpdatePayload = {
   email?: string;
   password?: string;
   role?: string;
+  status?: string;
   lockUntil?: string | null;
 };
 
@@ -88,6 +93,11 @@ const normalizeUser = (user: Record<string, unknown>): AdminUser => {
     phone: typeof user.phone === "string" ? user.phone : null,
     role: typeof user.role === "string" ? user.role : null,
     status: typeof user.status === "string" ? user.status : null,
+    loginProvider:
+      (typeof user.loginProvider === "string" && user.loginProvider) ||
+      (typeof user.provider === "string" && user.provider) ||
+      (typeof user.authProvider === "string" && user.authProvider) ||
+      null,
     joined:
       (typeof user.joined === "string" && user.joined) ||
       (typeof user.createdAt === "string" && user.createdAt) ||
@@ -143,6 +153,8 @@ export const adminApi = {
     if (params.limit) query.set("limit", String(params.limit));
     if (params.search) query.set("search", params.search);
     if (params.role) query.set("role", params.role);
+    if (params.loginProvider) query.set("loginProvider", params.loginProvider);
+    if (params.status) query.set("status", params.status);
 
     const path = query.toString()
       ? `${ADMIN_SERVICE_ENDPOINTS.users}?${query.toString()}`

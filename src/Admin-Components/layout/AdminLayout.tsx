@@ -1,7 +1,7 @@
 import { type ReactNode, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard, LogOut, Users } from "lucide-react";
+import { LayoutDashboard, LogOut, Megaphone, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { adminApi } from "@/lib/api";
 
@@ -14,6 +14,7 @@ type AdminLayoutProps = {
 const navItems = [
   { to: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/admin/user-management", label: "User Management", icon: Users },
+  { to: "/admin/ads-management", label: "Ads Management", icon: Megaphone },
 ];
 
 const activeClass = "bg-primary/10 text-primary border-primary/20";

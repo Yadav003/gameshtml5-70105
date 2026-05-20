@@ -1,5 +1,5 @@
 import { AUTH_SERVICE_ENDPOINTS } from "./endpoints";
-import { apiClient } from "./httpClient";
+import { ApiError, apiClient } from "./httpClient";
 import { clearAuthToken, getRefreshToken } from "./session";
 
 export type AuthUser = {
@@ -7,6 +7,7 @@ export type AuthUser = {
   name: string;
   email: string;
   role?: string;
+  status?: string;
 };
 
 export type AuthResponse = {
@@ -81,10 +82,21 @@ const unwrapAuthResponse = (response: AuthResponse) => {
   };
 };
 
+const isDisabledUser = (user?: AuthUser | null) => user?.status?.toLowerCase() === "disabled";
+
+const assertUserActive = (user?: AuthUser | null) => {
+  if (isDisabledUser(user)) {
+    clearAuthToken();
+    throw new ApiError("Account disabled", 403);
+  }
+};
+
 export const authApi = {
   login: async (payload: LoginPayload) => {
     const response = await apiClient.post<AuthResponse>(AUTH_SERVICE_ENDPOINTS.login, payload);
-    return unwrapAuthResponse(response);
+    const data = unwrapAuthResponse(response);
+    assertUserActive(data.user);
+    return data;
   },
 
   googleOAuthStart: async () => {
@@ -124,7 +136,12 @@ export const authApi = {
   },
 
   validateToken: async () => {
-    return apiClient.get<{ valid?: boolean; user?: AuthUser }>(AUTH_SERVICE_ENDPOINTS.validateToken);
+    const response = await apiClient.get<{ valid?: boolean; user?: AuthUser; data?: { user?: AuthUser } }>(
+      AUTH_SERVICE_ENDPOINTS.validateToken
+    );
+    const payload = response.data ?? response;
+    assertUserActive(payload.user ?? response.user);
+    return response;
   },
 
   status: async () => {

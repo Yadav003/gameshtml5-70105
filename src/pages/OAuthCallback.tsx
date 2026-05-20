@@ -52,6 +52,11 @@ const OAuthCallback = () => {
       return;
     }
 
+    if (user.status?.toLowerCase() === "disabled") {
+      setError("This account is disabled.");
+      return;
+    }
+
     completeOAuthLogin({ user, accessToken, refreshToken });
     toast({
       title: "Login successful",

@@ -24,6 +24,7 @@ import GamePlayer from "./pages/GamePlayer";
 import OAuthCallback from "./pages/OAuthCallback";
 import AdminDashboard from "./Admin-Components/dashboard/AdminDashboard.tsx";
 import AdminUserManagement from "./Admin-Components/user-management/AdminUserManagement.tsx";
+import AdsManagement from "./Admin-Components/Ads-Management/AdsManagement.tsx";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./lib/auth";
 import RequireAdmin from "./components/RequireAdmin";
@@ -70,6 +71,14 @@ const App = () => (
                   element={
                     <RequireAdmin>
                       <AdminUserManagement />
+                    </RequireAdmin>
+                  }
+                />
+                <Route
+                  path="/admin/ads-management"
+                  element={
+                    <RequireAdmin>
+                      <AdsManagement />
                     </RequireAdmin>
                   }
                 />
