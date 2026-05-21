@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { TrendingGames } from "@/components/TrendingGames";
+import ShowAds from "@/components/ShowAds";
 import { CategoriesSection } from "@/components/CategoriesSection";
 import { LeaderboardSection } from "@/components/LeaderboardSection";
 import { SubscriptionPlans } from "@/components/SubscriptionPlans";
@@ -29,6 +30,9 @@ const Index = () => {
       <Navigation />
       <main className="pt-16 pb-20 md:pb-0">
         <HeroCarousel />
+        <div className="container mx-auto px-2 py-4">
+          <ShowAds />
+        </div>
         <div id="trending">
           <TrendingGames />
         </div>
@@ -40,6 +44,9 @@ const Index = () => {
           <SubscriptionPlans />
         </div> */}
       </main>
+       <div className="container mx-auto px-2 py-4">
+          <ShowAds />
+        </div>
       <Footer />
       <MobileFooterNav />
     </div>
