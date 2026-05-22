@@ -22,6 +22,22 @@ export type AdminUser = {
   lockUntil?: string | null;
 };
 
+export type AdminContactReport = {
+  id: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  phone?: string | null;
+  status?: string | null;
+  createdAt?: string | null;
+};
+
+export type AdminContactReportList = {
+  reports: AdminContactReport[];
+  total: number;
+};
+
 export type AdminUserListResult = {
   users: AdminUser[];
   total: number;
@@ -46,6 +62,12 @@ type AdminUserCreatePayload = {
   status?: string;
 };
 
+type ContactReportListParams = {
+  search?: string;
+  page?: number;
+  limit?: number;
+};
+
 type AdminUserUpdatePayload = {
   name?: string;
   email?: string;
@@ -57,6 +79,8 @@ type AdminUserUpdatePayload = {
 
 const adminRequest = <T>(path: string, init?: RequestInit) =>
   request<T>(path, init, apiConfig.requestTimeoutMs, apiConfig.adminServiceBaseUrl);
+
+const CONTACT_REPORT_ENDPOINT = "/api/v1/admin/contacts";
 
 const unwrapPayload = <T>(response: T): T => {
   if (response && typeof response === "object" && "data" in (response as Record<string, unknown>)) {
@@ -74,6 +98,12 @@ const toNumber = (value: unknown, fallback = 0) => {
     return Number.isFinite(parsed) ? parsed : fallback;
   }
   return fallback;
+};
+
+const toTimestamp = (value: unknown) => {
+  if (typeof value !== "string" || !value) return 0;
+  const time = new Date(value).getTime();
+  return Number.isNaN(time) ? 0 : time;
 };
 
 const normalizeUser = (user: Record<string, unknown>): AdminUser => {
@@ -106,6 +136,77 @@ const normalizeUser = (user: Record<string, unknown>): AdminUser => {
       (typeof user.lockUntil === "string" && user.lockUntil) ||
       (typeof user.lockedUntil === "string" && user.lockedUntil) ||
       null,
+  };
+};
+
+const normalizeContactStatus = (value: unknown): string | null => {
+  if (typeof value === "string" && value.trim()) return value.trim();
+  if (typeof value === "boolean") return value ? "resolved" : "new";
+  return null;
+};
+
+const normalizeContactReport = (report: Record<string, unknown>, index: number): AdminContactReport => {
+  const id =
+    (typeof report.id === "string" && report.id) ||
+    (typeof report._id === "string" && report._id) ||
+    (typeof report.contactId === "string" && report.contactId) ||
+    (typeof report.messageId === "string" && report.messageId) ||
+    "";
+
+  const createdAt =
+    (typeof report.createdAt === "string" && report.createdAt) ||
+    (typeof report.created_at === "string" && report.created_at) ||
+    (typeof report.submittedAt === "string" && report.submittedAt) ||
+    null;
+
+  return {
+    id: id || `report-${index}`,
+    name:
+      (typeof report.name === "string" && report.name) ||
+      (typeof report.fullName === "string" && report.fullName) ||
+      "Unknown",
+    email: (typeof report.email === "string" && report.email) || "",
+    subject: (typeof report.subject === "string" && report.subject) || "",
+    message: (typeof report.message === "string" && report.message) || "",
+    phone: typeof report.phone === "string" ? report.phone : null,
+    status:
+      normalizeContactStatus(report.status) ||
+      normalizeContactStatus(report.state) ||
+      normalizeContactStatus(report.resolved) ||
+      null,
+    createdAt,
+  };
+};
+
+const normalizeContactReportList = (payload: unknown): AdminContactReportList => {
+  const data = unwrapPayload(payload as Record<string, unknown> | null) as Record<string, unknown> | null;
+  const listCandidate =
+    (data && Array.isArray(data.contacts) ? data.contacts : null) ||
+    (data && Array.isArray(data.messages) ? data.messages : null) ||
+    (data && Array.isArray(data.items) ? data.items : null) ||
+    (data && Array.isArray(data.reports) ? data.reports : null) ||
+    (data && Array.isArray(data.feedback) ? data.feedback : null) ||
+    (data && Array.isArray(data.data) ? data.data : null) ||
+    (Array.isArray(payload) ? payload : null) ||
+    [];
+
+  const reports = listCandidate
+    .filter((item) => item && typeof item === "object")
+    .map((item, index) => normalizeContactReport(item as Record<string, unknown>, index))
+    .sort((a, b) => {
+      return toTimestamp(b.createdAt) - toTimestamp(a.createdAt);
+    });
+
+  const paginationTotal =
+    data && typeof data.pagination === "object"
+      ? (data.pagination as Record<string, unknown>).total
+      : data && typeof data.meta === "object"
+        ? (data.meta as Record<string, unknown>).total
+        : undefined;
+
+  return {
+    reports,
+    total: toNumber(paginationTotal ?? data?.total ?? data?.count ?? reports.length, reports.length),
   };
 };
 
@@ -221,5 +322,23 @@ export const adminApi = {
     } finally {
       clearAuthToken();
     }
+  },
+
+  getContactReports: async (params: ContactReportListParams = {}) => {
+    const query = new URLSearchParams();
+    if (params.search) query.set("search", params.search);
+    if (params.page) query.set("page", String(params.page));
+    if (params.limit) query.set("limit", String(params.limit));
+
+    const path = query.toString() ? `${CONTACT_REPORT_ENDPOINT}?${query.toString()}` : CONTACT_REPORT_ENDPOINT;
+    const response = await adminRequest<unknown>(path);
+    return normalizeContactReportList(response);
+  },
+
+  deleteContactReport: async (contactId: string) => {
+    if (!contactId) return;
+    await adminRequest(`${CONTACT_REPORT_ENDPOINT}/${encodeURIComponent(contactId)}`, {
+      method: "DELETE",
+    });
   },
 };

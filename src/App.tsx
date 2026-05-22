@@ -25,6 +25,7 @@ import OAuthCallback from "./pages/OAuthCallback";
 import AdminDashboard from "./Admin-Components/dashboard/AdminDashboard.tsx";
 import AdminUserManagement from "./Admin-Components/user-management/AdminUserManagement.tsx";
 import AdsManagement from "./Admin-Components/Ads-Management/AdsManagement.tsx";
+import AdminReports from "./Admin-Components/reports/AdminReports.tsx";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./lib/auth";
 import RequireAdmin from "./components/RequireAdmin";
@@ -79,6 +80,14 @@ const App = () => (
                   element={
                     <RequireAdmin>
                       <AdsManagement />
+                    </RequireAdmin>
+                  }
+                />
+                <Route
+                  path="/admin/reports"
+                  element={
+                    <RequireAdmin>
+                      <AdminReports />
                     </RequireAdmin>
                   }
                 />
