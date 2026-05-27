@@ -3,10 +3,6 @@
   "description": "An old classic, rewritten in HTML5",
   "launch_path": "/",
   "version": "1.0.6",
-  "developer": {
-    "name": "platzh1rsch",
-    "url": "http://platzh1rsch.ch"
-  },
   "icons": {
 	"128": "/img/icon-128.png"
 	},

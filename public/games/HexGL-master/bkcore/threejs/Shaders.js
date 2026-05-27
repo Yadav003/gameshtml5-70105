@@ -43,10 +43,6 @@ bkcore.threejs.Shaders =
 		].join("\n")
 	},
 
-	/* ------------------------------------------------------------------------------------------------
-	//	Hexagonal Vignette shader
-	//  by BKcore.com
-	 ------------------------------------------------------------------------------------------------ */
 
 	'hexvignette': {
 
@@ -115,13 +111,6 @@ bkcore.threejs.Shaders =
 
 	},
 
-	/* -------------------------------------------------------------------------
-	//	Normal map shader (perpixel)
-	//		- Blinn-Phong
-	//		- normal + diffuse + specular + AO + displacement + reflection + shadow maps
-	//		- PER-PIXEL point and directional lights (use with "lights: true" material option)
-	//		- modified by BKcore
-	 ------------------------------------------------------------------------- */
 
 	'normal' : {
 

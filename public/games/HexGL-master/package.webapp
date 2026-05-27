@@ -3,8 +3,4 @@
     "description": "HexGL v1.0.1-ffos",
     "package_path" : "package.zip",
     "version": "1",
-    "developer": {
-        "name": "Thibaut Despoulain (BKcore)",
-        "url": "http://bkcore.com"
-    }
 }

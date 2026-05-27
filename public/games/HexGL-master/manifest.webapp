@@ -8,10 +8,6 @@
 		"128": "/icon_128.png",
 		"256": "/icon_256.png"
 	},
-	"developer": {
-		"name": "Thibaut Despoulain (BKcore)",
-		"url": "http://bkcore.com"
-	},
     "installs_allowed_from": ["*"],
 	"default_locale": "en",
 	"orientation": ["landscape"]

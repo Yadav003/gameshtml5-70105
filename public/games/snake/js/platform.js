@@ -854,8 +854,6 @@
         description.unshift('embedded');
       }
     }
-    // Detect BlackBerry OS version.
-    // http://docs.blackberry.com/en/developers/deliverables/18169/HTTP_headers_sent_by_BB_Browser_1234911_11.jsp
     else if ((/\bBlackBerry\b/.test(product) || /\bBB10\b/.test(ua)) && (data =
           (RegExp(product.replace(/ +/g, ' *') + '/([.\\d]+)', 'i').exec(ua) || 0)[1] ||
           version
