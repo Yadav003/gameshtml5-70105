@@ -1,35 +1,16 @@
-import { useEffect, useState } from "react";
-import { advertisementApi, type AdvertisementData } from "@/lib/api";
+import type { AdvertisementData } from "@/lib/api";
 
-function ShowAds() {
-    const [ad, setAd] = useState<AdvertisementData | null>(null);
+type ShowAdsProps = {
+    ad?: AdvertisementData | null;
+};
 
-    useEffect(() => {
-        let isActive = true;
+function ShowAds({ ad }: ShowAdsProps) {
+    const isRenderableAd = (
+        value?: AdvertisementData | null
+    ): value is AdvertisementData & { title: string; websiteUrl: string } =>
+        !!value?.show && !!value.title && !!value.websiteUrl;
 
-        const loadAd = async () => {
-            try {
-                const response = await advertisementApi.getPublicAdvertisement();
-                if (!isActive) return;
-
-                if (response?.show && response.title && response.websiteUrl && response.imageUrl) {
-                    setAd(response);
-                    return;
-                }
-
-                setAd(null);
-            } catch {
-                if (isActive) setAd(null);
-            }
-        };
-
-        loadAd();
-        return () => {
-            isActive = false;
-        };
-    }, []);
-
-    if (!ad) return null;
+    if (!isRenderableAd(ad)) return null;
 
     return (
         <div className="w-full overflow-hidden rounded-xl border border-border bg-card shadow-sm">

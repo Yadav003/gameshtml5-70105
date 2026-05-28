@@ -17,6 +17,7 @@ export const ADMIN_SERVICE_ENDPOINTS = {
   users: "/api/v1/admin/users",
   logout: "/api/v1/admin/logout",
   advertisement: "/api/v1/admin/advertisement",
+  advertisements: "/api/v1/admin/advertisements",
 } as const;
 
 export const PUBLIC_SERVICE_ENDPOINTS = {
