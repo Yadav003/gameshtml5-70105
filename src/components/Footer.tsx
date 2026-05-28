@@ -53,7 +53,7 @@ export const Footer = () => {
               <li><Link to="/help-center" onClick={scrollToTop} className="text-muted-foreground hover:text-foreground transition-colors">Help Center</Link></li>
               <li><Link to="/contact-us" onClick={scrollToTop} className="text-muted-foreground hover:text-foreground transition-colors">Contact Us</Link></li>
               <li><Link to="/faq" onClick={scrollToTop} className="text-muted-foreground hover:text-foreground transition-colors">FAQ</Link></li>
-              <li><Link to="/terms-conditions" onClick={scrollToTop} className="text-muted-foreground hover:text-foreground transition-colors">Terms of Service</Link></li>
+              {/* <li><Link to="/terms-conditions" onClick={scrollToTop} className="text-muted-foreground hover:text-foreground transition-colors">Terms of Service</Link></li> */}
             </ul>
           </div>
 

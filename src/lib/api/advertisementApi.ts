@@ -12,6 +12,13 @@ export type AdvertisementData = {
   updatedAt?: string;
 };
 
+export type AdvertisementFormPayload = {
+  show?: boolean;
+  title?: string;
+  websiteUrl?: string;
+  image?: File | null;
+};
+
 export type AdvertisementRecord = AdvertisementData & {
   id?: string;
   createdAt?: string;
@@ -35,6 +42,17 @@ const publicRequest = <T>(path: string, init?: RequestInit) =>
 
 const adminRequest = <T>(path: string, init?: RequestInit) =>
   request<T>(path, init, apiConfig.requestTimeoutMs, apiConfig.adminServiceBaseUrl);
+
+const buildAdvertisementFormData = (payload: AdvertisementFormPayload): FormData => {
+  const formData = new FormData();
+
+  if (payload.title !== undefined) formData.append("title", payload.title);
+  if (payload.websiteUrl !== undefined) formData.append("websiteUrl", payload.websiteUrl);
+  if (payload.show !== undefined) formData.append("show", String(payload.show));
+  if (payload.image instanceof File) formData.append("image", payload.image);
+
+  return formData;
+};
 
 const normalizeAdvertisement = (payload: unknown): AdvertisementData | null => {
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
@@ -140,10 +158,12 @@ const getAdminAdvertisement = async (): Promise<AdvertisementData | null> => {
   return normalizeAdvertisement(response);
 };
 
-const updateAdminAdvertisement = async (payload: AdvertisementData): Promise<AdvertisementData | null> => {
+const updateAdminAdvertisement = async (
+  payload: AdvertisementFormPayload
+): Promise<AdvertisementData | null> => {
   const response = await adminRequest<AdvertisementResponse>(ADMIN_SERVICE_ENDPOINTS.advertisement, {
     method: "PATCH",
-    body: JSON.stringify(payload),
+    body: buildAdvertisementFormData(payload),
   });
   return normalizeAdvertisement(response);
 };
@@ -153,23 +173,25 @@ const getAdminAdvertisements = async (): Promise<AdvertisementRecord[]> => {
   return normalizeAdminAdvertisementList(response);
 };
 
-const createAdminAdvertisement = async (payload: AdvertisementData): Promise<AdvertisementRecord | null> => {
+const createAdminAdvertisement = async (
+  payload: AdvertisementFormPayload
+): Promise<AdvertisementRecord | null> => {
   const response = await adminRequest<AdvertisementResponse>(ADMIN_SERVICE_ENDPOINTS.advertisements, {
     method: "POST",
-    body: JSON.stringify(payload),
+    body: buildAdvertisementFormData(payload),
   });
   return normalizeAdvertisementRecord(response);
 };
 
 const updateAdminAdvertisementById = async (
   advertisementId: string,
-  payload: AdvertisementData
+  payload: AdvertisementFormPayload
 ): Promise<AdvertisementRecord | null> => {
   const response = await adminRequest<AdvertisementResponse>(
     `${ADMIN_SERVICE_ENDPOINTS.advertisements}/${advertisementId}`,
     {
       method: "PATCH",
-      body: JSON.stringify(payload),
+      body: buildAdvertisementFormData(payload),
     }
   );
   return normalizeAdvertisementRecord(response);

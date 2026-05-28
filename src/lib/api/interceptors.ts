@@ -16,8 +16,11 @@ export const applyRequestInterceptors = async (
   context: RequestInterceptorContext
 ): Promise<RequestInterceptorContext> => {
   const headers = new Headers(context.init.headers || {});
+  const isFormData =
+    typeof FormData !== "undefined" &&
+    context.init.body instanceof FormData;
 
-  if (!headers.has("Content-Type") && context.init.body) {
+  if (!headers.has("Content-Type") && context.init.body && !isFormData) {
     headers.set("Content-Type", "application/json");
   }
 

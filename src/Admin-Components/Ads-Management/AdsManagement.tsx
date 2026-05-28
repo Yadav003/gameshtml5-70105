@@ -6,11 +6,10 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import AdminLayout from "@/Admin-Components/layout/AdminLayout";
-import { Image as ImageIcon } from "lucide-react";
-import { ApiError, advertisementApi, type AdvertisementData, type AdvertisementRecord } from "@/lib/api";
+import { ApiError, advertisementApi, type AdvertisementRecord, type AdvertisementFormPayload } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
-type AdField = "title" | "websiteUrl" | "imageUrl" | "show";
+type AdField = "title" | "websiteUrl" | "image" | "show";
 
 type AdFormErrors = Partial<Record<AdField, string>>;
 
@@ -20,7 +19,13 @@ type AdRowState = {
   title: string;
   websiteUrl: string;
   imageUrl: string;
+  imageFile?: File | null;
+  imagePreviewUrl?: string | null;
   show: boolean;
+  savedTitle: string;
+  savedWebsiteUrl: string;
+  savedShow: boolean;
+  savedImageUrl: string;
   createdAt?: string;
   updatedAt?: string;
   isSaving?: boolean;
@@ -30,7 +35,8 @@ type AdRowState = {
   errors?: AdFormErrors;
 };
 
-const allowedFields = new Set<AdField>(["title", "websiteUrl", "imageUrl", "show"]);
+const allowedFields = new Set<AdField>(["title", "websiteUrl", "image", "show"]);
+const updateMissingFieldsMessage = "Provide at least one field or an image file.";
 
 const buildLocalId = (prefix: string) => `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
@@ -40,7 +46,13 @@ const buildAdRow = (ad: AdvertisementRecord, index: number): AdRowState => ({
   title: ad.title ?? "",
   websiteUrl: ad.websiteUrl ?? "",
   imageUrl: ad.imageUrl ?? "",
+  imageFile: null,
+  imagePreviewUrl: null,
   show: ad.show ?? false,
+  savedTitle: (ad.title ?? "").trim(),
+  savedWebsiteUrl: (ad.websiteUrl ?? "").trim(),
+  savedShow: ad.show ?? false,
+  savedImageUrl: ad.imageUrl ?? "",
   createdAt: ad.createdAt,
   updatedAt: ad.updatedAt,
   isLegacy: !ad.id,
@@ -53,25 +65,72 @@ const buildEmptyAd = (): AdRowState => ({
   title: "",
   websiteUrl: "",
   imageUrl: "",
+  imageFile: null,
+  imagePreviewUrl: null,
   show: false,
+  savedTitle: "",
+  savedWebsiteUrl: "",
+  savedShow: false,
+  savedImageUrl: "",
   isNew: true,
   errors: {},
 });
 
-const buildPayload = (ad: AdRowState): AdvertisementData => ({
+const sanitizeText = (value: string) => value.trim();
+
+const buildCreatePayload = (ad: AdRowState): AdvertisementFormPayload => ({
   show: ad.show,
-  title: ad.title.trim(),
-  websiteUrl: ad.websiteUrl.trim(),
-  imageUrl: ad.imageUrl.trim(),
+  title: sanitizeText(ad.title),
+  websiteUrl: sanitizeText(ad.websiteUrl),
+  image: ad.imageFile ?? undefined,
 });
 
-const validatePayload = (payload: AdvertisementData): AdFormErrors => {
-  const errors: AdFormErrors = {};
+const buildUpdatePayload = (ad: AdRowState): AdvertisementFormPayload => {
+  const payload: AdvertisementFormPayload = {};
+  const title = sanitizeText(ad.title);
+  const websiteUrl = sanitizeText(ad.websiteUrl);
 
-  if (payload.show) {
-    if (!payload.title) errors.title = "Title is required when the ad is visible.";
-    if (!payload.websiteUrl) errors.websiteUrl = "Website link is required when the ad is visible.";
-    if (!payload.imageUrl) errors.imageUrl = "Image URL is required when the ad is visible.";
+  if (title !== ad.savedTitle) payload.title = title;
+  if (websiteUrl !== ad.savedWebsiteUrl) payload.websiteUrl = websiteUrl;
+  if (ad.show !== ad.savedShow) payload.show = ad.show;
+  if (ad.imageFile) payload.image = ad.imageFile;
+
+  return payload;
+};
+
+const hasUpdateFields = (payload: AdvertisementFormPayload) =>
+  payload.title !== undefined || payload.websiteUrl !== undefined || payload.show !== undefined;
+
+const validateBaseFields = (ad: AdRowState): AdFormErrors => {
+  const errors: AdFormErrors = {};
+  const title = sanitizeText(ad.title);
+  const websiteUrl = sanitizeText(ad.websiteUrl);
+
+  if (ad.show) {
+    if (!title) errors.title = "Title is required when the ad is visible.";
+    if (!websiteUrl) errors.websiteUrl = "Website link is required when the ad is visible.";
+  }
+
+  return errors;
+};
+
+const validateCreatePayload = (ad: AdRowState): AdFormErrors => {
+  const errors = validateBaseFields(ad);
+
+  if (!ad.imageFile) {
+    errors.image = "Image file is required to create an ad.";
+  }
+
+  return errors;
+};
+
+const validateUpdatePayload = (ad: AdRowState, payload: AdvertisementFormPayload): AdFormErrors => {
+  const errors = validateBaseFields(ad);
+  const hasFields = hasUpdateFields(payload);
+  const hasImage = !!payload.image;
+
+  if (!hasFields && !hasImage) {
+    errors.image = updateMissingFieldsMessage;
   }
 
   return errors;
@@ -97,9 +156,17 @@ const extractValidationErrors = (error: unknown): AdFormErrors => {
   const rawErrors = data.errors ?? record.errors;
   const errors: AdFormErrors = {};
 
+  const normalizeField = (field: string): AdField | null => {
+    if (field === "imageUrl") return "image";
+    if (allowedFields.has(field as AdField)) return field as AdField;
+    return null;
+  };
+
   const assignError = (field: string, message?: string) => {
-    if (!message || !allowedFields.has(field as AdField)) return;
-    errors[field as AdField] = message;
+    if (!message) return;
+    const normalized = normalizeField(field);
+    if (!normalized) return;
+    errors[normalized] = message;
   };
 
   if (Array.isArray(rawErrors)) {
@@ -179,36 +246,75 @@ const AdsManagement = () => {
   };
 
   const removeAd = (localId: string) => {
-    setAds((current) => current.filter((ad) => ad.localId !== localId));
+    setAds((current) => {
+      const target = current.find((ad) => ad.localId === localId);
+      if (target?.imagePreviewUrl) URL.revokeObjectURL(target.imagePreviewUrl);
+      return current.filter((ad) => ad.localId !== localId);
+    });
   };
 
   const handleAddAd = () => {
     setAds((current) => [...current, buildEmptyAd()]);
   };
 
-  const handleFieldChange = (localId: string, field: "title" | "websiteUrl" | "imageUrl") =>
+  const handleFieldChange = (localId: string, field: "title" | "websiteUrl") =>
     (event: ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value;
       updateAd(localId, (current) => ({
         ...current,
         [field]: value,
-        errors: { ...current.errors, [field]: undefined },
+        errors: {
+          ...current.errors,
+          [field]: undefined,
+          image:
+            current.errors?.image === updateMissingFieldsMessage
+              ? undefined
+              : current.errors?.image,
+        },
       }));
     };
+
+  const handleImageChange = (localId: string) => (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] ?? null;
+
+    setAds((current) =>
+      current.map((ad) => {
+        if (ad.localId !== localId) return ad;
+        if (ad.imagePreviewUrl) URL.revokeObjectURL(ad.imagePreviewUrl);
+        const previewUrl = file ? URL.createObjectURL(file) : null;
+
+        return {
+          ...ad,
+          imageFile: file,
+          imagePreviewUrl: previewUrl,
+          errors: { ...ad.errors, image: undefined },
+        };
+      })
+    );
+  };
 
   const handleToggle = (localId: string) => (value: boolean) => {
     updateAd(localId, (current) => ({
       ...current,
       show: value,
-      errors: { ...current.errors, show: undefined },
+      errors: {
+        ...current.errors,
+        show: undefined,
+        image:
+          current.errors?.image === updateMissingFieldsMessage
+            ? undefined
+            : current.errors?.image,
+      },
     }));
   };
 
   const handleSave = async (ad: AdRowState) => {
     if (ad.isSaving) return;
 
-    const payload = buildPayload(ad);
-    const validationErrors = validatePayload(payload);
+    const payload = ad.isNew ? buildCreatePayload(ad) : buildUpdatePayload(ad);
+    const validationErrors = ad.isNew
+      ? validateCreatePayload(ad)
+      : validateUpdatePayload(ad, payload);
 
     if (Object.keys(validationErrors).length > 0) {
       updateAd(ad.localId, (current) => ({ ...current, errors: validationErrors }));
@@ -228,33 +334,56 @@ const AdsManagement = () => {
         response = await advertisementApi.updateAdminAdvertisement(payload);
       }
 
-      const updated = response ?? payload;
+      const updated = (response ?? {}) as AdvertisementRecord;
 
-      updateAd(ad.localId, (current) => ({
-        ...current,
-        id: (updated as AdvertisementRecord).id ?? current.id,
-        title: updated.title ?? payload.title ?? "",
-        websiteUrl: updated.websiteUrl ?? payload.websiteUrl ?? "",
-        imageUrl: updated.imageUrl ?? payload.imageUrl ?? "",
-        show: updated.show ?? payload.show,
-        createdAt: (updated as AdvertisementRecord).createdAt ?? current.createdAt,
-        updatedAt: (updated as AdvertisementRecord).updatedAt ?? current.updatedAt,
-        isSaving: false,
-        isNew: false,
-        isLegacy: !(updated as AdvertisementRecord).id,
-        errors: {},
-      }));
+      updateAd(ad.localId, (current) => {
+        if (current.imagePreviewUrl) URL.revokeObjectURL(current.imagePreviewUrl);
+
+        const resolvedTitle = updated.title ?? sanitizeText(current.title);
+        const resolvedWebsiteUrl = updated.websiteUrl ?? sanitizeText(current.websiteUrl);
+        const resolvedShow = updated.show ?? current.show;
+        const resolvedImageUrl = updated.imageUrl ?? current.imageUrl;
+        const resolvedId = updated.id ?? current.id;
+
+        return {
+          ...current,
+          id: resolvedId,
+          title: resolvedTitle,
+          websiteUrl: resolvedWebsiteUrl,
+          imageUrl: resolvedImageUrl,
+          show: resolvedShow,
+          savedTitle: resolvedTitle,
+          savedWebsiteUrl: resolvedWebsiteUrl,
+          savedShow: resolvedShow,
+          savedImageUrl: resolvedImageUrl,
+          createdAt: updated.createdAt ?? current.createdAt,
+          updatedAt: updated.updatedAt ?? current.updatedAt,
+          isSaving: false,
+          isNew: false,
+          isLegacy: !resolvedId,
+          imageFile: null,
+          imagePreviewUrl: null,
+          errors: {},
+        };
+      });
 
       toast({ title: ad.isNew ? "Advertisement created" : "Advertisement updated" });
     } catch (error) {
       const fieldErrors = extractValidationErrors(error);
+      const message = error instanceof ApiError ? error.message : undefined;
+      const hasFallbackError = message === updateMissingFieldsMessage;
+
       updateAd(ad.localId, (current) => ({
         ...current,
         isSaving: false,
-        errors: Object.keys(fieldErrors).length ? fieldErrors : current.errors,
+        errors: Object.keys(fieldErrors).length
+          ? fieldErrors
+          : hasFallbackError
+            ? { ...current.errors, image: updateMissingFieldsMessage }
+            : current.errors,
       }));
 
-      const description = Object.keys(fieldErrors).length
+      const description = Object.keys(fieldErrors).length || hasFallbackError
         ? "Please fix the highlighted fields."
         : error instanceof Error
           ? error.message
@@ -329,6 +458,7 @@ const AdsManagement = () => {
             {ads.map((ad, index) => {
               const baseId = `ad-${ad.localId}`;
               const canDelete = !!ad.id || ad.isNew;
+              const previewUrl = ad.imagePreviewUrl ?? ad.imageUrl;
 
               return (
                 <Card key={ad.localId}>
@@ -395,27 +525,30 @@ const AdsManagement = () => {
                         </div>
 
                         <div className="space-y-2">
-                          <Label htmlFor={`${baseId}-image`}>Image URL</Label>
-                          <div className="relative">
-                            <ImageIcon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                            <Input
-                              id={`${baseId}-image`}
-                              type="url"
-                              value={ad.imageUrl}
-                              onChange={handleFieldChange(ad.localId, "imageUrl")}
-                              placeholder="https://cdn.example.com/banner.jpg"
-                              className={cn(
-                                "pl-9",
-                                ad.errors?.imageUrl && "border-destructive focus-visible:ring-destructive"
-                              )}
-                              aria-invalid={!!ad.errors?.imageUrl}
-                              aria-describedby={ad.errors?.imageUrl ? `${baseId}-image-error` : undefined}
-                              disabled={ad.isSaving}
-                            />
-                          </div>
-                          {ad.errors?.imageUrl ? (
+                          <Label htmlFor={`${baseId}-image`}>Image File</Label>
+                          <Input
+                            id={`${baseId}-image`}
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange(ad.localId)}
+                            onClick={(event) => {
+                              event.currentTarget.value = "";
+                            }}
+                            className={cn(ad.errors?.image && "border-destructive focus-visible:ring-destructive")}
+                            aria-invalid={!!ad.errors?.image}
+                            aria-describedby={ad.errors?.image ? `${baseId}-image-error` : undefined}
+                            disabled={ad.isSaving}
+                          />
+                          <p className="text-xs text-muted-foreground">
+                            {ad.imageFile
+                              ? `Selected: ${ad.imageFile.name}`
+                              : ad.imageUrl
+                                ? "Current image is already uploaded."
+                                : "Upload a banner image to display with this ad."}
+                          </p>
+                          {ad.errors?.image ? (
                             <p id={`${baseId}-image-error`} className="text-sm text-destructive">
-                              {ad.errors.imageUrl}
+                              {ad.errors.image}
                             </p>
                           ) : null}
                         </div>
@@ -440,8 +573,8 @@ const AdsManagement = () => {
                       <div>
                         {ad.show ? (
                           <div className="overflow-hidden rounded-lg border border-border bg-muted/30">
-                            {ad.imageUrl ? (
-                              <img src={ad.imageUrl} alt={ad.title || "Advertisement"} className="h-40 w-full object-cover" />
+                            {previewUrl ? (
+                              <img src={previewUrl} alt={ad.title || "Advertisement"} className="h-40 w-full object-cover" />
                             ) : (
                               <div className="flex h-40 w-full items-center justify-center text-sm text-muted-foreground">
                                 Image preview will appear here.
@@ -465,7 +598,7 @@ const AdsManagement = () => {
 
                     {!ad.id && !ad.isNew ? (
                       <p className="mt-3 text-xs text-muted-foreground">
-                        This ad was loaded from the legacy endpoint. Delete is unavailable; use the toggle to hide it.
+                        Delete is unavailable until we haven't added ADS.
                       </p>
                     ) : null}
                   </CardContent>

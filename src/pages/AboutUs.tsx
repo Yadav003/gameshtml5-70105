@@ -12,7 +12,7 @@ const AboutUs = () => {
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-4xl font-bold mb-4">About PlayVerse</h1>
           <p className="text-xl text-muted-foreground mb-12">
-            Your ultimate destination for online gaming entertainment
+            Instant games, real community, zero friction
           </p>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
@@ -20,10 +20,10 @@ const AboutUs = () => {
               <CardContent className="pt-6">
                 <h2 className="text-2xl font-bold mb-4">Our Story</h2>
                 <p className="text-muted-foreground mb-4">
-                  Founded in 2024, PlayVerse was born from a simple idea: make premium gaming accessible to everyone, everywhere. We believe that great games shouldn't be locked behind expensive hardware or complicated downloads.
+                  PlayVerse started with a simple promise: great games should open fast and run anywhere. We built a browser-first platform so players can jump in without installs, heavy updates, or expensive hardware.
                 </p>
                 <p className="text-muted-foreground">
-                  Today, we serve thousands of gamers worldwide, offering instant access to hundreds of games across all genres. Our platform continues to grow, adding new games and features every month.
+                  Today, our library blends quick-play favorites with deeper challenges, carefully tested for smooth performance. We keep shipping new titles and features so every visit feels fresh.
                 </p>
               </CardContent>
             </Card>
@@ -32,10 +32,10 @@ const AboutUs = () => {
               <CardContent className="pt-6">
                 <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
                 <p className="text-muted-foreground mb-4">
-                  To democratize gaming by providing instant access to a vast library of high-quality games through any web browser. We're committed to delivering seamless, enjoyable gaming experiences without the hassle of downloads, installations, or expensive gaming hardware.
+                  Make great gaming available in seconds, on any device, with no barriers between you and play. We focus on speed, stability, and discovery so you can find the right game and start immediately.
                 </p>
                 <p className="text-muted-foreground">
-                  We continuously innovate to bring you the best possible gaming experience, from cutting-edge technology to carefully curated game selections.
+                  We refine the platform relentlessly, from smarter recommendations to faster loading and reliable sessions.
                 </p>
               </CardContent>
             </Card>
@@ -51,7 +51,7 @@ const AboutUs = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Making gaming accessible to everyone, regardless of device or location. No barriers, just play.
+                  Play anywhere, any time, on the device you already have. No downloads, no waiting, just play.
                 </p>
               </CardContent>
             </Card>
@@ -63,7 +63,7 @@ const AboutUs = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Building a vibrant community of gamers who share their passion and experiences.
+                  A place to share favorites, compare scores, and celebrate the wins together.
                 </p>
               </CardContent>
             </Card>
@@ -75,7 +75,7 @@ const AboutUs = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Constantly pushing boundaries with new technology and features to enhance your gaming.
+                  Shipping faster loads, smoother play, and new features that make games feel better.
                 </p>
               </CardContent>
             </Card>
@@ -87,7 +87,7 @@ const AboutUs = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Prioritizing your privacy and security while delivering reliable, quality service.
+                  Clear policies, respectful ads, and reliable sessions you can count on.
                 </p>
               </CardContent>
             </Card>
@@ -97,20 +97,20 @@ const AboutUs = () => {
             <CardContent className="pt-6">
               <h2 className="text-2xl font-bold mb-4">Join Us</h2>
               <p className="text-muted-foreground mb-4">
-                Whether you're a casual player or a hardcore gamer, PlayVerse has something for you. Join thousands of players who have already discovered the future of browser-based gaming.
+                Whether you play for five minutes or five hours, PlayVerse makes it easy to start. Build your lineup, save your favorites, and come back to new releases each week.
               </p>
               <div className="grid grid-cols-3 gap-8 text-center mt-8">
                 <div>
-                  <p className="text-4xl font-bold text-primary mb-2">500+</p>
-                  <p className="text-sm text-muted-foreground">Games Available</p>
+                  <p className="text-4xl font-bold text-primary mb-2">100+</p>
+                  <p className="text-sm text-muted-foreground">Instant-Play Games</p>
                 </div>
                 <div>
-                  <p className="text-4xl font-bold text-primary mb-2">50K+</p>
-                  <p className="text-sm text-muted-foreground">Active Players</p>
+                  <p className="text-4xl font-bold text-primary mb-2">Global</p>
+                  <p className="text-sm text-muted-foreground">Player Community</p>
                 </div>
                 <div>
                   <p className="text-4xl font-bold text-primary mb-2">24/7</p>
-                  <p className="text-sm text-muted-foreground">Support Available</p>
+                  <p className="text-sm text-muted-foreground">Help When You Need It</p>
                 </div>
               </div>
             </CardContent>

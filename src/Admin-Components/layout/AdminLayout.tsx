@@ -31,7 +31,7 @@ const AdminLayout = ({ title, subtitle, children }: AdminLayoutProps) => {
 
     try {
       await adminApi.logout();
-      navigate("/admin/login");
+      navigate("/login");
     } catch (error) {
       toast({
         title: "Logout failed",

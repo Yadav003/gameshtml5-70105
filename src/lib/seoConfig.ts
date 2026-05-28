@@ -150,7 +150,7 @@ export const seoConfig = {
     metaDescription:
       "Read our terms and conditions for using our gaming platform. Understand your rights and responsibilities as a user.",
     keywords:
-      "terms and conditions, user agreement, terms of service, legal, user agreement",
+      "terms and conditions, user agreement, legal, user agreement",
     ogTitle: "Terms & Conditions",
     ogDescription: "Review our terms and conditions for platform usage.",
     canonicalUrl: "https://yourdomain.com/terms",
