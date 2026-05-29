@@ -31,7 +31,7 @@ export const trackGamePlay = (
       event_label: gameTitle,
     });
     
-    console.log(`Analytics: Game played - ${gameTitle} (${gameId})`);
+    // console.log(`Analytics: Game played - ${gameTitle} (${gameId})`);
   }
 };
 

@@ -1,5 +1,5 @@
 function gameStartEvent() {
-console.log("Game Started");
+// console.log("Game Started");
 try {Plaza.onGameStart();
 }catch (e)
 }
@@ -8,7 +8,7 @@ function gameEndEvent(score) {
  try {console.log("gameEndEvent");
     Plaza.onGameEnd(score);
 }catch (e) {
-  console.log(e);
+  // console.log(e);
 }
 }
 

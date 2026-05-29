@@ -1,6 +1,6 @@
 function gameStartEvent()
 {
-	console.log("Game Started");
+	// console.log("Game Started");
 	Plaza.onGameStart();
 }
 
@@ -110,7 +110,7 @@ function refresh()
 function foo() {
     backbuttonpress();
 
-    console.log("back button pressed value: " + backbuttonpress());
+    // console.log("back button pressed value: " + backbuttonpress());
 
 }
 function backbuttonpress()

@@ -1,7 +1,7 @@
 
 function gameStartEvent()
 {
-  console.log("Game Started");
+  // console.log("Game Started");
    try {
     Plaza.onGameStart();
   } catch (e) {

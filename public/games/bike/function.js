@@ -1,5 +1,5 @@
 function gameStartEvent() {
-  console.log("Game Started");
+  // console.log("Game Started");
   Plaza.onGameStart();
 }
 

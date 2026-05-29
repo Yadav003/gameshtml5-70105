@@ -245,7 +245,7 @@ async function UpdateCheck(isFirst)
 			}
 			else
 			{
-				console.log(CONSOLE_PREFIX + "Up to date");
+				// console.log(CONSOLE_PREFIX + "Up to date");
 				Broadcast("up-to-date");
 			}
 			return;
