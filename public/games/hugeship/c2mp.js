@@ -15,7 +15,7 @@
 	var NetValue = window["C2NetValue"];
 	
 	// Config options
-	var DEFAULT_SERVER_LIST_URL = "http://www.scirra.com/multiplayer/serverlist.json";
+	var DEFAULT_SERVER_LIST_URL = "#";
 	var SIGNALLING_WEBSOCKET_PROTOCOL = "c2multiplayer";
 	var SIGNALLING_PROTOCOL_REVISION = 1;
 	var MAGIC_NUMBER = 0x63326D70;	// to identify non-fragmented messages originating from this protocol

@@ -18,7 +18,7 @@ export type User = {
 type AuthContextType = {
   user: User | null;
   isInitialized: boolean;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string, redirectTo?: string) => Promise<void>;
   startGoogleOAuth: () => Promise<void>;
   completeOAuthLogin: (payload: { user: User; accessToken?: string | null; refreshToken?: string | null }) => void;
   register: (name: string, email: string, password: string) => Promise<void>;
@@ -31,6 +31,11 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const STORAGE_KEY = "playverse_user";
+
+const getSafeRedirect = (redirectTo?: string) => {
+  if (!redirectTo || typeof redirectTo !== "string") return null;
+  return redirectTo.startsWith("/") ? redirectTo : null;
+};
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -83,11 +88,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     persist(normalizedUser);
   };
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string, redirectTo?: string) => {
     const response = await authApi.login({ email, password });
     persistAuthUser(response.user, email, response.token, response.refreshToken);
     const role = response.user?.role?.toLowerCase();
-    navigate(role === "admin" ? "/admin/dashboard" : "/");
+    const safeRedirect = getSafeRedirect(redirectTo);
+    if (safeRedirect) {
+      navigate(safeRedirect, { replace: true });
+      return;
+    }
+    navigate(role === "admin" ? "/admin/dashboard" : "/", { replace: true });
   };
 
   const startGoogleOAuth = async () => {

@@ -23,6 +23,8 @@ const decodeUser = (encoded: string): User | null => {
   }
 };
 
+const POST_LOGIN_REDIRECT_KEY = "playverse_post_login_redirect";
+
 const OAuthCallback = () => {
   const { completeOAuthLogin } = useAuth();
   const navigate = useNavigate();
@@ -64,6 +66,14 @@ const OAuthCallback = () => {
     });
     window.history.replaceState({}, document.title, "/oauth/callback");
 
+    const storedRedirect = sessionStorage.getItem(POST_LOGIN_REDIRECT_KEY);
+    if (storedRedirect?.startsWith("/")) {
+      sessionStorage.removeItem(POST_LOGIN_REDIRECT_KEY);
+      navigate(storedRedirect, { replace: true });
+      return;
+    }
+
+    sessionStorage.removeItem(POST_LOGIN_REDIRECT_KEY);
     const role = user.role?.toLowerCase();
     navigate(role === "admin" ? "/admin/dashboard" : "/", { replace: true });
   }, [completeOAuthLogin, navigate]);

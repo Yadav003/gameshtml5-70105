@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import { useAuth } from "@/lib/auth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, type Location } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
   const { login, startGoogleOAuth, register, forgotPassword } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
   const [mode, setMode] = useState<"login" | "register" | "forgot">("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [googleRedirecting, setGoogleRedirecting] = useState(false);
+
+  const locationState = location.state as { redirectTo?: string; from?: Location } | null;
+  const fallbackRedirect = locationState?.from
+    ? `${locationState.from.pathname}${locationState.from.search}${locationState.from.hash}`
+    : undefined;
+  const redirectTo = locationState?.redirectTo ?? fallbackRedirect;
+  const safeRedirectTo = redirectTo?.startsWith("/") ? redirectTo : undefined;
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +47,7 @@ const Login = () => {
 
     try {
       if (mode === "login") {
-        await login(emailValue, password);
+        await login(emailValue, password, safeRedirectTo);
         toast({
           title: "Login successful",
           description: "Welcome back to PlayVerse.",
@@ -76,6 +84,11 @@ const Login = () => {
   const handleGoogleRedirect = async () => {
     setGoogleRedirecting(true);
     try {
+      if (safeRedirectTo) {
+        sessionStorage.setItem("playverse_post_login_redirect", safeRedirectTo);
+      } else {
+        sessionStorage.removeItem("playverse_post_login_redirect");
+      }
       await startGoogleOAuth();
     } catch (err) {
       console.error(err);
