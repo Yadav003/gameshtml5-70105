@@ -36,7 +36,7 @@ const UpdatePassword = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 items-stretch">
             <div className="hidden md:flex flex-col justify-center px-10 py-12 bg-primary/80 text-white gap-6">
               <h2 className="text-3xl font-extrabold">Secure your account</h2>
-              <p className="text-foreground/800 max-w-sm">Use a strong password to keep your PlayVerse account safe. Update your password regularly and avoid reusing passwords.</p>
+              <p className="text-foreground/800 max-w-sm">Use a strong password to keep your PlayArena account safe. Update your password regularly and avoid reusing passwords.</p>
               <div>
                 <button onClick={() => navigate('/profile')} className="px-4 py-2 bg-primary/90 rounded text-sm font-medium border-2 border-white">Back to profile</button>
               </div>

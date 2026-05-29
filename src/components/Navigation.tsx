@@ -30,7 +30,7 @@ export const Navigation = () => {
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center gap-2">
             <Gamepad2 className="w-8 h-8 text-primary" />
-            <span className="text-xl font-bold">PlayVerse</span>
+            <span className="text-xl font-bold">PlayArena</span>
           </Link>
           <div className="hidden md:flex items-center gap-6">
             <Link to="/games" className="text-foreground/80 hover:text-foreground transition-colors">

@@ -23,7 +23,7 @@ const decodeUser = (encoded: string): User | null => {
   }
 };
 
-const POST_LOGIN_REDIRECT_KEY = "playverse_post_login_redirect";
+const POST_LOGIN_REDIRECT_KEY = "playarena_post_login_redirect";
 
 const OAuthCallback = () => {
   const { completeOAuthLogin } = useAuth();

@@ -331,8 +331,8 @@ const ContactUs = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    support@playverse.com<br />
-                    business@playverse.com
+                    support@playarena.com<br />
+                    business@playarena.com
                   </p>
                 </CardContent>
               </Card>

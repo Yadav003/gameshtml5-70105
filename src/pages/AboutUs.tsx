@@ -10,7 +10,7 @@ const AboutUs = () => {
       <Navigation />
       <main className="pt-16 pb-20 md:pb-8">
         <div className="container mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold mb-4">About PlayVerse</h1>
+          <h1 className="text-4xl font-bold mb-4">About PlayArena</h1>
           <p className="text-xl text-muted-foreground mb-12">
             Instant games, real community, zero friction
           </p>
@@ -20,7 +20,7 @@ const AboutUs = () => {
               <CardContent className="pt-6">
                 <h2 className="text-2xl font-bold mb-4">Our Story</h2>
                 <p className="text-muted-foreground mb-4">
-                  PlayVerse started with a simple promise: great games should open fast and run anywhere. We built a browser-first platform so players can jump in without installs, heavy updates, or expensive hardware.
+                  PlayArena started with a simple promise: great games should open fast and run anywhere. We built a browser-first platform so players can jump in without installs, heavy updates, or expensive hardware.
                 </p>
                 <p className="text-muted-foreground">
                   Today, our library blends quick-play favorites with deeper challenges, carefully tested for smooth performance. We keep shipping new titles and features so every visit feels fresh.
@@ -97,7 +97,7 @@ const AboutUs = () => {
             <CardContent className="pt-6">
               <h2 className="text-2xl font-bold mb-4">Join Us</h2>
               <p className="text-muted-foreground mb-4">
-                Whether you play for five minutes or five hours, PlayVerse makes it easy to start. Build your lineup, save your favorites, and come back to new releases each week.
+                Whether you play for five minutes or five hours, PlayArena makes it easy to start. Build your lineup, save your favorites, and come back to new releases each week.
               </p>
               <div className="grid grid-cols-3 gap-8 text-center mt-8">
                 <div>

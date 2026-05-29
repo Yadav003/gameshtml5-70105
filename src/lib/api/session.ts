@@ -1,5 +1,5 @@
-const ACCESS_TOKEN_KEY = "playverse_access_token";
-const REFRESH_TOKEN_KEY = "playverse_refresh_token";
+const ACCESS_TOKEN_KEY = "playarena_access_token";
+const REFRESH_TOKEN_KEY = "playarena_refresh_token";
 
 export const getAuthToken = (): string | null => {
   try {

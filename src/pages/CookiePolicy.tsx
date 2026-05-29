@@ -17,7 +17,7 @@ const CookiePolicy = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">1. What Are Cookies</h2>
                 <p className="text-muted-foreground mb-4">
-                  Cookies are small text files stored on your device when you visit a website. They help PlayVerse remember your choices and understand how the site is used so we can keep it fast, reliable, and easy to navigate.
+                  Cookies are small text files stored on your device when you visit a website. They help PlayArena remember your choices and understand how the site is used so we can keep it fast, reliable, and easy to navigate.
                 </p>
               </section>
 
@@ -75,7 +75,7 @@ const CookiePolicy = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">4. Third-Party Cookies</h2>
                 <p className="text-muted-foreground mb-4">
-                  Some cookies may come from trusted partners that help run PlayVerse:
+                  Some cookies may come from trusted partners that help run PlayArena:
                 </p>
                 <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                   <li>Payment services that secure transactions</li>
@@ -115,17 +115,17 @@ const CookiePolicy = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">7. Updates to This Policy</h2>
                 <p className="text-muted-foreground mb-4">
-                  We may update this policy to reflect changes in technology, legal requirements, or how PlayVerse operates. The "Last updated" date shows the latest revision.
+                  We may update this policy to reflect changes in technology, legal requirements, or how PlayArena operates. The "Last updated" date shows the latest revision.
                 </p>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">8. Contact Us</h2>
                 <p className="text-muted-foreground mb-4">
-                  If you have questions about cookies on PlayVerse, contact us:
+                  If you have questions about cookies on PlayArena, contact us:
                 </p>
                 <p className="text-muted-foreground">
-                  Email: privacy@playverse.com<br />
+                  Email: privacy@playarena.com<br />
                   {/* Address: 123 Gaming Street, San Francisco, CA 94102 */}
                 </p>
               </section>

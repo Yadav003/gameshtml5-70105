@@ -30,7 +30,7 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const STORAGE_KEY = "playverse_user";
+const STORAGE_KEY = "playarena_user";
 
 const getSafeRedirect = (redirectTo?: string) => {
   if (!redirectTo || typeof redirectTo !== "string") return null;

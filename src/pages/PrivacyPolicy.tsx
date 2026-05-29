@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">1. Introduction</h2>
                 <p className="text-muted-foreground mb-4">
-                  PlayVerse respects your privacy and aims to be clear about how data is handled. This policy explains what we collect, why we collect it, and the choices you have when using the platform.
+                  PlayArena respects your privacy and aims to be clear about how data is handled. This policy explains what we collect, why we collect it, and the choices you have when using the platform.
                 </p>
               </section>
 
@@ -51,7 +51,7 @@ const PrivacyPolicy = () => {
                 </p>
                 <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                   <li>Hosting and infrastructure providers</li>
-                  <li>Analytics partners that help us improve PlayVerse</li>
+                  <li>Analytics partners that help us improve PlayArena</li>
                   <li>Authorities when required by law</li>
                 </ul>
               </section>
@@ -86,7 +86,7 @@ const PrivacyPolicy = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">8. Changes to This Policy</h2>
                 <p className="text-muted-foreground mb-4">
-                  We may update this policy as PlayVerse evolves. Changes are posted here and the "Last updated" date is refreshed.
+                  We may update this policy as PlayArena evolves. Changes are posted here and the "Last updated" date is refreshed.
                 </p>
               </section>
 
@@ -96,7 +96,7 @@ const PrivacyPolicy = () => {
                   If you have questions about this policy, contact us:
                 </p>
                 <p className="text-muted-foreground">
-                  Email: privacy@playverse.com<br />
+                  Email: privacy@playarena.com<br />
                   {/* Address: 123 Gaming Street, San Francisco, CA 94102 */}
                 </p>
               </section>

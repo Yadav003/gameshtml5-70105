@@ -18,7 +18,7 @@ const Games = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [favorites, setFavorites] = useState<string[]>(() => {
-    const saved = localStorage.getItem("PlayVerse-favorites");
+    const saved = localStorage.getItem("PlayArena-favorites");
     return saved ? JSON.parse(saved) : [];
   });
 
@@ -49,7 +49,7 @@ const Games = () => {
       : [...favorites, gameId];
     
     setFavorites(newFavorites);
-    localStorage.setItem("PlayVerse-favorites", JSON.stringify(newFavorites));
+    localStorage.setItem("PlayArena-favorites", JSON.stringify(newFavorites));
     
     // Track the favorite action in analytics
     trackFavoriteAction(gameId, gameName, isRemoving ? 'remove' : 'add');

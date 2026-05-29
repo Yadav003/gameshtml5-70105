@@ -33,7 +33,7 @@ const HelpCenter = () => {
                 <CardTitle>Email Support</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">support@playverse.com</p>
+                <p className="text-sm text-muted-foreground mb-4">support@playarena.com</p>
                 <Button variant="outline" className="w-full">Send Email</Button>
               </CardContent>
             </Card>

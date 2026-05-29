@@ -17,7 +17,7 @@ const TermsConditions = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">1. Agreement to Terms</h2>
                 <p className="text-muted-foreground mb-4">
-                  By visiting or using PlayVerse, you agree to these Terms and Conditions. If you do not accept them, please stop using the service.
+                  By visiting or using PlayArena, you agree to these Terms and Conditions. If you do not accept them, please stop using the service.
                 </p>
               </section>
 
@@ -35,7 +35,7 @@ const TermsConditions = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">3. Subscription Services</h2>
                 <p className="text-muted-foreground mb-4">
-                  PlayVerse offers optional plans with different features and pricing:
+                  PlayArena offers optional plans with different features and pricing:
                 </p>
                 <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                   <li>Plans renew automatically unless you cancel before the next billing date</li>
@@ -62,14 +62,14 @@ const TermsConditions = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">5. Intellectual Property</h2>
                 <p className="text-muted-foreground mb-4">
-                  PlayVerse and its licensors own the platform, branding, and content you see. You may not reproduce, distribute, or create derivative works without written permission.
+                  PlayArena and its licensors own the platform, branding, and content you see. You may not reproduce, distribute, or create derivative works without written permission.
                 </p>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">6. User Content</h2>
                 <p className="text-muted-foreground mb-4">
-                  If you submit content (reviews, comments, feedback), you grant PlayVerse a worldwide, non-exclusive license to host, display, and use it to operate and improve the service.
+                  If you submit content (reviews, comments, feedback), you grant PlayArena a worldwide, non-exclusive license to host, display, and use it to operate and improve the service.
                 </p>
               </section>
 
@@ -90,14 +90,14 @@ const TermsConditions = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">9. Limitation of Liability</h2>
                 <p className="text-muted-foreground mb-4">
-                  To the fullest extent permitted by law, PlayVerse is not liable for indirect, incidental, or consequential damages related to your use of the service.
+                  To the fullest extent permitted by law, PlayArena is not liable for indirect, incidental, or consequential damages related to your use of the service.
                 </p>
               </section>
 
               <section className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">10. Changes to Terms</h2>
                 <p className="text-muted-foreground mb-4">
-                  We may update these terms from time to time. Continued use of PlayVerse after updates means you accept the revised terms.
+                  We may update these terms from time to time. Continued use of PlayArena after updates means you accept the revised terms.
                 </p>
               </section>
 
@@ -107,7 +107,7 @@ const TermsConditions = () => {
                   For questions about these Terms and Conditions, contact us:
                 </p>
                 <p className="text-muted-foreground">
-                  Email: legal@playverse.com<br />
+                  Email: legal@playarena.com<br />
                   {/* Address: 123 Gaming Street, San Francisco, CA 94102 */}
                 </p>
               </section>

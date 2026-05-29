@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => ({
     port: 3000,
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
-  // base: '/PlayVerse/',
+  // base: '/PlayArena/',
   esbuild: mode === "production" ? { drop: ["console", "debugger"] } : undefined,
   resolve: {
     alias: {

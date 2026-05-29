@@ -50,7 +50,7 @@ const Login = () => {
         await login(emailValue, password, safeRedirectTo);
         toast({
           title: "Login successful",
-          description: "Welcome back to PlayVerse.",
+          description: "Welcome back to PlayArena.",
         });
       } else if (mode === "register") {
         await register(nameValue, emailValue, password);
@@ -85,9 +85,9 @@ const Login = () => {
     setGoogleRedirecting(true);
     try {
       if (safeRedirectTo) {
-        sessionStorage.setItem("playverse_post_login_redirect", safeRedirectTo);
+        sessionStorage.setItem("playarena_post_login_redirect", safeRedirectTo);
       } else {
-        sessionStorage.removeItem("playverse_post_login_redirect");
+        sessionStorage.removeItem("playarena_post_login_redirect");
       }
       await startGoogleOAuth();
     } catch (err) {
@@ -106,10 +106,10 @@ const Login = () => {
             <div className="hidden md:flex flex-col justify-center px-10 py-12 bg-emerald-800 text-white gap-6">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-emerald-600 rounded-full">
                
-                <img src="favicon.svg" alt="PlayVerse logo" className="w-8 h-8 brightness-0" />
+                <img src="favicon.svg" alt="PlayArena logo" className="w-8 h-8 brightness-0" />
               </div>
               <h1 className="text-4xl font-extrabold leading-tight">Welcome Back.</h1>
-              <p className="text-foreground/800 max-w-sm">Your exclusive PlayVerse dashboard is ready — sign in to continue playing, track favourites and manage your profile.</p>
+              <p className="text-foreground/800 max-w-sm">Your exclusive PlayArena dashboard is ready — sign in to continue playing, track favourites and manage your profile.</p>
               <div className="mt-4">
                 <button onClick={() => navigate('/')} className="px-4 py-2 bg-emerald-600 rounded text-sm font-medium">Back to home</button>
               </div>
@@ -120,7 +120,7 @@ const Login = () => {
               <div className="max-w-md mx-auto">
                 <div className="mb-6">
                   <h2 className="text-2xl font-bold">{mode === 'login' ? 'Sign in' : mode === 'register' ? 'Create account' : 'Reset password'}</h2>
-                  <p className="text-sm text-foreground/70 mt-1">{mode === 'login' ? 'Welcome back — please sign in to continue.' : mode === 'register' ? 'Create your PlayVerse account.' : 'Enter your email to receive a password reset link.'}</p>
+                  <p className="text-sm text-foreground/70 mt-1">{mode === 'login' ? 'Welcome back — please sign in to continue.' : mode === 'register' ? 'Create your PlayArena account.' : 'Enter your email to receive a password reset link.'}</p>
                 </div>
 
                 <form onSubmit={submit} className="space-y-4">

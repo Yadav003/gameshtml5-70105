@@ -49,10 +49,10 @@ const AdminLayout = ({ title, subtitle, children }: AdminLayoutProps) => {
         <aside className="border-r border-border bg-background px-4 py-5">
           <Link to="/admin/dashboard" className="mb-8 flex items-center gap-3 rounded-lg px-2 py-1">
             <div className="rounded-lg bg-primary/10 p-2 text-primary">
-            <img src="/favicon.svg" alt="Playverse Logo" className="w-6 h-6" />
+            <img src="/favicon.svg" alt="PlayArena Logo" className="w-6 h-6" />
             </div>
             <div>
-              <p className="font-semibold leading-none">PlayVerse Admin</p>
+              <p className="font-semibold leading-none">PlayArena Admin</p>
               <p className="mt-1 text-xs text-muted-foreground">Control Panel</p>
             </div>
           </Link>

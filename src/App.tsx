@@ -39,7 +39,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        {/* <BrowserRouter basename="/PlayVerse"> */}
+        {/* <BrowserRouter basename="/PlayArena"> */}
         <BrowserRouter>
           {/* AuthProvider provides `useAuth()` for login state */}
           <AuthProvider>

@@ -18,14 +18,14 @@ const Favourites = () => {
   const allGames = getAllGames();
 
   useEffect(() => {
-    const saved = localStorage.getItem("PlayVerse-favorites");
+    const saved = localStorage.getItem("PlayArena-favorites");
     setFavorites(saved ? JSON.parse(saved) : []);
   }, []);
 
   const removeFavorite = (gameId: string, gameName: string) => {
     const newFavorites = favorites.filter((id) => id !== gameId);
     setFavorites(newFavorites);
-    localStorage.setItem("PlayVerse-favorites", JSON.stringify(newFavorites));
+    localStorage.setItem("PlayArena-favorites", JSON.stringify(newFavorites));
     
     // Track the remove action in analytics
     trackFavoriteAction(gameId, gameName, 'remove');
