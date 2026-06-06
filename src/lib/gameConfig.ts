@@ -12,7 +12,7 @@ export interface GameInfo {
 }
 // production url below
 
-// const BASE_PATH ="https://www.PlayArena.com/";
+// const BASE_PATH ="https://playarena.co.in/";
 
 
 // Get the base path from Vite config
