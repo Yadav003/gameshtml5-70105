@@ -331,8 +331,7 @@ const ContactUs = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    support@playarena.com<br />
-                    business@playarena.com
+                    playarena.support@gmail.com
                   </p>
                 </CardContent>
               </Card>
@@ -357,8 +356,8 @@ const ContactUs = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    Monday - Friday: 9am - 6pm<br />
-                    Saturday: 10am - 4pm<br />
+                    Monday - Friday: 10am - 6pm<br />
+                    Saturday: Closed<br />
                     Sunday: Closed
                   </p>
                 </CardContent>

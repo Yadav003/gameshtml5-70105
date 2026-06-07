@@ -5,8 +5,28 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { MessageCircle, Mail, Phone, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const HelpCenter = () => {
+  const { toast } = useToast();
+  const supportEmail = "playarena.support@gmail.com";
+
+  const handleLiveChatClick = () => {
+    toast({
+      title: "Live chat coming soon",
+      description: "Our live chat feature is being rolled out. Please use email support for now.",
+    });
+  };
+
+  const handleEmailClick = () => {
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(supportEmail)}`;
+    const opened = window.open(gmailUrl, "_blank", "noopener,noreferrer");
+
+    if (!opened) {
+      window.location.href = `mailto:${supportEmail}`;
+    }
+  };
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -23,7 +43,9 @@ const HelpCenter = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground mb-4">Chat with our support team</p>
-                <Button className="w-full">Start Chat</Button>
+                <Button type="button" className="w-full" onClick={handleLiveChatClick}>
+                  Start Chat
+                </Button>
               </CardContent>
             </Card>
             
@@ -33,8 +55,15 @@ const HelpCenter = () => {
                 <CardTitle>Email Support</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">support@playarena.com</p>
-                <Button variant="outline" className="w-full">Send Email</Button>
+                <p className="text-sm text-muted-foreground mb-4">{supportEmail}</p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full"
+                  onClick={handleEmailClick}
+                >
+                  Send Email
+                </Button>
               </CardContent>
             </Card>
             
