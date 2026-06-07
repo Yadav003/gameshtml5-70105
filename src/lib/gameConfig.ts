@@ -208,14 +208,14 @@ export const GAMES: Record<string, GameInfo> = {
     category: ["Arcade", "Shooter"],
     description: "Space shooter in a circular arena",
   },
-  "tower-game": {
-    id: "tower-game",
-    title: "Build Tower",
-    path: `${BASE_PATH}games/tower_game-master/index.html`,
-    image: gameStackTower,
-    category: ["Casual", "Arcade"],
-    description: "Stack blocks to build the tallest tower",
-  },
+  // "tower-game": {
+  //   id: "tower-game",
+  //   title: "Build Tower",
+  //   path: `${BASE_PATH}games/tower_game-master/index.html`,
+  //   image: gameStackTower,
+  //   category: ["Casual", "Arcade"],
+  //   description: "Stack blocks to build the tallest tower",
+  // },
 
 
   // Sports Games

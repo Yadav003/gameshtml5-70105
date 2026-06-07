@@ -6,8 +6,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 // import bikeimage from "@/assets/1.jpg";
 // import gameFruitNinja from "@/assets/fruit_ninja.jpg"
 import gameCar from "@/assets/carracing.jpg"
-import gameStackTower from "@/assets/tower.jpg"
+import gameHextris from "@/assets/hextris.jpg"
 import game100meter from "@/assets/100meter.jpg"
+import gameBarrier from "@/assets/barrier.png"
 
 const slides = [
   {
@@ -18,15 +19,21 @@ const slides = [
   },
   {
     id: 2,
-    title: "Build Tower",
-    image: gameStackTower,
-    gameId: "tower-game",
+    title: "Hextris",
+    image: gameHextris,
+    gameId: "hextris",
   },
   {
     id: 3,
     title: "100 Metres Race",
     image: game100meter,
     gameId: "100m-race",
+  },
+  {
+    id: 4,
+    title: "Dotch Barrier",
+    image: gameBarrier,
+    gameId: "barrier",
   },
 ];
 
