@@ -1,6 +1,3 @@
-// Exponent
-// From: https://github.com/Team-Sass/Sassy-math/blob/master/sass/math.scss#L36
-
 @function exponent($base, $exponent) {
   // reset value
   $value: $base;

@@ -2,13 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-// import rocketimage from "@/assets/2.jpg";
-// import bikeimage from "@/assets/1.jpg";
-// import gameFruitNinja from "@/assets/fruit_ninja.jpg"
-import gameCar from "@/assets/carracing.jpg"
-import gameHextris from "@/assets/hextris.jpg"
-import game100meter from "@/assets/100meter.jpg"
-import gameBarrier from "@/assets/barrier.png"
+import gameCar from "@/assets/carracing.webp"
+import gameHextris from "@/assets/hextris.webp"
+import gameBarrier from "@/assets/barrier.webp"
+import gameBowling from "@/assets/bowl.webp";
 
 const slides = [
   {
@@ -25,9 +22,9 @@ const slides = [
   },
   {
     id: 3,
-    title: "100 Metres Race",
-    image: game100meter,
-    gameId: "100m-race",
+    title: "Go Bowling",
+    image: gameBowling,
+    gameId: "bowling",
   },
   {
     id: 4,

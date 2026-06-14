@@ -19,53 +19,40 @@ export interface GameInfo {
 const BASE_PATH = import.meta.env.BASE_URL || '/';
 
 // Import game images
-import gameCubeNinja from "@/assets/game-cube-ninja.jpg";
-import heroRacing from "@/assets/hero-racing.jpg";
-import gameAirBattle from "@/assets/game-air-battle.jpg";
-import gameCricket from "@/assets/game-cricket.jpg";
-import gameBaseball from "@/assets/game-cube-ninja.jpg";
-import heroWatercraft from "@/assets/hero-racing.jpg";
-import heroFps from "@/assets/hero-fps.jpg";
-import gamerocket from "@/assets/rocketr.jpg"
-import gamebike from "@/assets/biker.jpg"
-import gameFruitNinja from "@/assets/fruitn.jpg"
-import gameStackTower from "@/assets/tower.jpg"
-import gameClumcy from "@/assets/flappy.jpg"
-import gameDuckHunt from "@/assets/duck.jpg"
-import gameSpaceWar from "@/assets/spacewar.jpg"
-import gameSpace from "@/assets/spaceinvaders.jpg"
-import gameBowling from "@/assets/bowl.jpg";
-import gamePacman from "@/assets/pacman.jpg"
-import gameSnake from "@/assets/snake.jpg"
-import gameKnifeAttack from "@/assets/knife.jpg"
-import gameCar from "@/assets/carracing.jpg"
-import gameTic from "@/assets/tictac.jpg"
-import gameBubbleShooter from "@/assets/bubble.jpg"
-import gameJumpingPanda from "@/assets/jumpp.jpg"
-import gameHextris from "@/assets/hextris.jpg"
-import gameBlockFusion from "@/assets/block.jpg"
-import gamebreak from "@/assets/lock.jpg"
-import gameTetris from "@/assets/titrisl.jpg"
-import gameLastColony from "@/assets/lastcolony.jpg"
-import gameship from "@/assets/ship.jpg"
-import gameTetris2 from "@/assets/tetris.jpg"
-import gameRadiusRaid from "@/assets/radius_raid.jpg"
-import placeholder1 from "@/assets/1.jpg"
-import placeholder2 from "@/assets/2.jpg"
-import game100meter from "@/assets/100meter.png"
-import gameAlienMemory from "@/assets/alienm.png"
-import gameAleorgold from "@/assets/gold.jpg"
-import gameanimalcrush from "@/assets/animalc.png"
-import gameanimalpuzzle from "@/assets/animalpuzzle.png"
-import gameBarrier from "@/assets/barrier.png"
-import gamebiliards from "@/assets/biiliards.png"
-import gamefrog from "@/assets/frog.jpg"
-import basketball from "@/assets/basketball.png"
-import gamestickman from "@/assets/stickman.jpg"
-import gamefoosball from "@/assets/foosball.jpg"
-import gameBaseball1 from "@/assets/baseball.png"
-import gameblocksupermatch from "@/assets/blocksuper.jpg"
-import gamebirdify from "@/assets/birdify.jpg"
+
+import gamerocket from "@/assets/rocketr.webp"
+import gamebike from "@/assets/biker.webp"
+import gameFruitNinja from "@/assets/fruitn.webp"
+import gameClumcy from "@/assets/flappy.webp"
+import gameSpaceWar from "@/assets/spacewar.webp"
+import gameSpace from "@/assets/spaceinvaders.webp"
+import gameBowling from "@/assets/bowl.webp";
+import gamePacman from "@/assets/pacman.webp"
+import gameSnake from "@/assets/snake.webp"
+import gameKnifeAttack from "@/assets/knife.webp"
+import gameCar from "@/assets/carracing.webp"
+import gameBubbleShooter from "@/assets/bubble.webp"
+import gameJumpingPanda from "@/assets/jumpp.webp"
+import gameHextris from "@/assets/hextris.webp"
+import gameBlockFusion from "@/assets/block.webp"
+import gamebreak from "@/assets/lock.webp"
+import gameTetris from "@/assets/titrisl.webp"
+import gameTetris2 from "@/assets/tetris.webp"
+import gameRadiusRaid from "@/assets/radius_raid.webp"
+import game100meter from "@/assets/100meter.webp"
+import gameAlienMemory from "@/assets/alienm.webp"
+import gameAleorgold from "@/assets/gold.webp"
+import gameanimalcrush from "@/assets/animalc.webp"
+import gameanimalpuzzle from "@/assets/animalpuzzle.webp"
+import gameBarrier from "@/assets/barrier.webp"
+import gamebiliards from "@/assets/biiliards.webp"
+import gamefrog from "@/assets/frog.webp"
+import basketball from "@/assets/basketball.webp"
+import gamestickman from "@/assets/stickman.webp"
+import gamefoosball from "@/assets/foosball.webp"
+import gameBaseball1 from "@/assets/baseball.webp"
+import gameblocksupermatch from "@/assets/blocksuper.webp"
+import gamebirdify from "@/assets/birdify.webp"
 
 
 export const GAMES: Record<string, GameInfo> = {
@@ -221,7 +208,7 @@ export const GAMES: Record<string, GameInfo> = {
   // Sports Games
   "bowling": {
     id: "bowling",
-    title: "Go Bowling",
+    title: "Bowling",
     path: `${BASE_PATH}games/GoBowling2/index.html`,
     image: gameBowling,
     category: ["Sports", "Strategy"],
@@ -267,7 +254,7 @@ export const GAMES: Record<string, GameInfo> = {
   },
   "foosBall": {
     id: "foosBall",
-    title: "Foos Ball",
+    title: "Table Football",
     path: `${BASE_PATH}games/FoosBall/index.html`,
     image: gamefoosball,
     category: ["Sports", "Strategy"],
@@ -375,7 +362,7 @@ export const GAMES: Record<string, GameInfo> = {
   },
   "billards": {
     id: "billards",
-    title: "Billards",
+    title: "8 Ball Pool",
     path: `${BASE_PATH}games/billards/gamefiles/index.html`,
     image: gamebiliards, 
     Toplay:"Login-Required",

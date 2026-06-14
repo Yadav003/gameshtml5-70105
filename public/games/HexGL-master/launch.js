@@ -103,7 +103,7 @@
     getWebGL = $('start');
     getWebGL.innerHTML = 'WebGL is not supported!';
     getWebGL.onclick = function() {
-      return window.location.href = 'http://get.webgl.org/';
+      return window.location.href = 'https://playarena.co.in/';
     };
   } else {
     $('start').onclick = function() {

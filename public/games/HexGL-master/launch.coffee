@@ -77,7 +77,7 @@ if not hasWebGL()
   getWebGL = $('start')
   getWebGL.innerHTML = 'WebGL is not supported!'
   getWebGL.onclick = ->
-    window.location.href = 'http://get.webgl.org/'
+    window.location.href = 'https://playarena.co.in/'
 else
   $('start').onclick = ->
     $('step-1').style.display = 'none'

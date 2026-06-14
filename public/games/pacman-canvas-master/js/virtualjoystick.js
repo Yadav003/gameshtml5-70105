@@ -74,9 +74,7 @@ VirtualJoystick.touchScreenAvailable	= function()
 	return 'createTouch' in document ? true : false;
 }
 
-/**
- * microevents.js - https://github.com/jeromeetienne/microevent.js
-*/
+
 ;(function(destObj){
 	destObj.addEventListener	= function(event, fct){
 		if(this._events === undefined) 	this._events	= {};
@@ -353,11 +351,6 @@ VirtualJoystick.prototype._buildJoystickStick	= function()
 	ctx.stroke();
 	return canvas;
 }
-
-//////////////////////////////////////////////////////////////////////////////////
-//		move using translate3d method with fallback to translate > 'top' and 'left'		
-//      modified from https://github.com/component/translate and dependents
-//////////////////////////////////////////////////////////////////////////////////
 
 VirtualJoystick.prototype._move = function(style, x, y)
 {

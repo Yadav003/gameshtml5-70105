@@ -1,7 +1,4 @@
-/*
- * Forked based on this pr: https://github.com/tonistiigi/audiosprite/pull/49/files
- * Audiosprite project has broken compat with howler, this vendored version fixes that
- */
+
 var fs = require('fs')
 var path = require('path')
 var async = require('async')
