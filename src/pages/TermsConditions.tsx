@@ -107,7 +107,7 @@ const TermsConditions = () => {
                   For questions about these Terms and Conditions, contact us:
                 </p>
                 <p className="text-muted-foreground">
-                  Email: legal@playarena.com<br />
+                  Email: playarena.support@gmail.com<br />
                   {/* Address: 123 Gaming Street, San Francisco, CA 94102 */}
                 </p>
               </section>

@@ -1,4 +1,4 @@
-import { Gamepad2, User, Heart, Moon, Sun } from "lucide-react";
+import { DollarSign, Gamepad2, User, Heart, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -54,12 +54,12 @@ export const Navigation = () => {
             >
               PREMIUM GAMES
             </Link> */}
-            {/* <Link
+            <Link
               to="/play-and-earn"
               className="text-foreground/80 hover:text-foreground transition-colors"
             >
               PLAY & EARN
-            </Link> */}
+            </Link>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -70,6 +70,16 @@ export const Navigation = () => {
             aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
           >
             {isDark ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+          </Button>
+          <Button
+            asChild
+            size="icon"
+            className="md:hidden"
+            aria-label="Play and earn"
+          >
+            <Link to="/play-and-earn">
+              <DollarSign className="w-5 h-5" />
+            </Link>
           </Button>
           <Button 
             variant="ghost" 

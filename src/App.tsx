@@ -30,7 +30,7 @@ import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./lib/auth";
 import RequireAdmin from "./components/RequireAdmin";
 import AuthGate from "./components/AuthGate";
-import PlayAndEarn from "./components/PlayAndEarn.tsx";
+import SpinWheelPage from "./pages/SpinWheelPage";
 
 const queryClient = new QueryClient();
 
@@ -49,7 +49,8 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/games" element={<Games />} />
                 <Route path="/premium-games" element={<PremiumGamesPage />} />
-                <Route path="/play-and-earn" element={<PlayAndEarn/>} />
+                <Route path="/spin-wheel" element={<SpinWheelPage />} />
+                <Route path="/play-and-earn" element={<SpinWheelPage />} />
                 <Route path="/favourites" element={<Favourites />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/help-center" element={<HelpCenter />} />

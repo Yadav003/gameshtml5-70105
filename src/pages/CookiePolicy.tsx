@@ -125,7 +125,7 @@ const CookiePolicy = () => {
                   If you have questions about cookies on PlayArena, contact us:
                 </p>
                 <p className="text-muted-foreground">
-                  Email: privacy@playarena.com<br />
+                  Email: playarena.support@gmail.com<br />
                   {/* Address: 123 Gaming Street, San Francisco, CA 94102 */}
                 </p>
               </section>
