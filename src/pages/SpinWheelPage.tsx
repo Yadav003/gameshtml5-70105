@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import LoginRequiredModal from "@/components/LoginRequiredModal";
 import { MobileFooterNav } from "@/components/MobileFooterNav";
 import { Navigation } from "@/components/Navigation";
+import RedeemSection from "@/components/RedeemSection";
 import SpinWheel, { REWARD_TO_SLICE_INDEX, SPIN_REWARDS } from "@/components/SpinWheel";
 import { useToast } from "@/hooks/use-toast";
 import { ApiError } from "@/lib/api/httpClient";
@@ -154,7 +155,6 @@ const SpinWheelPage = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navigation />
       <main className="pt-16 pb-20 md:pb-10">
-        <section className="border-b border-border">
           <div className="container mx-auto px-4 py-8 md:py-12">
             <div className="mx-auto max-w-6xl">
               <div className="grid gap-8 lg:grid-cols-[1fr_320px] lg:items-end">
@@ -234,7 +234,7 @@ const SpinWheelPage = () => {
               </div>
             </div>
           </div>
-        </section>
+        <RedeemSection availablePoints={totalPoints} />
       </main>
 
       {showRewardPopup && rewardResult && (

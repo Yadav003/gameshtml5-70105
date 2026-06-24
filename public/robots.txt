@@ -1,14 +1,79 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# OpenAI
+User-Agent: GPTBot
+Allow: /
+
+User-Agent: ChatGPT-User
+Allow: /
+
+User-Agent: OAI-SearchBot
+Allow: /
+
+# Perplexity
+User-Agent: PerplexityBot
+Allow: /
+
+User-Agent: Perplexity-User
+Allow: /
+
+# Google
+User-Agent: Google-Extended
+Allow: /
+
+User-Agent: GoogleAgent-Mariner
+Allow: /
+
+User-Agent: GoogleAgent-Shopping
+Allow: /
+
+User-Agent: Google-CloudVertexBot
+Allow: /
+
+User-Agent: Google-NotebookLM
+Allow: /
+
+# Anthropic
+User-Agent: ClaudeBot
+Allow: /
+
+User-Agent: Claude-User
+Allow: /
+
+User-Agent: Claude-SearchBot
+Allow: /
+
+# Microsoft
+User-Agent: Copilot
+Allow: /
+
+User-Agent: CopilotNative
+Allow: /
+
+User-Agent: CopilotSapphire
+Allow: /
+
+# Gemini
+User-Agent: Gemini-Deep-Research
+Allow: /
+
+# SEO
+User-Agent: SemrushBot-SWA
+Allow: /
+
+# Admin and private areas
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /user-management/
+Disallow: /reports/
+Disallow: /ads-management/
+Disallow: /profile/
+Disallow: /settings/
+
+# Backend/API routes
+Disallow: /api/
+Disallow: /auth/
+
+# Sitemap
+Sitemap: https://playarena.co.in/sitemap.xml

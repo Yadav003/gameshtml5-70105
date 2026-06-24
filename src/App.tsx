@@ -26,11 +26,14 @@ import AdminDashboard from "./Admin-Components/dashboard/AdminDashboard.tsx";
 import AdminUserManagement from "./Admin-Components/user-management/AdminUserManagement.tsx";
 import AdsManagement from "./Admin-Components/Ads-Management/AdsManagement.tsx";
 import AdminReports from "./Admin-Components/reports/AdminReports.tsx";
+import AdminRewardRedemptions from "./Admin-Components/rewards/AdminRewardRedemptions.tsx";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./lib/auth";
 import RequireAdmin from "./components/RequireAdmin";
 import AuthGate from "./components/AuthGate";
 import SpinWheelPage from "./pages/SpinWheelPage";
+import RedeemPage from "./pages/RedeemPage";
+import ProtectedRedeemRoute from "./components/ProtectedRedeemRoute";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +54,14 @@ const App = () => (
                 <Route path="/premium-games" element={<PremiumGamesPage />} />
                 <Route path="/spin-wheel" element={<SpinWheelPage />} />
                 <Route path="/play-and-earn" element={<SpinWheelPage />} />
+                <Route
+                  path="/redeem"
+                  element={
+                    <ProtectedRedeemRoute>
+                      <RedeemPage />
+                    </ProtectedRedeemRoute>
+                  }
+                />
                 <Route path="/favourites" element={<Favourites />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/help-center" element={<HelpCenter />} />
@@ -91,6 +102,14 @@ const App = () => (
                   element={
                     <RequireAdmin>
                       <AdminReports />
+                    </RequireAdmin>
+                  }
+                />
+                <Route
+                  path="/admin/reward-redemptions"
+                  element={
+                    <RequireAdmin>
+                      <AdminRewardRedemptions />
                     </RequireAdmin>
                   }
                 />
