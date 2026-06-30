@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { useLocation, useNavigate, type Location } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -12,6 +13,7 @@ const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [googleRedirecting, setGoogleRedirecting] = useState(false);
 
   const locationState = location.state as { redirectTo?: string; from?: Location } | null;
@@ -108,7 +110,7 @@ const Login = () => {
                
                 <img src="favicon.svg" alt="PlayArena logo" className="w-8 h-8 brightness-0" />
               </div>
-              <h1 className="text-4xl font-extrabold leading-tight">Welcome Back.</h1>
+              <h1 className="text-4xl font-extrabold leading-tight">Welcome </h1>
               <p className="text-foreground/800 max-w-sm">Your exclusive PlayArena dashboard is ready — sign in to continue playing, track favourites and manage your profile.</p>
               <div className="mt-4">
                 <button onClick={() => navigate('/')} className="px-4 py-2 bg-emerald-600 rounded text-sm font-medium">Back to home</button>
@@ -139,7 +141,24 @@ const Login = () => {
                   {mode !== 'forgot' && (
                     <div>
                       <label className="block text-sm text-foreground/80 mb-1">Password</label>
-                      <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" required minLength={8} className="w-full px-3 py-2 border border-border rounded bg-transparent" />
+                      <div className="relative">
+                        <input
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          type={showPassword ? "text" : "password"}
+                          required
+                          minLength={8}
+                          className="w-full pr-10 px-3 py-2 border border-border rounded bg-transparent"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          className="absolute inset-y-0 right-2 flex items-center text-foreground/70 hover:text-foreground"
+                          aria-label={showPassword ? "Hide password" : "Show password"}
+                        >
+                          {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        </button>
+                      </div>
                     </div>
                   )}
 

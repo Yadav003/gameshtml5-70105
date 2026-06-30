@@ -6,6 +6,13 @@ import { getGameById } from "@/lib/gameConfig";
 import { trackGamePlay } from "@/lib/analytics";
 import { useAuth } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
+import { RouteSeo } from "@/components/RouteSeo";
+import {
+  createBreadcrumbSchema,
+  createImageObjectSchema,
+  createVideoGameSchema,
+  createWebPageSchema,
+} from "@/lib/schema";
 
 const GamePlayer = () => {
   const navigate = useNavigate();
@@ -136,43 +143,74 @@ const GamePlayer = () => {
   // If game not found, show error
   if (!game || !game.path) {
     return (
-      <div className="fixed inset-0 bg-background flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold mb-4">Game Not Found</h1>
-          <p className="text-muted-foreground mb-6">
-            The game you're looking for doesn't exist or is not yet available.
-          </p>
-          <Button onClick={handleBack}>
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back
-          </Button>
+      <>
+        <RouteSeo route="notFound" />
+        <div className="fixed inset-0 bg-background flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold mb-4">Game Not Found</h1>
+            <p className="text-muted-foreground mb-6">
+              The game you're looking for doesn't exist or is not yet available.
+            </p>
+            <Button onClick={handleBack}>
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
   return (
-    <div className="fixed inset-0 bg-black touch-none">
-      <div className="absolute top-4 left-4 z-50">
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={handleBack}
-          className="flex items-center gap-2"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back
-        </Button>
-      </div>
-      <iframe
-        src={game.path}
-        className="w-full h-full border-0"
-        title={game.title}
-        allowFullScreen
-        allow="accelerometer; gyroscope"
-        style={{ touchAction: 'none' }}
+    <>
+      <RouteSeo
+        route="home"
+        title={`${game.title} | Play Free Online Game | PlayArena`}
+        description={`Play ${game.title} online for free in your browser. ${game.description || "Enjoy this exciting HTML5 game instantly with no download required."}`}
+        canonical={`${window.location.origin}/play/${game.id}`}
+        keywords={`play ${game.title}, ${game.title} online, free ${game.title}, browser game, html5 game`}
+        schema={[
+          createVideoGameSchema({
+            title: game.title,
+            description: game.description || `Play ${game.title} online for free in your browser.`,
+            image: game.image,
+            url: `${window.location.origin}/play/${game.id}`,
+            genre: Array.isArray(game.category) ? game.category.join(", ") : game.category || "Game",
+            operatingSystem: "Web Browser",
+            applicationCategory: "Game",
+            publisher: "PlayArena",
+          }),
+          createWebPageSchema(`${window.location.origin}/play/${game.id}`, `${game.title} | Play Free Online Game | PlayArena`, `Play ${game.title} online for free in your browser.`),
+          createBreadcrumbSchema([
+            { name: "Home", url: "https://playarena.co.in/" },
+            { name: "Games", url: "https://playarena.co.in/games" },
+            { name: game.title, url: `${window.location.origin}/play/${game.id}` },
+          ]),
+          createImageObjectSchema(game.image, game.title),
+        ]}
       />
-    </div>
+      <div className="fixed inset-0 bg-black touch-none">
+        <div className="absolute top-4 left-4 z-50">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleBack}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back
+          </Button>
+        </div>
+        <iframe
+          src={game.path}
+          className="w-full h-full border-0"
+          title={game.title}
+          allowFullScreen
+          allow="accelerometer; gyroscope"
+          style={{ touchAction: 'none' }}
+        />
+      </div>
+    </>
   );
 };
 

@@ -23,7 +23,7 @@ export const seoConfig = {
       "free online games, play games online, HTML5 games, browser games, online gaming, casual games, puzzle games, action games",
     ogTitle: "Free Online Games Hub - Play Now",
     ogDescription: "Discover and play hundreds of free online games instantly.",
-    canonicalUrl: "https://yourdomain.com",
+    canonicalUrl: "https://playarena.co.in",
   },
 
   // GAMES LISTING PAGE
@@ -35,7 +35,7 @@ export const seoConfig = {
       "online games, free games, browser games, play games online, game library, HTML5 games, casual gaming",
     ogTitle: "Browse 100+ Free Online Games",
     ogDescription: "Explore our extensive collection of free HTML5 games.",
-    canonicalUrl: "https://yourdomain.com/games",
+    canonicalUrl: "https://playarena.co.in/games",
   },
 
   // GAME PLAYER PAGE (Dynamic)
@@ -59,7 +59,7 @@ export const seoConfig = {
       "game leaderboard, high scores, top players, gaming rankings, leaderboard, game scores, competitive gaming",
     ogTitle: "Global Game Leaderboard",
     ogDescription: "View top players and compete on the global leaderboard.",
-    canonicalUrl: "https://yourdomain.com/leaderboard",
+    canonicalUrl: "https://playarena.co.in/leaderboard",
   },
 
   // PROFILE PAGE
@@ -93,7 +93,7 @@ export const seoConfig = {
       "about us, gaming platform, online gaming, game website, free games, gaming community",
     ogTitle: "About Our Gaming Platform",
     ogDescription: "Discover the story behind our free online gaming platform.",
-    canonicalUrl: "https://yourdomain.com/about",
+    canonicalUrl: "https://playarena.co.in/about-us",
   },
 
   // CONTACT US PAGE
@@ -105,7 +105,7 @@ export const seoConfig = {
       "contact us, support, feedback, help, customer service, contact form, get in touch",
     ogTitle: "Contact Us - Gaming Support",
     ogDescription: "Get in touch with our support team.",
-    canonicalUrl: "https://yourdomain.com/contact",
+    canonicalUrl: "https://playarena.co.in/contact-us",
   },
 
   // FAQ PAGE
@@ -117,7 +117,7 @@ export const seoConfig = {
       "FAQ, frequently asked questions, help, support, how to play, troubleshooting, gaming help",
     ogTitle: "Frequently Asked Questions",
     ogDescription: "Find answers to your questions about our gaming platform.",
-    canonicalUrl: "https://yourdomain.com/faq",
+    canonicalUrl: "https://playarena.co.in/faq",
   },
 
   // HELP CENTER PAGE
@@ -129,7 +129,7 @@ export const seoConfig = {
       "help center, support, documentation, tutorials, guides, how-to, gaming help",
     ogTitle: "Help Center & Support",
     ogDescription: "Find help and support for our gaming platform.",
-    canonicalUrl: "https://yourdomain.com/help",
+    canonicalUrl: "https://playarena.co.in/help-center",
   },
 
   // PRIVACY POLICY PAGE
@@ -141,7 +141,7 @@ export const seoConfig = {
       "privacy policy, data protection, personal information, privacy, data security",
     ogTitle: "Privacy Policy",
     ogDescription: "Review our privacy policy and data protection practices.",
-    canonicalUrl: "https://yourdomain.com/privacy",
+    canonicalUrl: "https://playarena.co.in/privacy-policy",
   },
 
   // TERMS & CONDITIONS PAGE
@@ -153,7 +153,7 @@ export const seoConfig = {
       "terms and conditions, user agreement, legal, user agreement",
     ogTitle: "Terms & Conditions",
     ogDescription: "Review our terms and conditions for platform usage.",
-    canonicalUrl: "https://yourdomain.com/terms",
+    canonicalUrl: "https://playarena.co.in/terms-conditions",
   },
 
   // COOKIE POLICY PAGE
@@ -165,7 +165,7 @@ export const seoConfig = {
       "cookie policy, cookies, data collection, privacy, cookie preferences",
     ogTitle: "Cookie Policy",
     ogDescription: "Review our cookie policy and preferences.",
-    canonicalUrl: "https://yourdomain.com/cookies",
+    canonicalUrl: "https://playarena.co.in/cookie-policy",
   },
 
   // SUBSCRIPTION/PRICING PAGE
@@ -177,7 +177,7 @@ export const seoConfig = {
       "subscription plans, premium membership, pricing, premium games, ad-free gaming, exclusive games",
     ogTitle: "Premium Membership Plans",
     ogDescription: "Unlock more games with our affordable premium plans.",
-    canonicalUrl: "https://yourdomain.com/pricing",
+    canonicalUrl: "https://playarena.co.in/premium-games",
   },
 };
 
