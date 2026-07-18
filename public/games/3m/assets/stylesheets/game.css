@@ -1,4 +1,69 @@
+    /* Desktop Restriction Overlay */
+    #desktop-restriction-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #111;
+      color: #fff;
+      z-index: 99999;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
+    .restriction-content {
+      max-width: 500px;
+      background: #222;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 3px solid #ff4a4a;
+    }
+
+    .restriction-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    .restriction-content h2 {
+      font-family: 'Bangers', cursive, sans-serif;
+      font-size: 36px;
+      color: #ff4a4a;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .restriction-content p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ccc;
+      font-family: sans-serif;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Restrict for screen widths greater than 1024px (standard tablets/desktops) */
+    @media screen and (min-width: 1024px) {
+      #desktop-restriction-overlay {
+        display: flex;
+      }
+      .main {
+        display: none !important;
+      }
+      button {
+        display: none !important;
+      }
+    }
 
 #toggleSound, #toggleFX{
   display: block;

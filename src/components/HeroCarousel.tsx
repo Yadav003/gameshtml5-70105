@@ -8,12 +8,12 @@ import gameBarrier from "@/assets/barrier.webp"
 import gameBowling from "@/assets/bowl.webp";
 
 const slides = [
-  {
-    id: 1,
-    title: "Auto Offroad",
-    image: gameCar,
-    gameId: "auto-offroad",
-  },
+  // {
+  //   id: 1,
+  //   title: "Auto Offroad",
+  //   image: gameCar,
+  //   gameId: "auto-offroad",
+  // },
   {
     id: 2,
     title: "Hextris",

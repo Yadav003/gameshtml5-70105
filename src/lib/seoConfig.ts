@@ -1,18 +1,4 @@
-/**
- * SEO Configuration File
- * Centralized location for all SEO-related tasks including:
- * - Page titles with targeted keywords
- * - Meta descriptions
- * - Keywords and tags
- * - Open Graph tags
- * - Schema markup recommendations
- * - Canonical URLs
- */
-
-// ============================================
 // PAGE METADATA & KEYWORDS
-// ============================================
-
 export const seoConfig = {
   // HOMEPAGE
   home: {
@@ -181,9 +167,7 @@ export const seoConfig = {
   },
 };
 
-// ============================================
 // GAME CATEGORIES & KEYWORDS
-// ============================================
 
 export const gameCategoryKeywords = {
   puzzle: {
@@ -223,9 +207,7 @@ export const gameCategoryKeywords = {
   },
 };
 
-// ============================================
 // GAME-SPECIFIC OPTIMIZATION TEMPLATE
-// ============================================
 
 export const gameOptimizationTemplate = {
   // Example: Use this template for each game
@@ -238,9 +220,7 @@ export const gameOptimizationTemplate = {
   altTextTemplate: "Screenshot of {gameName} gameplay",
 };
 
-// ============================================
 // META TAGS & STRUCTURED DATA
-// ============================================
 
 export const defaultMetaTags = [
   {
@@ -260,11 +240,7 @@ export const defaultMetaTags = [
     content: "telephone=no",
   },
 ];
-
-// ============================================
 // STRUCTURED DATA (Schema.org JSON-LD)
-// ============================================
-
 export const structuredDataSchemas = {
   website: {
     "@context": "https://schema.org",
@@ -349,11 +325,7 @@ export const structuredDataSchemas = {
     ],
   },
 };
-
-// ============================================
 // SEO BEST PRACTICES & CHECKLIST
-// ============================================
-
 export const seoChecklist = {
   onPage: [
     "✓ Include primary keyword in title (first 60 characters)",
@@ -400,11 +372,7 @@ export const seoChecklist = {
     "✓ Brand mentions monitored",
   ],
 };
-
-// ============================================
 // KEYWORD RESEARCH DATA
-// ============================================
-
 export const keywordResearch = {
   primaryKeywords: [
     "free online games",
@@ -430,9 +398,7 @@ export const keywordResearch = {
   },
 };
 
-// ============================================
 // FUNCTION: Apply SEO Config to a Page
-// ============================================
 
 export const applySEOConfig = (
   pageName: keyof typeof seoConfig
@@ -440,9 +406,7 @@ export const applySEOConfig = (
   return seoConfig[pageName];
 };
 
-// ============================================
 // FUNCTION: Generate Dynamic Game Title
-// ============================================
 
 export const generateGameTitle = (
   gameName: string,
@@ -452,11 +416,7 @@ export const generateGameTitle = (
     category ? ` | ${category}` : ""
   }`;
 };
-
-// ============================================
 // FUNCTION: Generate Dynamic Meta Description
-// ============================================
-
 export const generateGameDescription = (
   gameName: string,
   shortDescription: string,
@@ -466,11 +426,7 @@ export const generateGameDescription = (
     category ? `Popular ${category} game.` : ""
   }`;
 };
-
-// ============================================
 // TRACKING & ANALYTICS RECOMMENDATIONS
-// ============================================
-
 export const analyticsRecommendations = {
   googleAnalytics: [
     "Track page views and bounce rates",
@@ -494,9 +450,7 @@ export const analyticsRecommendations = {
   ],
 };
 
-// ============================================
 // PERFORMANCE OPTIMIZATION
-// ============================================
 
 export const performanceOptimization = {
   imageOptimization: [

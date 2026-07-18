@@ -24,6 +24,14 @@
     <audio id="myAudio" autoplay loop src="./assets/song.mp3"  loop="true" preload="auto">
 </audio>
 
+     <!-- Desktop Restriction Overlay -->
+    <div id="desktop-restriction-overlay">
+      <div class="restriction-content">
+        <div class="restriction-icon">📱</div>
+        <h2>Mobile Only Game</h2>
+        <p>This game is designed and optimized specifically for mobile devices. Please open this page on your mobile phone or tablet</p>
+      </div>
+    </div>
     <!-- <h1>BUBBLE BURST</h1> -->
      <button type="button"   style="position: absolute; top:0px;" onclick="closeCurrentTab()" class="btn btn-success" >Pause</button>
       <div class="main">
@@ -82,6 +90,13 @@
 
 
             <script>
+               var audio = document.getElementById("myAudio");
+      audio.volume = 0.5;
+
+      // Prevent music from playing in the background on desktop screens
+      if (window.innerWidth >= 1024) {
+        audio.pause();
+      }
                 function myFunction() {
                   var x = document.getElementById("map_img");
                   var y = document.getElementById("quit_button");
