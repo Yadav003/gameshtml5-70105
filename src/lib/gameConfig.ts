@@ -378,7 +378,7 @@ export const GAMES: Record<string, GameInfo> = {
     category: "Arcade",
     description: "Birdify is a lively arcade adventure where players guide a bird through a colorful world full of movement, challenge, and excitement. The gameplay focuses on quick reactions, smooth flying, and staying in control as the pace increases. With its playful theme and accessible controls, Birdify offers a charming and entertaining experience for players who enjoy light action and cheerful game design.",
   },
-
+ 
   "blocker": {
     id: "blocker",
     title: "Wall Breaker",
