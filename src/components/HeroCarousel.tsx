@@ -6,14 +6,16 @@ import gameCar from "@/assets/carracing.webp"
 import gameHextris from "@/assets/hextris.webp"
 import gameBarrier from "@/assets/barrier.webp"
 import gameBowling from "@/assets/bowl.webp";
+import gameAleorgold from "@/assets/gold.webp"
+import gamefoosball from "@/assets/foosball.webp"
 
 const slides = [
-  // {
-  //   id: 1,
-  //   title: "Auto Offroad",
-  //   image: gameCar,
-  //   gameId: "auto-offroad",
-  // },
+  {
+    id: 1,
+    title: "Table Football",
+    image: gamefoosball,
+    gameId: "foosBall",
+  },
   {
     id: 2,
     title: "Hextris",
@@ -22,7 +24,7 @@ const slides = [
   },
   {
     id: 3,
-    title: "Go Bowling",
+    title: "The King Pin",
     image: gameBowling,
     gameId: "bowling",
   },
@@ -32,6 +34,12 @@ const slides = [
     image: gameBarrier,
     gameId: "barrier",
   },
+   {
+    id: 5,
+    title: "Ale or Gold",
+    image: gameAleorgold,
+    gameId: "aleor-gold",
+  }
 ];
 
 export const HeroCarousel = () => {
