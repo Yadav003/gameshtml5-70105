@@ -53,6 +53,7 @@ import gamefoosball from "@/assets/foosball.webp"
 import gameBaseball1 from "@/assets/baseball.webp"
 import gameblocksupermatch from "@/assets/blocksuper.webp"
 import gamebirdify from "@/assets/birdify.webp"
+import gamewallbreaker from "@/assets/wallbreaker.webp"
 
 
 export const GAMES: Record<string, GameInfo> = {
@@ -382,7 +383,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "blocker",
     title: "Wall Breaker",
     path: `${BASE_PATH}games/blocker/index.html`,
-    image: gamebirdify,
+    image: gamewallbreaker,
     category: "Casual",
     description: "Wall Breaker is a satisfying block-busting puzzle game where players break through layers of obstacles with smart shots and careful planning. Each level introduces a new layout that encourages creative thinking and fast reactions. The game is easy to understand, visually engaging, and packed with just enough challenge to keep players coming back for another round of strategy and fun.",
   },
