@@ -168,7 +168,7 @@ export const seoPages: Record<string, SeoPageData> = {
     keywords: "playarena login, sign in, account access",
     canonical: `${SITE_URL}/login`,
     type: "website",
-    robots: "noindex, nofollow",
+    // robots: "noindex, nofollow",
   },
   resetPassword: {
     title: "Reset Password | PlayArena",
