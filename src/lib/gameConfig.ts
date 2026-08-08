@@ -54,6 +54,9 @@ import gameBaseball1 from "@/assets/baseball.webp"
 import gameblocksupermatch from "@/assets/blocksuper.webp"
 import gamebirdify from "@/assets/birdify.webp"
 import gamewallbreaker from "@/assets/wallbreaker.webp"
+import gameboatrush from "@/assets/boat.webp"
+import ticTacToe from "@/assets/tic_tac.webp"
+import gameSkyEscape from "@/assets/skyescape.webp"
 
 
 export const GAMES: Record<string, GameInfo> = {
@@ -387,14 +390,23 @@ export const GAMES: Record<string, GameInfo> = {
     category: "Casual",
     description: "Wall Breaker is a satisfying block-busting puzzle game where players break through layers of obstacles with smart shots and careful planning. Each level introduces a new layout that encourages creative thinking and fast reactions. The game is easy to understand, visually engaging, and packed with just enough challenge to keep players coming back for another round of strategy and fun.",
   },
-  // "boat-rush": {
-  //   id: "boat-rush",
-  //   title: "Boat Rush",
-  //   path: `${BASE_PATH}games/BoatRush/index.html`,
-  //   image: placeholder1,
-  //   category: "Racing",
-  //   description: "Fast-paced boat racing game",
-  // },
+
+  "skygame": {
+    id: "skygame",
+    title: "Sky Escape",
+    path: `${BASE_PATH}games/skygame/index.html`,
+    image: gameSkyEscape,
+    category: "Casual",
+    description: "Sky Escape is an exhilarating arcade game where players navigate through breathtaking skies, avoiding obstacles and collecting power-ups. With its stunning visuals and smooth controls, it offers a thrilling experience for those who love aerial adventures and fast-paced gameplay.",
+  },
+  "boat-rush": {
+    id: "boat-rush",
+    title: "Boat Rush",
+    path: `${BASE_PATH}games/BoatRush/index.html`,
+    image: gameboatrush,
+    category: "Racing",
+    description: "Boat Rush is an exciting water racing game where players speed through challenging courses, dodging obstacles and competing for the best time. The game combines fast-paced action with skillful navigation, making it a fun choice for fans of racing and adventure on the high seas.",
+  },
   // "crazy-match3": {
   //   id: "crazy-match3",
   //   title: "Crazy Match 3",
