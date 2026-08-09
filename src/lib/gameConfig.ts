@@ -391,14 +391,14 @@ export const GAMES: Record<string, GameInfo> = {
     description: "Wall Breaker is a satisfying block-busting puzzle game where players break through layers of obstacles with smart shots and careful planning. Each level introduces a new layout that encourages creative thinking and fast reactions. The game is easy to understand, visually engaging, and packed with just enough challenge to keep players coming back for another round of strategy and fun.",
   },
 
-  "skygame": {
-    id: "skygame",
-    title: "Sky Escape",
-    path: `${BASE_PATH}games/skygame/index.html`,
-    image: gameSkyEscape,
-    category: "Casual",
-    description: "Sky Escape is an exhilarating arcade game where players navigate through breathtaking skies, avoiding obstacles and collecting power-ups. With its stunning visuals and smooth controls, it offers a thrilling experience for those who love aerial adventures and fast-paced gameplay.",
-  },
+  // "skygame": {
+  //   id: "skygame",
+  //   title: "Sky Escape",
+  //   path: `${BASE_PATH}games/skygame/index.html`,
+  //   image: gameSkyEscape,
+  //   category: "Casual",
+  //   description: "Sky Escape is an exhilarating arcade game where players navigate through breathtaking skies, avoiding obstacles and collecting power-ups. With its stunning visuals and smooth controls, it offers a thrilling experience for those who love aerial adventures and fast-paced gameplay.",
+  // },
   "boat-rush": {
     id: "boat-rush",
     title: "Boat Rush",
