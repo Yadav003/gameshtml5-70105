@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ApiError } from "@/lib/api/httpClient";
 import { useAuth } from "@/lib/auth";
 import { spinService } from "@/services/spinService";
+import { REDEEM_ACCESS_SESSION_KEY } from "@/types/reward.types";
 import type { SpinResponse, SpinRewardLabel } from "@/types/spin";
 
 const formatNextSpin = (nextSpinTime: string | null) => {
@@ -36,11 +37,15 @@ const SpinWheelPage = () => {
   const [rewardResult, setRewardResult] = useState<SpinResponse | null>(null);
   const [nextSpinTime, setNextSpinTime] = useState<string | null>(null);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [loginModalMessage, setLoginModalMessage] = useState(
+    "Please login to access your profile and rewards.",
+  );
   const [showRewardPopup, setShowRewardPopup] = useState(false);
 
   const nextSpinLabel = useMemo(() => formatNextSpin(nextSpinTime), [nextSpinTime]);
 
-  const openLoginModal = useCallback(() => {
+  const openLoginModal = useCallback((message?: string) => {
+    setLoginModalMessage(message ?? "Please login to access your profile and rewards.");
     setLoginModalOpen(true);
     setLoading(false);
     setSpinning(false);
@@ -50,7 +55,11 @@ const SpinWheelPage = () => {
     if (!isInitialized) return;
 
     if (!user) {
-      openLoginModal();
+      setLoading(false);
+      setCanSpin(false);
+      setTotalPoints(0);
+      setNextSpinTime(null);
+      setLoginModalOpen(false);
       return;
     }
 
@@ -103,7 +112,22 @@ const SpinWheelPage = () => {
     });
   };
 
+  const handleRedeemClick = () => {
+    if (!user) {
+      openLoginModal("Please login to spin and redeem points.");
+      return;
+    }
+
+    sessionStorage.setItem(REDEEM_ACCESS_SESSION_KEY, "true");
+    navigate("/redeem", { state: { fromPlayAndEarn: true } });
+  };
+
   const handleSpin = async () => {
+    if (!user) {
+      openLoginModal("Please login to spin and redeem points.");
+      return;
+    }
+
     if (!canSpin || spinning) return;
 
     setSpinning(true);
@@ -145,7 +169,9 @@ const SpinWheelPage = () => {
     setShowRewardPopup(true);
   }, []);
 
-  const statusMessage = !canSpin
+  const statusMessage = !user
+    ? "Login to spin and redeem points."
+    : !canSpin
     ? nextSpinLabel
       ? `You have already used today's spin. Next spin available at ${nextSpinLabel}.`
       : "You have already used today's spin."
@@ -194,6 +220,7 @@ const SpinWheelPage = () => {
                   ) : (
                     <SpinWheel
                       canSpin={canSpin}
+                      isAuthenticated={Boolean(user)}
                       spinning={spinning}
                       selectedReward={(rewardResult?.reward as SpinRewardLabel | null) ?? null}
                       statusMessage={statusMessage}
@@ -234,7 +261,7 @@ const SpinWheelPage = () => {
               </div>
             </div>
           </div>
-        <RedeemSection availablePoints={totalPoints} />
+        <RedeemSection availablePoints={totalPoints} onRedeemClick={handleRedeemClick} />
       </main>
 
       {showRewardPopup && rewardResult && (
@@ -259,7 +286,11 @@ const SpinWheelPage = () => {
         </div>
       )}
 
-      <LoginRequiredModal open={loginModalOpen} onLogin={handleLogin} />
+      <LoginRequiredModal
+        open={loginModalOpen}
+        message={loginModalMessage}
+        onLogin={handleLogin}
+      />
       <Footer />
       <MobileFooterNav />
     </div>

@@ -35,6 +35,7 @@ const animationMs = 5000;
 
 type SpinWheelProps = {
   canSpin: boolean;
+  isAuthenticated: boolean;
   spinning: boolean;
   selectedReward: SpinRewardLabel | null;
   statusMessage?: string;
@@ -44,6 +45,7 @@ type SpinWheelProps = {
 
 const SpinWheel = ({
   canSpin,
+  isAuthenticated,
   spinning,
   selectedReward,
   statusMessage,
@@ -84,7 +86,7 @@ const SpinWheel = ({
 
   const radius = 150;
   const center = 160;
-  const disabled = !canSpin || spinning || animationActive;
+  const disabled = (isAuthenticated ? !canSpin : false) || spinning || animationActive;
 
   return (
     <div className="flex w-full flex-col items-center">

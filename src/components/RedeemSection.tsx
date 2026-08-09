@@ -6,12 +6,18 @@ import { REDEEM_ACCESS_SESSION_KEY } from "@/types/reward.types";
 
 interface RedeemSectionProps {
   availablePoints: number;
+  onRedeemClick?: () => void;
 }
 
-const RedeemSection = ({ availablePoints }: RedeemSectionProps) => {
+const RedeemSection = ({ availablePoints, onRedeemClick }: RedeemSectionProps) => {
   const navigate = useNavigate();
 
   const handleRedeemClick = () => {
+    if (onRedeemClick) {
+      onRedeemClick();
+      return;
+    }
+
     sessionStorage.setItem(REDEEM_ACCESS_SESSION_KEY, "true");
     navigate("/redeem", { state: { fromPlayAndEarn: true } });
   };
