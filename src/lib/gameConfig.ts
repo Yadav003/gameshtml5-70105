@@ -390,7 +390,6 @@ export const GAMES: Record<string, GameInfo> = {
     category: "Casual",
     description: "Wall Breaker is a satisfying block-busting puzzle game where players break through layers of obstacles with smart shots and careful planning. Each level introduces a new layout that encourages creative thinking and fast reactions. The game is easy to understand, visually engaging, and packed with just enough challenge to keep players coming back for another round of strategy and fun.",
   },
-
   // "skygame": {
   //   id: "skygame",
   //   title: "Sky Escape",
