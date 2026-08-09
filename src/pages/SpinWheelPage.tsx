@@ -257,7 +257,7 @@ const SpinWheelPage = () => {
                       ))}
                     </div>
                   </div>
-                </aside>
+                </aside> 
               </div>
             </div>
           </div>
