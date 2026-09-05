@@ -107,10 +107,10 @@ export const GAMES: Record<string, GameInfo> = {
   // "tic-tac-toe": {
   //   id: "tic-tac-toe",
   //   title: "Tic Tac Toe",
-  //   path: `${BASE_PATH}games/tic-tac-toe/dist/index.html`,
-  //   image: gameTic,
-  //   category: ["Casual"],
-  //   description: "Classic Tic Tac Toe game",
+  //   path: `${BASE_PATH}games/tic-tac-toe/src/index.html`,
+  //   image: ticTacToe,
+  //   category: ["Casual","2 Player Game"],
+  //   description: "Classic Tic Tac Toe game where players take turns marking spaces in a 3×3 grid, aiming to place three of their marks in a horizontal, vertical, or diagonal row. This simple yet strategic game is perfect for quick matches and friendly competition, offering endless fun for players of all ages.",
   // },
   // Racing Games
   "hexgl": {
@@ -261,7 +261,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Table Football",
     path: `${BASE_PATH}games/FoosBall/index.html`,
     image: gamefoosball,
-    category: ["Sports", "Strategy"],
+    category: ["Sports", "Strategy","2 Player Game"],
     description: "Table Football brings the excitement of a real football match into a compact arcade format where timing, positioning, and strategy all matter. Players control the rods, defend the goal, and try to outsmart their opponents with quick passes and sharp shots. This entertaining sports game is perfect for fans of football who want a simple, competitive, and highly replayable experience online.",
   },
   "frog-bubbles": {
@@ -277,7 +277,7 @@ export const GAMES: Record<string, GameInfo> = {
     title: "Double Stickman",
     path: `${BASE_PATH}games/double-stickman/gamefiles/index.html`,
     image: gamestickman,
-    category: ["Casual","Arcade"],
+    category: ["Casual","Arcade","2 Player Game"],
     description: "Double Stickman delivers fast action and combat energy in a simple two-character fighting style that is easy to pick up and hard to master. Players battle through intense encounters by timing attacks, dodging incoming hits, and using strategy to survive. The game stands out for its bold visuals, responsive controls, and exciting challenge, making it a fun choice for action fans and competitive arcade players.",
   },
   "super-match": {
@@ -370,7 +370,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/billards/gamefiles/index.html`,
     image: gamebiliards, 
     Toplay:"Login-Required",
-    category: ["Sports", "Strategy"],
+    category: ["Sports", "Strategy","2 Player Game"],
     description: "8 Ball Pool is a classic billiards game that combines aiming, power control, and smart shot selection into one enjoyable experience. Players can line up each shot, judge angles, and outplay opponents with careful strategy. The game captures the feel of real pool while staying simple enough for browser play, making it an excellent choice for sports fans who enjoy precision, concentration, and friendly competition.",
   },
   "birdify": {
@@ -420,7 +420,7 @@ export const GAMES: Record<string, GameInfo> = {
     path: `${BASE_PATH}games/ArrowEscape/index.html`,
     image: gameboatrush,
     category: "Arcade",
-    description: "Arrow Escape is a thrilling action game where players must navigate through a series of challenging levels, avoiding traps and enemies. With its fast-paced gameplay and strategic elements, it's an exciting choice for fans of adventure and skill-based challenges.",
+    description: "Arrow Escape is a fast-paced puzzle game where players navigate through maze-like arrow paths, carefully choosing the right direction to escape. Test your logic, timing, and problem-solving skills as you clear challenging levels and find your way to the exit.",
   },
 
   // "crazy-match3": {
