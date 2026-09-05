@@ -406,6 +406,23 @@ export const GAMES: Record<string, GameInfo> = {
     category: "Racing",
     description: "Boat Rush is an exciting water racing game where players speed through challenging courses, dodging obstacles and competing for the best time. The game combines fast-paced action with skillful navigation, making it a fun choice for fans of racing and adventure on the high seas.",
   },
+  "roling ball": {
+    id: "roling ball ",
+    title: "Rolling Ball",
+    path: `${BASE_PATH}games/roling ball/index.html`,
+    image: gameboatrush,
+    category: "Arcade",
+    description: "Rolling Ball is a fun and engaging arcade game where players control a ball rolling through various levels, avoiding obstacles and collecting coins. With its simple yet addictive gameplay, it's perfect for players who enjoy fast-paced action and quick reflexes.",
+  },
+  "Arrow Escape":{
+    id: "Arrow Escape",
+    title: "Arrow Escape",
+    path: `${BASE_PATH}games/ArrowEscape/index.html`,
+    image: gameboatrush,
+    category: "Arcade",
+    description: "Arrow Escape is a thrilling action game where players must navigate through a series of challenging levels, avoiding traps and enemies. With its fast-paced gameplay and strategic elements, it's an exciting choice for fans of adventure and skill-based challenges.",
+  },
+
   // "crazy-match3": {
   //   id: "crazy-match3",
   //   title: "Crazy Match 3",
