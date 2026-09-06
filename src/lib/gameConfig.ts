@@ -57,6 +57,8 @@ import gamewallbreaker from "@/assets/wallbreaker.webp"
 import gameboatrush from "@/assets/boat.webp"
 import ticTacToe from "@/assets/tic_tac.webp"
 import gameSkyEscape from "@/assets/skyescape.webp"
+import gameRollingBall from "@/assets/rolling-ball.webp"
+import gameArrowEscape from "@/assets/arrowesacpe.webp"
 
 
 export const GAMES: Record<string, GameInfo> = {
@@ -408,18 +410,18 @@ export const GAMES: Record<string, GameInfo> = {
   },
   "roling ball": {
     id: "roling ball ",
-    title: "Rolling Ball",
+    title: "Rolling Ball 3D",
     path: `${BASE_PATH}games/roling ball/index.html`,
-    image: gameboatrush,
-    category: "Arcade",
+    image: gameRollingBall,
+    category: ["Casual","Arcade"],
     description: "Rolling Ball is a fun and engaging arcade game where players control a ball rolling through various levels, avoiding obstacles and collecting coins. With its simple yet addictive gameplay, it's perfect for players who enjoy fast-paced action and quick reflexes.",
   },
   "Arrow Escape":{
     id: "Arrow Escape",
     title: "Arrow Escape",
     path: `${BASE_PATH}games/ArrowEscape/index.html`,
-    image: gameboatrush,
-    category: "Arcade",
+    image: gameArrowEscape,
+    category: ["Puzzle","Casual","Arcade"],
     description: "Arrow Escape is a fast-paced puzzle game where players navigate through maze-like arrow paths, carefully choosing the right direction to escape. Test your logic, timing, and problem-solving skills as you clear challenging levels and find your way to the exit.",
   },
 

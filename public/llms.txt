@@ -1,0 +1,53 @@
+# PlayArena
+
+> PlayArena is a browser-based gaming platform at https://playarena.co.in. Visitors can play free HTML5 games instantly in a web browser without downloading software. The library includes puzzle, arcade, action, racing, sports, adventure, and casual games.
+
+## Main Pages
+
+- [Home](https://playarena.co.in/): Discover featured, trending, and free online games.
+
+- [Games](https://playarena.co.in/games): Browse the complete PlayArena game library. Games can be filtered by category with the `category` query parameter.
+
+- [Leaderboard](https://playarena.co.in/leaderboard): View top players and high scores across featured games.
+
+- [Spin the Wheel](https://playarena.co.in/spin-wheel): Use the PlayArena rewards wheel to unlock bonuses and rewards.
+
+- [Play and Earn](https://playarena.co.in/play-and-earn): Access the PlayArena rewards experience.
+
+- [Favourites](https://playarena.co.in/favourites): Access saved favourite games.
+
+## Games
+
+- [Play a Game](https://playarena.co.in/play/{gameName}): Game detail and playable page. Replace `{gameName}` with the Name of a game from the Games library.
+
+- Game categories include 2 player, puzzle, action, sports, racing, arcade, adventure, and casual games.
+
+- Games are designed to run directly in modern web browsers, with no download required.
+
+## Support and Information
+
+- [Help Center](https://playarena.co.in/help-center): Technical help and account support.
+
+- [FAQ](https://playarena.co.in/faq): Answers about playing games, accounts, and platform features.
+
+- [Contact Us](https://playarena.co.in/contact-us): Support, feedback, and general enquiries.
+
+- [About PlayArena](https://playarena.co.in/about-us): Information about PlayArena and its mission.
+
+## Policies
+
+- [Privacy Policy](https://playarena.co.in/privacy-policy): How PlayArena handles user data and privacy.
+
+- [Terms and Conditions](https://playarena.co.in/terms-conditions): Terms for using PlayArena and its services.
+
+- [Cookie Policy](https://playarena.co.in/cookie-policy): How PlayArena uses cookies and manages privacy choices.
+
+## Discovery
+
+- [XML Sitemap](https://playarena.co.in/sitemap.xml): Search-engine sitemap for the public site.
+
+- [Robots.txt](https://playarena.co.in/robots.txt): Crawl directives for automated agents.
+
+## Scope Notes
+
+Account, authentication, redemption, and administrative routes may require sign-in or authorization and are not listed as public content sources here.
