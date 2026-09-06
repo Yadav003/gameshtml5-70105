@@ -2,47 +2,47 @@
 export const seoConfig = {
   // HOMEPAGE
   home: {
-    title: "Free Online Games | Play 100+ HTML5 Games | Gaming Hub",
+    title: "Play Free Online Games | PlayArena",
     metaDescription:
-      "Play 100+ free online games instantly. No download required. HTML5 games including puzzle, action, sports, and adventure games. Play now!",
+      "Play free online games instantly on PlayArena. Discover browser games across puzzle, action, sports, racing, adventure, arcade, and casual categories.",
     keywords:
-      "free online games, play games online, HTML5 games, browser games, online gaming, casual games, puzzle games, action games",
-    ogTitle: "Free Online Games Hub - Play Now",
-    ogDescription: "Discover and play hundreds of free online games instantly.",
+      "free online games, browser games, puzzle games, action games, sports games, racing games, casual games",
+    ogTitle: "PlayArena - Free Online Games",
+    ogDescription: "Discover and play free browser games across multiple categories on PlayArena.",
     canonicalUrl: "https://playarena.co.in",
   },
 
   // GAMES LISTING PAGE
   games: {
-    title: "Online Games Library | 100+ Free HTML5 Games to Play",
+    title: "Free Online Games Library | PlayArena",
     metaDescription:
-      "Browse our collection of 100+ free online games. Find puzzle, action, sports, adventure, and casual games. Start playing today!",
+      "Browse PlayArena games by category and discover free browser games across puzzle, action, sports, racing, arcade, adventure, and casual genres.",
     keywords:
-      "online games, free games, browser games, play games online, game library, HTML5 games, casual gaming",
-    ogTitle: "Browse 100+ Free Online Games",
-    ogDescription: "Explore our extensive collection of free HTML5 games.",
+      "free browser games, online game library, puzzle games, action games, sports games, racing games, arcade games, casual games",
+    ogTitle: "Browse Free Online Games - PlayArena",
+    ogDescription: "Explore PlayArena games and find browser games to play instantly.",
     canonicalUrl: "https://playarena.co.in/games",
   },
 
   // GAME PLAYER PAGE (Dynamic)
   gamePlayer: {
-    titleTemplate: "Play {gameName} Online Free | Instant Browser Gaming",
+    titleTemplate: "Play {gameName} Online | Free Browser Game",
     metaDescriptionTemplate:
-      "Play {gameName} online for free. No download needed. {gameDescription} Start playing instantly in your browser!",
+      "Play {gameName} online in your browser. {gameDescription} Learn how to play and start the game instantly with no download required.",
     keywordsTemplate:
-      "play {gameName}, {gameName} online, free {gameName} game, {gameCategory} game, browser game",
-    ogTitleTemplate: "Play {gameName} - Free Online Game",
+      "play {gameName}, {gameName} online, {gameName} game, {gameCategory} games, browser game",
+    ogTitleTemplate: "Play {gameName} Online - PlayArena",
     ogDescriptionTemplate:
       "Join thousands playing {gameName} online. Play now for free!",
   },
 
   // LEADERBOARD PAGE
   leaderboard: {
-    title: "Game Leaderboard | Top Players & High Scores | Gaming Rankings",
+    title: "Game Leaderboard | High Scores & Top Players | PlayArena",
     metaDescription:
-      "Check out the global leaderboard. See top players and high scores across all games. Compete and climb the rankings!",
+      "View PlayArena high scores, compare your results with other players, and see who is leading the rankings.",
     keywords:
-      "game leaderboard, high scores, top players, gaming rankings, leaderboard, game scores, competitive gaming",
+      "game leaderboard, game high scores, top players, gaming rankings, player scores",
     ogTitle: "Global Game Leaderboard",
     ogDescription: "View top players and compete on the global leaderboard.",
     canonicalUrl: "https://playarena.co.in/leaderboard",
@@ -50,9 +50,9 @@ export const seoConfig = {
 
   // PROFILE PAGE
   profile: {
-    title: "My Gaming Profile | Game Statistics & Achievements",
+    title: "Gaming Profile | Scores, Statistics & Achievements | PlayArena",
     metaDescription:
-      "View your gaming profile, statistics, achievements, and high scores. Track your gaming progress and compete with other players.",
+      "View your PlayArena profile, game scores, achievements, and progress in supported games.",
     keywords:
       "gaming profile, game statistics, achievements, high scores, gaming history, player profile",
     ogTitle: "My Gaming Profile",
@@ -61,9 +61,9 @@ export const seoConfig = {
 
   // FAVORITES PAGE
   favorites: {
-    title: "My Favorite Games | Saved Games Library",
+    title: "Favorite Games | Saved Games | PlayArena",
     metaDescription:
-      "Access your favorite games and bookmarked titles. Quickly play your most loved games.",
+      "Access your saved PlayArena games and quickly return to the games you enjoy most.",
     keywords:
       "favorite games, saved games, bookmarked games, my games, game library",
     ogTitle: "My Favorite Games",
@@ -72,9 +72,9 @@ export const seoConfig = {
 
   // ABOUT US PAGE
   aboutUs: {
-    title: "About Us | Free Online Gaming Platform | Our Mission",
+    title: "About PlayArena | Online Gaming Platform",
     metaDescription:
-      "Learn about our free online gaming platform. Discover our mission to bring quality games to everyone. Play, compete, and have fun!",
+      "Learn about PlayArena, our online gaming platform, and our goal of making browser-based games easy to discover and play.",
     keywords:
       "about us, gaming platform, online gaming, game website, free games, gaming community",
     ogTitle: "About Our Gaming Platform",
@@ -84,7 +84,7 @@ export const seoConfig = {
 
   // CONTACT US PAGE
   contactUs: {
-    title: "Contact Us | Get in Touch | Support & Feedback",
+    title: "Contact PlayArena | Support & Feedback",
     metaDescription:
       "Have questions or feedback? Contact our support team. We're here to help. Send us a message today!",
     keywords:
@@ -96,7 +96,7 @@ export const seoConfig = {
 
   // FAQ PAGE
   faq: {
-    title: "FAQs | Frequently Asked Questions | Help & Support",
+    title: "PlayArena FAQ | Games, Accounts & Support",
     metaDescription:
       "Find answers to common questions about our gaming platform. Learn how to play, account management, technical support, and more.",
     keywords:
@@ -108,7 +108,7 @@ export const seoConfig = {
 
   // HELP CENTER PAGE
   helpCenter: {
-    title: "Help Center | Gaming Support & Documentation",
+    title: "PlayArena Help Center | Gaming Support",
     metaDescription:
       "Browse our help center for tutorials, guides, and support documentation. Get answers and learn how to use our gaming platform.",
     keywords:
@@ -120,7 +120,7 @@ export const seoConfig = {
 
   // PRIVACY POLICY PAGE
   privacyPolicy: {
-    title: "Privacy Policy | Your Data Protection | Gaming Platform",
+    title: "Privacy Policy | PlayArena",
     metaDescription:
       "Read our privacy policy to understand how we protect your data and personal information on our gaming platform.",
     keywords:
@@ -132,7 +132,7 @@ export const seoConfig = {
 
   // TERMS & CONDITIONS PAGE
   termsConditions: {
-    title: "Terms & Conditions | User Agreement | Gaming Platform",
+    title: "Terms & Conditions | PlayArena",
     metaDescription:
       "Read our terms and conditions for using our gaming platform. Understand your rights and responsibilities as a user.",
     keywords:
@@ -144,7 +144,7 @@ export const seoConfig = {
 
   // COOKIE POLICY PAGE
   cookiePolicy: {
-    title: "Cookie Policy | How We Use Cookies | Gaming Platform",
+    title: "Cookie Policy | PlayArena",
     metaDescription:
       "Learn how we use cookies on our gaming platform. Understand cookie preferences and data collection practices.",
     keywords:
@@ -156,11 +156,11 @@ export const seoConfig = {
 
   // SUBSCRIPTION/PRICING PAGE
   subscriptionPlans: {
-    title: "Premium Membership Plans | Unlock More Games | Affordable Gaming",
+    title: "Premium Games & Membership | PlayArena",
     metaDescription:
-      "Explore our premium membership plans. Unlock exclusive games, remove ads, and get premium features. Affordable gaming at its best!",
+      "Explore PlayArena premium gaming options, exclusive content, and available membership features.",
     keywords:
-      "subscription plans, premium membership, pricing, premium games, ad-free gaming, exclusive games",
+      "premium games, premium membership, gaming membership, exclusive games, PlayArena premium",
     ogTitle: "Premium Membership Plans",
     ogDescription: "Unlock more games with our affordable premium plans.",
     canonicalUrl: "https://playarena.co.in/premium-games",
@@ -171,37 +171,37 @@ export const seoConfig = {
 
 export const gameCategoryKeywords = {
   puzzle: {
-    title: "Free Puzzle Games Online | Brain Teasers & Brain Games",
+    title: "Free Puzzle Games Online | PlayArena",
     keywords:
-      "puzzle games, brain teasers, brain games, logic games, matching games, tile games",
+      "free puzzle games, online puzzle games, logic games, brain games, matching games",
     description:
       "Play challenging puzzle games online. Improve your brain with our collection of free puzzle and brain teaser games.",
   },
   action: {
-    title: "Action Games Online | Play Free Action Games Now",
+    title: "Free Action Games Online | PlayArena",
     keywords:
-      "action games, shooting games, adventure games, fast-paced games, arcade games",
+      "free action games, online action games, arcade action games, fast-paced games",
     description:
       "Experience thrilling action games. Fight, shoot, and conquer in our collection of free online action games.",
   },
   sports: {
-    title: "Free Sports Games Online | Play Football, Basketball & More",
+    title: "Free Sports Games Online | PlayArena",
     keywords:
-      "sports games, football games, basketball games, racing games, sports simulation",
+      "free sports games, online sports games, football games, basketball games, sports games",
     description:
       "Play your favorite sports games online. From football to basketball, enjoy realistic sports gaming.",
   },
   adventure: {
-    title: "Adventure Games Online | Epic Quest & Story Games",
+    title: "Free Adventure Games Online | PlayArena",
     keywords:
-      "adventure games, quest games, RPG games, story games, exploration games",
+      "free adventure games, online adventure games, quest games, exploration games, story games",
     description:
       "Embark on epic adventures. Explore, quest, and discover in our collection of free adventure games.",
   },
   casual: {
-    title: "Casual Games Online | Relaxing & Fun Games to Play",
+    title: "Free Casual Games Online | PlayArena",
     keywords:
-      "casual games, relaxing games, fun games, simple games, browser games",
+      "free casual games, online casual games, fun browser games, simple games, quick games",
     description:
       "Enjoy casual gaming fun. Play relaxing and simple games perfect for any mood.",
   },
@@ -212,12 +212,12 @@ export const gameCategoryKeywords = {
 export const gameOptimizationTemplate = {
   // Example: Use this template for each game
   // gameId: "2048",
-  titleTemplate: "{gameName} - Free Online Game | Play Now",
+  titleTemplate: "Play {gameName} Online | Free Browser Game",
   descriptionTemplate:
-    "Play {gameName} online for free. {fullDescription} Enjoy this {category} game instantly in your browser. No download needed!",
+    "Play {gameName} online in your browser. {fullDescription} Discover how to play this {category} game and start instantly with no download required.",
   keywordsTemplate:
-    "play {gameName}, {gameName} game, free {gameName}, {gameName} online, {category} game",
-  altTextTemplate: "Screenshot of {gameName} gameplay",
+    "play {gameName}, {gameName} online, {gameName} game, {category} games, free browser game",
+  altTextTemplate: "{gameName} gameplay screenshot",
 };
 
 // META TAGS & STRUCTURED DATA
@@ -245,8 +245,8 @@ export const structuredDataSchemas = {
   website: {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Gaming Hub",
-    url: "https://yourdomain.com",
+    name: "PlayArena",
+    url: "https://playarena.co.in",
     potentialAction: {
       "@type": "SearchAction",
       target: {
@@ -263,8 +263,8 @@ export const structuredDataSchemas = {
     name: "{gameName}",
     description: "{gameDescription}",
     genre: "{category}",
-    url: "https://yourdomain.com/game/{gameId}",
-    image: "https://yourdomain.com/assets/games/{gameId}/thumbnail.jpg",
+    url: "https://playarena.co.in/play/{gameId}",
+    image: "https://playarena.co.in/assets/games/{gameId}/thumbnail.jpg",
     playMode: "SinglePlayer",
     offers: {
       "@type": "Offer",
@@ -276,8 +276,8 @@ export const structuredDataSchemas = {
   organization: {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Gaming Hub",
-    url: "https://yourdomain.com",
+    name: "PlayArena",
+    url: "https://playarena.co.in",
     logo: "https://yourdomain.com/assets/logo.png",
     contactPoint: {
       "@type": "ContactPoint",
@@ -285,9 +285,7 @@ export const structuredDataSchemas = {
       email: "support@yourdomain.com",
     },
     sameAs: [
-      "https://www.facebook.com/yourgaming",
-      "https://twitter.com/yourgaming",
-      "https://instagram.com/yourgaming",
+      // Add only PlayArena social profiles that actually exist.
     ],
   },
 
@@ -314,83 +312,88 @@ export const structuredDataSchemas = {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://yourdomain.com",
+        item: "https://playarena.co.in",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Games",
-        item: "https://yourdomain.com/games",
+        item: "https://playarena.co.in/games",
       },
     ],
   },
 };
 // SEO BEST PRACTICES & CHECKLIST
-export const seoChecklist = {
-  onPage: [
-    "✓ Include primary keyword in title (first 60 characters)",
-    "✓ Add secondary keywords to title naturally",
-    "✓ Meta description between 150-160 characters",
-    "✓ Include CTA in meta description",
-    "✓ H1 tag should match or relate to main title",
-    "✓ Use H2, H3 tags for content structure",
-    "✓ Internal linking with relevant anchor text",
-    "✓ Image alt text describing content",
-    "✓ Mobile responsive design",
-    "✓ Page load speed optimization",
-    "✓ Schema markup implementation",
-  ],
-  technical: [
-    "✓ XML sitemap.xml created and submitted",
-    "✓ robots.txt configured properly",
-    "✓ HTTPS/SSL certificate installed",
-    "✓ Canonical URLs set correctly",
-    "✓ Structured data (JSON-LD) implemented",
-    "✓ Open Graph tags for social sharing",
-    "✓ Twitter Card tags added",
-    "✓ Mobile-first indexing optimized",
-    "✓ 404 error page configured",
-    "✓ Redirects (301) setup for old URLs",
-  ],
-  content: [
-    "✓ Unique content for each page",
-    "✓ Keyword research completed",
-    "✓ Long-tail keywords included",
-    "✓ Content length adequate (min 300 words)",
-    "✓ Natural keyword placement (2-3% density)",
-    "✓ Fresh content updates scheduled",
-    "✓ Content readability improved",
-    "✓ External links to authoritative sources",
-    "✓ Content formatted for quick scanning",
-  ],
-  linkBuilding: [
-    "✓ Internal linking strategy established",
-    "✓ Backlink profile analysis",
-    "✓ Guest posting opportunities identified",
-    "✓ Directory submissions completed",
-    "✓ Social media links added",
-    "✓ Brand mentions monitored",
-  ],
-};
+// export const seoChecklist = {
+//   onPage: [
+//     "✓ Include primary keyword in title (first 60 characters)",
+//     "✓ Add secondary keywords to title naturally",
+//     "✓ Meta description between 150-160 characters",
+//     "✓ Include CTA in meta description",
+//     "✓ H1 tag should match or relate to main title",
+//     "✓ Use H2, H3 tags for content structure",
+//     "✓ Internal linking with relevant anchor text",
+//     "✓ Image alt text describing content",
+//     "✓ Mobile responsive design",
+//     "✓ Page load speed optimization",
+//     "✓ Schema markup implementation",
+//   ],
+//   technical: [
+//     "✓ XML sitemap.xml created and submitted",
+//     "✓ robots.txt configured properly",
+//     "✓ HTTPS/SSL certificate installed",
+//     "✓ Canonical URLs set correctly",
+//     "✓ Structured data (JSON-LD) implemented",
+//     "✓ Open Graph tags for social sharing",
+//     "✓ Twitter Card tags added",
+//     "✓ Mobile-first indexing optimized",
+//     "✓ 404 error page configured",
+//     "✓ Redirects (301) setup for old URLs",
+//   ],
+//   content: [
+//     "✓ Unique content for each page",
+//     "✓ Keyword research completed",
+//     "✓ Long-tail keywords included",
+//     "✓ Content length adequate (min 300 words)",
+//     "✓ Use keywords naturally; avoid keyword stuffing",
+//     "✓ Fresh content updates scheduled",
+//     "✓ Content readability improved",
+//     "✓ External links to authoritative sources",
+//     "✓ Content formatted for quick scanning",
+//   ],
+//   linkBuilding: [
+//     "✓ Internal linking strategy established",
+//     "✓ Backlink profile analysis",
+//     "✓ Guest posting opportunities identified",
+//     "✓ Directory submissions completed",
+//     "✓ Social media links added",
+//     "✓ Brand mentions monitored",
+//   ],
+// };
 // KEYWORD RESEARCH DATA
 export const keywordResearch = {
   primaryKeywords: [
-    "free online games",
-    "play games online",
-    "browser games",
-    "HTML5 games",
-    "casual games",
+    "free browser games",
+    "online puzzle games",
+    "online action games",
+    "online sports games",
+    "online racing games",
   ],
   longTailKeywords: [
-    "free online games no download",
-    "best free browser games",
-    "HTML5 games to play online",
-    "casual games for relaxation",
-    "quick online games to play",
+    "free browser games no download",
+    "puzzle games to play online",
+    "action games to play online",
+    "free racing games online",
+    "quick browser games to play",
   ],
   locationKeywords: [
-    // Add if you have regional targeting
-    // "online games in [location]"
+    "online games in India",
+    "free browser games in Asia",
+    "online gaming in Africa",
+    "free games to play online in Europe",
+    "browser games in North America",
+    "free online games in South America",
+    "online games in Australia",
   ],
   competitorAnalysis: {
     // Add competitor domains and their ranking keywords
@@ -473,7 +476,7 @@ export const performanceOptimization = {
   ],
   coreWebVitals: [
     "LCP (Largest Contentful Paint) < 2.5s",
-    "FID (First Input Delay) < 100ms",
+    "INP (Interaction to Next Paint) should meet Google performance guidance",
     "CLS (Cumulative Layout Shift) < 0.1",
   ],
 };
