@@ -106,14 +106,14 @@ export const GAMES: Record<string, GameInfo> = {
     Toplay:"Login-Required",
     description: "Breaklock is a clever logic puzzle that invites players to discover the correct combination by testing patterns, observing clues, and solving the lock step by step. Every round is a fresh challenge that rewards patience, memory, and sharp reasoning. With simple mechanics and a satisfying sense of discovery, Breaklock is ideal for players who enjoy brain games with a touch of mystery and strategy.",
   },
-  // "tic-tac-toe": {
-  //   id: "tic-tac-toe",
-  //   title: "Tic Tac Toe",
-  //   path: `${BASE_PATH}games/tic-tac-toe/src/index.html`,
-  //   image: ticTacToe,
-  //   category: ["Casual","2 Player Game"],
-  //   description: "Classic Tic Tac Toe game where players take turns marking spaces in a 3×3 grid, aiming to place three of their marks in a horizontal, vertical, or diagonal row. This simple yet strategic game is perfect for quick matches and friendly competition, offering endless fun for players of all ages.",
-  // },
+  "tic-tac-toe": {
+    id: "tic-tac-toe",
+    title: "Tic Tac Toe",
+    path: `${BASE_PATH}games/tic-tac-toe/src/index.html`,
+    image: ticTacToe,
+    category: ["Casual","2 Player Game"],
+    description: "Classic Tic Tac Toe game where players take turns marking spaces in a 3×3 grid, aiming to place three of their marks in a horizontal, vertical, or diagonal row. This simple yet strategic game is perfect for quick matches and friendly competition, offering endless fun for players of all ages.",
+  },
   // Racing Games
   "hexgl": {
     id: "hexgl",
@@ -201,14 +201,14 @@ export const GAMES: Record<string, GameInfo> = {
     category: ["Arcade", "Shooter"],
     description: "Radius Raid is a fast-moving space shooter set inside a circular arena where survival depends on constant movement and sharp aiming. Players dodge incoming attacks, destroy enemies, and push their score higher as the action intensifies. With its compact design, energetic gameplay, and arcade-style challenge, this game is perfect for players who enjoy quick reflex battles and exciting sci-fi combat.",
   },
-  // "tower-game": {
-  //   id: "tower-game",
-  //   title: "Build Tower",
-  //   path: `${BASE_PATH}games/tower_game-master/index.html`,
-  //   image: gameStackTower,
-  //   category: ["Casual", "Arcade"],
-  //   description: "Stack blocks to build the tallest tower",
-  // },
+  "tower-game": {
+    id: "tower-game",
+    title: "Build Tower",
+    path: `${BASE_PATH}games/tower_game-master/index.html`,
+    image: gamebike,
+    category: ["Casual"],
+    description: "Build Tower is a fun and engaging stacking game where players carefully place blocks to construct the tallest tower possible. Precision, timing, and balance are key as each block must be aligned perfectly to avoid collapse. The game offers a simple yet addictive experience that challenges players to improve their skills and achieve higher scores with each attempt.",
+  },
 
 
   // Sports Games
@@ -425,22 +425,22 @@ export const GAMES: Record<string, GameInfo> = {
     description: "Arrow Escape is a fast-paced puzzle game where players navigate through maze-like arrow paths, carefully choosing the right direction to escape. Test your logic, timing, and problem-solving skills as you clear challenging levels and find your way to the exit.",
   },
 
-  // "crazy-match3": {
-  //   id: "crazy-match3",
-  //   title: "Crazy Match 3",
-  //   path: `${BASE_PATH}games/crazy-match3/gamefiles/index.html`,
-  //   image: placeholder2,
-  //   category: "Casual",
-  //   description: "Match 3 puzzle game with crazy effects",
-  // },
-  // "birds-memory": {
-  //   id: "birds-memory",
-  //   title: "Remember Birds ",
-  //   path: `${BASE_PATH}games/BirdsMemory/index.html`,
-  //   image: placeholder1,
-  //   category: "Puzzle",
-  //   description: "Memory card matching game with birds",
-  // },
+  "crazy-match3": {
+    id: "crazy-match3",
+    title: "Crazy Match 3",
+    path: `${BASE_PATH}games/crazy-match3/gamefiles/index.html`,
+    image: gamebike,
+    category: "Casual",
+    description: "Crazy Match 3 is a vibrant and lovable puzzle game where players swap and match colorful tiles to clear the board and achieve high scores. With its engaging mechanics, fun power-ups, and increasing difficulty, it offers hours of entertainment for casual gamers who enjoy strategic thinking and quick reflexes.",
+  },
+  "birds-memory": {
+    id: "birds-memory",
+    title: "Remember Birds (Kids Game) ",
+    path: `${BASE_PATH}games/BirdsMemory/index.html`,
+    image: gamebike,
+    category: "Puzzle",
+    description: "Remember Birds is a delightful memory game that challenges players to recall the positions of various bird images on a grid. With its charming visuals, simple rules, and progressively challenging levels, it provides a fun and engaging experience for players of all ages who enjoy testing their memory skills.",
+  },
 };
 
 // Helper function to get game by ID

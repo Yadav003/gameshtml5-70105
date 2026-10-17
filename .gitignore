@@ -9,6 +9,8 @@ lerna-debug.log*
 
 node_modules
 dist
+!public/games/tower_game-master/dist/
+!public/games/tower_game-master/dist/main.js
 dist-ssr
 *.local
 *.env
