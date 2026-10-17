@@ -59,6 +59,9 @@ import ticTacToe from "@/assets/tic_tac.webp"
 import gameSkyEscape from "@/assets/skyescape.webp"
 import gameRollingBall from "@/assets/rolling-ball.webp"
 import gameArrowEscape from "@/assets/arrowesacpe.webp"
+import gameStackTower from "@/assets/tower.webp"
+import gameBirdMemory from "@/assets/bm.webp"
+import gameCrazyMatch3 from "@/assets/cm3.webp"
 
 
 export const GAMES: Record<string, GameInfo> = {
@@ -205,7 +208,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "tower-game",
     title: "Build Tower",
     path: `${BASE_PATH}games/tower_game-master/index.html`,
-    image: gamebike,
+    image: gameStackTower,
     category: ["Casual"],
     description: "Build Tower is a fun and engaging stacking game where players carefully place blocks to construct the tallest tower possible. Precision, timing, and balance are key as each block must be aligned perfectly to avoid collapse. The game offers a simple yet addictive experience that challenges players to improve their skills and achieve higher scores with each attempt.",
   },
@@ -429,7 +432,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "crazy-match3",
     title: "Crazy Match 3",
     path: `${BASE_PATH}games/crazy-match3/gamefiles/index.html`,
-    image: gamebike,
+    image: gameCrazyMatch3,
     category: "Casual",
     description: "Crazy Match 3 is a vibrant and lovable puzzle game where players swap and match colorful tiles to clear the board and achieve high scores. With its engaging mechanics, fun power-ups, and increasing difficulty, it offers hours of entertainment for casual gamers who enjoy strategic thinking and quick reflexes.",
   },
@@ -437,7 +440,7 @@ export const GAMES: Record<string, GameInfo> = {
     id: "birds-memory",
     title: "Remember Birds (Kids Game) ",
     path: `${BASE_PATH}games/BirdsMemory/index.html`,
-    image: gamebike,
+    image: gameBirdMemory,
     category: "Puzzle",
     description: "Remember Birds is a delightful memory game that challenges players to recall the positions of various bird images on a grid. With its charming visuals, simple rules, and progressively challenging levels, it provides a fun and engaging experience for players of all ages who enjoy testing their memory skills.",
   },
