@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Level Verification & Visualizer</title>
+  <style>
+    body {
+      background: #0f172a;
+      color: #fff;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+      z-index: 100;
+    }
+    button {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid #475569;
+      background: #1e293b;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover { background: #334155; }
+    button.active { background: #2563eb; border-color: #3b82f6; }
+    .stage {
+      position: relative;
+      width: 449px;
+      height: 1024px;
+      border: 2px solid #334155;
+      background: #12161a;
+      overflow: hidden;
+    }
+    .ref-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 449px;
+      height: 1024px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .svg-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 449px;
+      height: 1024px;
+    }
+    .board-svg {
+      width: 100%;
+      height: 100%;
+    }
+    .info {
+      font-size: 14px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button id="btn11" onclick="switchLevel(11)">Level 11</button>
+    <button id="btn12" onclick="switchLevel(12)">Level 12</button>
+    <button id="btn13" onclick="switchLevel(13)">Level 13</button>
+    <button id="btn14" onclick="switchLevel(14)">Level 14</button>
+    <button id="btn15" onclick="switchLevel(15)">Level 15</button>
+    <button id="btn16" onclick="switchLevel(16)">Level 16</button>
+    <button id="btn17" onclick="switchLevel(17)">Level 17</button>
+    <button id="btn18" onclick="switchLevel(18)">Level 18</button>
+    <button id="btn19" onclick="switchLevel(19)">Level 19</button>
+    <button id="btn20" onclick="switchLevel(20)">Level 20</button>
+    <label>
+      Opacity:
+      <input type="range" id="opacitySlider" min="0" max="1" step="0.05" value="0.5" oninput="setOpacity(this.value)">
+    </label>
+    <span class="info" id="statusInfo"></span>
+  </div>
+
+  <div class="stage">
+    <img id="refImg" class="ref-img" src="assets/ref_level11.png" alt="Reference">
+    <div id="svgContainer" class="svg-layer"></div>
+  </div>
+
+  <script src="game.js"></script>
+  <script>
+    let currentLvl = 11;
+    function setOpacity(val) {
+      document.getElementById('refImg').style.opacity = val;
+    }
+
+    async function switchLevel(num) {
+      currentLvl = num;
+      document.querySelectorAll('.toolbar button').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn' + num).classList.add('active');
+      document.getElementById('refImg').src = 'assets/ref_level' + num + '.png';
+
+      const res = await fetch(`levels/level${num}.json`);
+      const levelData = await res.json();
+      document.getElementById('statusInfo').textContent = `${levelData.name}: ${levelData.paths.length} arrows`;
+
+      const arrows = levelData.paths.map(p => new Arrow(p));
+      const renderer = new SVGRenderer(document.getElementById('svgContainer'));
+      renderer.render(levelData, arrows);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      switchLevel(11);
+    });
+  </script>
+</body>
+</html>

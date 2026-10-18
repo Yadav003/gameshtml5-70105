@@ -9,7 +9,8 @@ export class MovementEngine {
       height: board.height,
     };
     this.arrows = Array.isArray(arrows) ? arrows : [];
-    this.tolerance = 12; // Grid & stroke tolerance
+    this.tolerance = 8; // Grid & stroke tolerance
+    this.parallelTolerance = 3; // Parallel lane tolerance
   }
 
   setArrows(arrows = []) {
@@ -72,6 +73,7 @@ export class MovementEngine {
 
   rayIntersectSegment(head, direction, seg) {
     const tol = this.tolerance;
+    const parTol = this.parallelTolerance || 3;
     const minX = seg.minX;
     const maxX = seg.maxX;
     const minY = seg.minY;
@@ -88,7 +90,7 @@ export class MovementEngine {
         }
         // Intersects collinear horizontal segment in the same lane
         else if (seg.isHorizontal) {
-          if (Math.abs(seg.p1.y - head.y) <= tol && maxX > head.x + 2) {
+          if (Math.abs(seg.p1.y - head.y) <= parTol && maxX > head.x + 2) {
             const dist = Math.max(0, minX - head.x);
             return { distance: dist, point: { x: Math.max(head.x, minX), y: head.y } };
           }
@@ -103,7 +105,7 @@ export class MovementEngine {
             return { distance: dist, point: { x: seg.p1.x, y: head.y } };
           }
         } else if (seg.isHorizontal) {
-          if (Math.abs(seg.p1.y - head.y) <= tol && minX < head.x - 2) {
+          if (Math.abs(seg.p1.y - head.y) <= parTol && minX < head.x - 2) {
             const dist = Math.max(0, head.x - maxX);
             return { distance: dist, point: { x: Math.min(head.x, maxX), y: head.y } };
           }
@@ -118,7 +120,7 @@ export class MovementEngine {
             return { distance: dist, point: { x: head.x, y: seg.p1.y } };
           }
         } else if (seg.isVertical) {
-          if (Math.abs(seg.p1.x - head.x) <= tol && maxY > head.y + 2) {
+          if (Math.abs(seg.p1.x - head.x) <= parTol && maxY > head.y + 2) {
             const dist = Math.max(0, minY - head.y);
             return { distance: dist, point: { x: head.x, y: Math.max(head.y, minY) } };
           }
@@ -133,7 +135,7 @@ export class MovementEngine {
             return { distance: dist, point: { x: head.x, y: seg.p1.y } };
           }
         } else if (seg.isVertical) {
-          if (Math.abs(seg.p1.x - head.x) <= tol && minY < head.y - 2) {
+          if (Math.abs(seg.p1.x - head.x) <= parTol && minY < head.y - 2) {
             const dist = Math.max(0, head.y - maxY);
             return { distance: dist, point: { x: head.x, y: Math.min(head.y, maxY) } };
           }

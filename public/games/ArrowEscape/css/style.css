@@ -170,6 +170,8 @@ html, body {
   position: relative;
   width: min(94vw, 560px);
   height: min(72vh, 680px);
+  max-width: 96vw;
+  max-height: 84vh;
   background: var(--surface);
   border-radius: 28px;
   border: 1px solid var(--surface-border);
@@ -178,6 +180,7 @@ html, body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .svg-container {
