@@ -43,26 +43,62 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const initAuth = async () => {
     try {
       const raw = sessionStorage.getItem(STORAGE_KEY);
       const accessToken = getAuthToken();
       const refreshToken = getRefreshToken();
 
-      if (raw && (accessToken || refreshToken)) {
-        setUser(JSON.parse(raw));
-      } else {
+      if (!(accessToken || refreshToken)) {
+          // No tokens at all — definitely not logged in
+          sessionStorage.removeItem(STORAGE_KEY);
+          setUser(null);
+          return;
+        }
+
+        // Optimistic render: show cached user immediately to avoid flicker,
+        // but we MUST verify with the server before granting any permissions.
+        if (raw) {
+          try {
+            setUser(JSON.parse(raw));
+          } catch {
+            // ignore malformed cache
+          }
+        }
+
+        // Always verify the token server-side and use server-returned role.
+        // This prevents sessionStorage tampering (e.g. changing role to "admin").
+        try {
+          const validation = await authApi.validateToken();
+          const payload = (validation as { data?: { user?: import("./api/authApi").AuthUser }; user?: import("./api/authApi").AuthUser });
+          const serverUser = payload.data?.user ?? payload.user ?? null;
+
+          if (serverUser) {
+            // Persist the server-authoritative user — overwrites any tampered cache
+            persist(serverUser);
+          } else {
+            // Server returned no user despite a valid token response — clear session
+            sessionStorage.removeItem(STORAGE_KEY);
+            clearAuthToken();
+            setUser(null);
+          }
+        } catch {
+          // validate-token failed (expired, revoked, network down, etc.) — force logout
         sessionStorage.removeItem(STORAGE_KEY);
         clearAuthToken();
         setUser(null);
       }
     } catch (e) {
-      console.error("Failed to load user from storage", e);
+      console.error("Failed to initialize auth", e);
       setUser(null);
       clearAuthToken();
       sessionStorage.removeItem(STORAGE_KEY);
     } finally {
       setIsInitialized(true);
     }
+    };
+
+    void initAuth();
   }, []);
 
   const persist = (u: User | null) => {
