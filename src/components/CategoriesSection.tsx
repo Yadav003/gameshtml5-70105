@@ -4,6 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { getCategories, getGamesByCategory } from "@/lib/gameConfig";
 import { getCategoryDisplay } from "@/lib/utils";
 
+const categoryDescriptions: Record<string, string> = {
+  "2 Player Game": "Play head-to-head games built around taking turns or competing together.",
+  Arcade: "Jump into quick challenges that reward timing, focus, and fast reactions.",
+  Casual: "Enjoy approachable games with simple rules and easy-to-learn gameplay.",
+  Puzzle: "Solve number, pattern, and logic challenges one move at a time.",
+  Racing: "Take on bike, car, and arcade racing challenges where every turn counts.",
+  Shooter: "Test your aim and reactions in action-focused shooting games.",
+  Sports: "Try browser games inspired by familiar sports and skill challenges.",
+  Strategy: "Plan your moves carefully and outthink each new challenge.",
+};
+
 export const CategoriesSection = () => {
   const navigate = useNavigate();
   const categories = getCategories();
@@ -25,8 +36,13 @@ export const CategoriesSection = () => {
             return (
               <div key={category} className="space-y-6">
                 {/* Category Header */}
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                  <div>
                   <h3 className="text-2xl font-bold">{category}</h3>
+                    <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+                      {categoryDescriptions[category] ?? `Browse ${category.toLowerCase()} games in the PlayArena library.`}
+                    </p>
+                  </div>
                   <Button variant="ghost" className="text-primary" asChild>
                     <Link to={`/games?category=${category}`}>
                       View All →

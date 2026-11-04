@@ -81,9 +81,9 @@ export const HeroCarousel = () => {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-shadow-lg text-white">
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 text-shadow-lg text-white">
               {slide.title}
-            </h1>
+            </h2>
             <Button 
               variant="hero" 
               size="xl"

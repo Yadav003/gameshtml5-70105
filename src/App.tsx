@@ -69,7 +69,7 @@ const App = () => (
                         schema={[
                           createOrganizationSchema(),
                           createWebsiteSchema("https://playarena.co.in"),
-                          createWebPageSchema("https://playarena.co.in/", "PlayArena | Free Online Games", "Play free online games instantly in your browser."),
+                          createWebPageSchema("https://playarena.co.in/", "PlayArena | Free Online Games", "Explore free browser games on PlayArena, including puzzle, racing, arcade, sports, casual, and two-player games. Browse featured titles and choose a game to play."),
                         ]}
                       />
                       <Index />

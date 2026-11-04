@@ -13,7 +13,7 @@ export const seoPages: Record<string, SeoPageData> = {
   home: {
     title: "PlayArena | Free Online Games | Play Browser Games Instantly",
     description:
-      "Play free online games instantly in your browser. Explore action, puzzle, sports, and casual games with no download required.",
+      "Explore free browser games on PlayArena, including puzzle, racing, arcade, sports, casual, and two-player games. Browse featured titles and choose a game to play.",
     keywords:
       "free online games, browser games, html5 games, casual games, puzzle games, action games, sports games",
     canonical: `${SITE_URL}/`,

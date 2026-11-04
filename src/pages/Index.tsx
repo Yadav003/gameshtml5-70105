@@ -51,6 +51,18 @@ const Index = () => {
       <Navigation />
       <main className="pt-16 pb-20 md:pb-0">
         <HeroCarousel />
+        <section className="container mx-auto px-4 py-10 md:py-14">
+          <div className="mx-auto max-w-4xl text-center">
+            <h1 className="text-3xl font-bold md:text-4xl">
+              Free online games to play in your browser
+            </h1>
+            <p className="mt-4 text-base leading-7 text-muted-foreground md:text-lg">
+              PlayArena brings together browser games across puzzle, racing, arcade, sports, casual, and
+              two-player categories. Browse featured titles, explore a genre that suits your mood, and
+              choose a game to open its page and start playing.
+            </p>
+          </div>
+        </section>
         <div className="container mx-auto px-2 py-4">
           <ShowAds ad={ads[0]} />
         </div>
